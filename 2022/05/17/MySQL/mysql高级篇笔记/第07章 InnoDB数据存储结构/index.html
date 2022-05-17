@@ -1,0 +1,708 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>YZ | YZ</title><meta name="keywords" content="博客"><meta name="author" content="YZ"><meta name="copyright" content="YZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第07章 InnoDB数据存储结构1. 数据库的存储结构：页索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的存储引擎负责对表中数据的读取和写入工作。不同存储引擎中存放的格式一般不同的，甚至有的存储引擎比如Memory都不用磁盘来存储数据。 由于InnoDB是MySQL的默认存储引擎，所以本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YZ">
+<meta property="og:url" content="http://example.com/2022/05/17/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC07%E7%AB%A0%20InnoDB%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="YZ">
+<meta property="og:description" content="第07章 InnoDB数据存储结构1. 数据库的存储结构：页索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的存储引擎负责对表中数据的读取和写入工作。不同存储引擎中存放的格式一般不同的，甚至有的存储引擎比如Memory都不用磁盘来存储数据。 由于InnoDB是MySQL的默认存储引擎，所以本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=1172543276,3142609657&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=416">
+<meta property="article:published_time" content="2022-05-17T08:17:59.914Z">
+<meta property="article:modified_time" content="2022-04-11T09:58:57.983Z">
+<meta property="article:author" content="YZ">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=1172543276,3142609657&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=416"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/05/17/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC07%E7%AB%A0%20InnoDB%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'YZ',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-11 17:58:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/constown/HexoCustomFile@0.0.4/dist/css/custom.min.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="YZ" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">YZ</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-17T08:17:59.914Z" title="发表于 2022-05-17 16:17:59">2022-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-11T09:58:57.983Z" title="更新于 2022-04-11 17:58:57">2022-04-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="第07章-InnoDB数据存储结构"><a href="#第07章-InnoDB数据存储结构" class="headerlink" title="第07章 InnoDB数据存储结构"></a>第07章 InnoDB数据存储结构</h3><h4 id="1-数据库的存储结构：页"><a href="#1-数据库的存储结构：页" class="headerlink" title="1. 数据库的存储结构：页"></a>1. 数据库的存储结构：页</h4><p>索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的<code>存储引擎</code>负责对表中数据的读取和写入工作。不同存储引擎中<code>存放的格式</code>一般不同的，甚至有的存储引擎比如Memory都不用磁盘来存储数据。</p>
+<p>由于<code>InnoDB</code>是MySQL的<code>默认存储引擎</code>，所以本章剖析InooDB存储引擎的数据存储结构。</p>
+<h5 id="1-1-磁盘与内存交互基本单位：页"><a href="#1-1-磁盘与内存交互基本单位：页" class="headerlink" title="1.1 磁盘与内存交互基本单位：页"></a>1.1 磁盘与内存交互基本单位：页</h5><p>InnoDB将数据划分为若干个页，InnoDB中页的大小默认为<code>16KB</code>。</p>
+<p>以<code>页</code>作为磁盘和内存之间交互的基本单位，也就是一次最少从磁盘中读取16KB的内容到内存中，一次最少把内存中的16KB内容刷新到磁盘中。也就是说，<strong>在数据库中，不论读一行，还是读多行，都是将这些行所在的页进行加载。也就是说，数据库管理存储空间的基本单位是页（Page），数据库I/O操作的最小单位是页。</strong>一个页中可以存储多个行记录。</p>
+<blockquote>
+<p>记录是按照行来存储的，但是数据库的读取并不以行为单位，否则一次读取（也就是一次I/O操作）只能处理一行数据，效率会非常低。</p>
+</blockquote>
+<h5 id="1-2-页结构概述"><a href="#1-2-页结构概述" class="headerlink" title="1.2 页结构概述"></a>1.2 页结构概述</h5><p>页a、页b、页c…页n这些页可以<code>不在物理结构上相连</code>，只要通过<code>双向链表</code>相关联即可。每个数据页中的记录会按照主键值从小到大的顺序组成一个<code>单向链表</code>，每个数据页都会为存储在它里边的记录生成一个<code>页目录</code>，在通过主键查找某条记录的时候可以在页目录中<code>使用二分法</code>快速定位到对应的槽，然后再遍历该槽对应的分组中的记录即可快速找到指定的记录。</p>
+<h5 id="1-3-页的上层结构"><a href="#1-3-页的上层结构" class="headerlink" title="1.3 页的上层结构"></a>1.3 页的上层结构</h5><p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301838071.png" alt="image-20220330183814954"></p>
+<p>区（Extent）是比页大一级的存储结构，在InnoDB存储引擎中，一个区会分配<code>64个连续的页</code>。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB=<code>1MB</code>。</p>
+<p>段（Segment）由一个或多个区组成，区在文件系统是一个连续分配的空间（在InnoDB中是连续的64个页），不过在段中不要求区与区之间是相邻的。<code>段是数据库中的分配单位，不同类型的数据库对象以不同的段形式存在。</code>当我们创建数据表、索引的时候，就会相应创建对应的段，比如创建一张表时会创建一个表段，创建一个索引时会创建一个索引段。</p>
+<p>表空间（Tablespace）是一个逻辑容器，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一个段只能属于一个表空间。数据库由一个或多个表空间组成，表空间从管理上可以划分为<code>系统表空间</code>、<code>用户表空间</code>、<code>撤销表空间</code>、<code>临时表空间</code>等。</p>
+<h4 id="2-页的内部结构"><a href="#2-页的内部结构" class="headerlink" title="2. 页的内部结构"></a>2. 页的内部结构</h4><h5 id="2-1-第1部分：文件头部和文件尾部"><a href="#2-1-第1部分：文件头部和文件尾部" class="headerlink" title="2.1 第1部分：文件头部和文件尾部"></a>2.1 第1部分：文件头部和文件尾部</h5><h6 id="2-1-1-File-Header（文件头部）（38字节）"><a href="#2-1-1-File-Header（文件头部）（38字节）" class="headerlink" title="2.1.1 File Header（文件头部）（38字节）"></a>2.1.1 File Header（文件头部）（38字节）</h6><p><strong>作用</strong>：<br>描述各种页的通用信息。（比如页的编号、其上一页、下一页是谁等）</p>
+<p><strong>大小</strong>：38字节</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>占用空间大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FIL_PAGE_SPACE_OR_CHKSUM</code></td>
+<td><code>4</code>字节</td>
+<td>页的校验和（checksum值）</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_OFFSET</code></td>
+<td><code>4</code>字节</td>
+<td>页号</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_PREV</code></td>
+<td><code>4</code>字节</td>
+<td>上一个页的页号</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_NEXT</code></td>
+<td><code>4</code>字节</td>
+<td>下一个页的页号</td>
+</tr>
+<tr>
+<td>FIL_PAGE_LSN</td>
+<td><code>8</code>字节</td>
+<td>页面被最后修改时对应的日志序列位置</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_TYPE</code></td>
+<td><code>2</code>字节</td>
+<td>该页的类型</td>
+</tr>
+<tr>
+<td>FIL_PAGE_FILE_FLUSH_LSN</td>
+<td><code>8</code>字节</td>
+<td>仅在系统表空间的一个页中定义，代表文件至少被刷新到了对应的LSN值</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_ARCH_LOG_NO_OR_SPACE_ID</code></td>
+<td><code>4</code>字节</td>
+<td>页属于哪个表空间</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>FIL_PAGE_OFFSET（4字节）</code>：每一个页都有一个单独的页号，就跟你的身份证号码一样，InnoDB通过页号可以唯一定位一个页。</li>
+<li><code>FIL_PAGE_TYPE（2字节）</code>：这个代表当前页的类型。</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>十六进制</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FIL_PAGE_TYPE_ALLOCATED</td>
+<td>0x0000</td>
+<td>最新分配，还没有使用</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_UNDO_LOG</code></td>
+<td>0x0002</td>
+<td>Undo日志页</td>
+</tr>
+<tr>
+<td>FIL_PAGE_INODE</td>
+<td>0x0003</td>
+<td>段信息节点</td>
+</tr>
+<tr>
+<td>FIL_PAGE_IBUF_FREE_LIST</td>
+<td>0x0004</td>
+<td>Insert Buffer空闲列表</td>
+</tr>
+<tr>
+<td>FIL_PAGE_IBUF_BITMAP</td>
+<td>0x0005</td>
+<td>Insert Buffer位图</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_TYPE_SYS</code></td>
+<td>0x0006</td>
+<td>系统页</td>
+</tr>
+<tr>
+<td>FIL_PAGE_TYPE_TRX_SYS</td>
+<td>0x0007</td>
+<td>事务系统数据</td>
+</tr>
+<tr>
+<td>FIL_PAGE_TYPE_FSP_HDR</td>
+<td>0x0008</td>
+<td>表空间头部信息</td>
+</tr>
+<tr>
+<td>FIL_PAGE_TYPE_XDES</td>
+<td>0x0009</td>
+<td>扩展描述页</td>
+</tr>
+<tr>
+<td>FIL_PAGE_TYPE_BLOB</td>
+<td>0x000A</td>
+<td>溢出页</td>
+</tr>
+<tr>
+<td><code>FIL_PAGE_INDEX</code></td>
+<td>0x45BF</td>
+<td>索引页，也就是我们所说的<code>数据页</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>FIL_PAGE_PREV（4字节）和FIL_PAGE_NEXT（4字节）</code>：InnoDB都是以页为单位存放数据的，如果数据分散到多个不连续的页中存储的话需要把这些页关联起来，FIL_PAGE_PREV和FIL_PAGE_NEXT就分别代表本页的上一个和下一个页的页号。这样通过建立一个双向链表把许许多多的页就都串联起来了，保证这些页之间<strong>不需要是物理上的连续，而是逻辑上的连续。</strong></li>
+<li><code>FIL_PAGE_SPACE_OR_CHKSUM（4字节）</code>：代表当前页面的校验和（checksum）。文件头部和文件尾部都有属性：FIL_PAGE_SPACE_OR_CHKSUM</li>
+</ul>
+<p><strong>作用：</strong></p>
+<p>InnoDB存储引擎以页为单位把数据加载到内存中处理，如果该页中的数据在内存中被修改了，那么<code>在修改后的某个时间需要把数据同步到磁盘中。</code>但是在同步了一半的时候断电了，造成了该页传输的不完整。</p>
+<p>为了检测一个页是否完整（也就是在同步的时候有没有发生只同步一半的尴尬情况），这时可以通过文件尾的校验和（checksum 值）与文件头的校验和做比对，如果两个值不相等则证明页的传输有问题，需要重新进行传输，否则认为页的传输已经完成。</p>
+<ul>
+<li><code>FIL_PAGE_LSN（8字节）</code>：页面被最后修改时对应的日志序列位置（英文名是：Log Sequence Number）</li>
+</ul>
+<h6 id="2-1-2-File-Trailer（文件尾部）（8字节）"><a href="#2-1-2-File-Trailer（文件尾部）（8字节）" class="headerlink" title="2.1.2 File Trailer（文件尾部）（8字节）"></a>2.1.2 File Trailer（文件尾部）（8字节）</h6><ul>
+<li>前4个字节代表页的校验和：这个部分是和File Header中的校验和相对应的。</li>
+<li>后4个字节代表页面被最后修改时对应的日志序列位置（LSN）：这个部分也是为了校验页的完整性的，如果首部和尾部的LSN值校验不成功的话，就说明同步过程出现了问题。</li>
+</ul>
+<h5 id="2-2-第2部分：空闲空间、用户记录和最小最大记录"><a href="#2-2-第2部分：空闲空间、用户记录和最小最大记录" class="headerlink" title="2.2 第2部分：空闲空间、用户记录和最小最大记录"></a>2.2 第2部分：空闲空间、用户记录和最小最大记录</h5><h6 id="2-2-1-Free-Space-空闲空间"><a href="#2-2-1-Free-Space-空闲空间" class="headerlink" title="2.2.1 Free Space (空闲空间)"></a>2.2.1 Free Space (空闲空间)</h6><p>我们自己存储的记录会按照指定的<code>行格式</code>存储到<code>User Records</code>部分。但是在一开始生成页的时候，其实并没有User Records这个部分，<code>每当我们插入一条记录，都会从Free Space部分，也就是尚未使用的存储空间中申请一个记录大小的空间划分到User Records部分</code>，当Free Space部分的空间全部被User Records部分替代掉之后，也就意味着这个页使用完了，如果还有新的记录插入的话，就需要去<code>申请新的页</code>了。</p>
+<h6 id="2-2-2-User-Records-用户记录"><a href="#2-2-2-User-Records-用户记录" class="headerlink" title="2.2.2 User Records (用户记录)"></a>2.2.2 User Records (用户记录)</h6><p>User Records中的这些记录按照<code>指定的行格式</code>一条一条摆在User Records部分，相互之间形成<code>单链表</code>。</p>
+<h6 id="2-2-3-Infimum-Supremum（最小最大记录）"><a href="#2-2-3-Infimum-Supremum（最小最大记录）" class="headerlink" title="2.2.3 Infimum + Supremum（最小最大记录）"></a>2.2.3 Infimum + Supremum（最小最大记录）</h6><p><strong>记录可以比较大小吗</strong>？<br>是的，记录可以比大小，对于一条完整的记录来说，比较记录的大小就是<code>比较主键</code>的大小。比方说我们插入的4行记录的主键值分别是：1、2、3、4，这也就意味着这4条记录是从小到大依次递增。</p>
+<p>InnoDB规定的最小记录与最大记录这两条记录的构造十分简单，都是由5字节大小的记录头信息和8字节大小的一个固定的部分组成的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301913664.png" alt="image-20220330191335574"></p>
+<p>这两条记录<code>不是我们自己定义的记录</code>，所以它们并不存放在页的User Records部分，他们被单独放在一个称为Infimum + Supremum的部分</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301914167.png" alt="image-20220330191446070"></p>
+<h5 id="2-3-第3部分：页目录和页面头部"><a href="#2-3-第3部分：页目录和页面头部" class="headerlink" title="2.3 第3部分：页目录和页面头部"></a>2.3 第3部分：页目录和页面头部</h5><h6 id="2-3-1-Page-Directory（页目录）"><a href="#2-3-1-Page-Directory（页目录）" class="headerlink" title="2.3.1 Page Directory（页目录）"></a>2.3.1 Page Directory（页目录）</h6><p><strong>为什么需要页目录</strong>？<br>在页中，记录是以<code>单向链表</code>的形式进行存储的。单向链表的特点就是插入、删除非常方便，但是<code>检索效率不高</code>，最差的情况下需要遍历链表上的所有节点才能完成检索。因此在页结构中专门设计了页目录这个模块，<code>专门给记录做一个目录</code>，通过<code>二分查找法</code>的方式进行检索，提升效率。</p>
+<p><strong>页目录，二分法查找</strong></p>
+<ol>
+<li>将所有的记录<code>分成几个组</code>，这些记录包括最小记录和最大记录，但不包括标记为“已删除”的记录。</li>
+<li>第 1 组，也就是最小记录所在的分组只有 1 个记录；<br>最后一组，就是最大记录所在的分组，会有 1-8 条记录；<br>其余的组记录数量在 4-8 条之间。<br>这样做的好处是，除了第 1 组（最小记录所在组）以外，其余组的记录数会<code>尽量平分</code>。</li>
+<li>在每个组中最后一条记录的头信息中会存储该组一共有多少条记录，作为 n_owned 字段。</li>
+<li><code>页目录用来存储每组最后一条记录的地址偏移量</code>，这些地址偏移量会按照<code>先后顺序存储</code>起来，每组的地址偏移量也被称之为<code>槽（slot）</code>，每个槽相当于指针指向了不同组的最后一个记录。</li>
+</ol>
+<p><strong>举例：</strong></p>
+<p>现在的page_demo表中正常的记录共有6条，InnoDB会把它们分成两组，第一组中只有一个最小记录，第二组中是剩余的5条记录。如下图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301921631.png" alt="image-20220330192130497"></p>
+<p>从这个图中我们需要注意这么几点：</p>
+<ul>
+<li>现在页目录部分中有两个槽，也就意味着我们的记录被分成了两个组，槽1中的值是112，代表最大记录的地址偏移量（就是从页面的0字节开始数，数112个字节）；槽0中的值是99，代表最小记录的地址偏移量。</li>
+<li>注意最小和最大记录的头信息中的n_owned属性<ul>
+<li>最小记录的n_owned值为1，这就代表着以最小记录结尾的这个分组中只有1条记录，也就是最小记录本身。</li>
+<li>最大记录的n_owned值为5，这就代表着以最大记录结尾的这个分组中只有5条记录，包括最大记录本身还有我们自己插入的4条记录。</li>
+</ul>
+</li>
+</ul>
+<p>用箭头指向的方式替代数字，这样更易于我们理解，修改后如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301924874.png" alt="image-20220330192413776"></p>
+<p><strong>为什么最小记录的n_owned值为1，而最大记录的n_owned值为5呢？</strong></p>
+<p>InnoDB规定：对于最小记录所在的分组只能有1条记录，最大记录所在的分组拥有的记录条数只能在1~8条之间，剩下的分组中记录的条数范围只能在是 4~8 条之间。</p>
+<p>分组是按照下边的步骤进行的：</p>
+<ul>
+<li>初始情况下一个数据页里只有最小记录和最大记录两条记录，它们分属于两个分组。</li>
+<li>之后每插入一条记录，都会从页目录中找到主键值比本记录的主键值大并且差值最小的槽，然后把该槽对应的记录的n_owned值加1，表示本组内又添加了一条记录，直到该组中的记录数等于8个。</li>
+<li>在一个组中的记录数等于8个后再插入一条记录时，会将组中的记录拆分成两个组，一个组中4条记录，另一个5条记录。这个过程会在页目录中新增一个槽来记录这个新增分组中最大的那条记录的偏移量。</li>
+</ul>
+<h6 id="2-3-2-Page-Header（页面头部）"><a href="#2-3-2-Page-Header（页面头部）" class="headerlink" title="2.3.2 Page Header（页面头部）"></a>2.3.2 Page Header（页面头部）</h6><p>为了能得到一个数据页中存储的记录的状态信息，比如本页中已经存储了多少条记录，第一条记录的地址是什么，页目录中存储了多少个槽等等，特意在页中定义了一个叫Page Header的部分，这个部分占用固定的56个字节，专门存储各种状态信息。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>占用空间大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PAGE_N_DIR_SLOTS</td>
+<td>2字节</td>
+<td>在页目录中的槽数量</td>
+</tr>
+<tr>
+<td>PAGE_HEAP_TOP</td>
+<td>2字节</td>
+<td>还未使用的空间最小地址，也就是说从该地址之后就是<code>Free Space</code></td>
+</tr>
+<tr>
+<td>PAGE_N_HEAP</td>
+<td>2字节</td>
+<td>本页中的记录的数量（包括最小和最大记录以及标记为删除的记录）</td>
+</tr>
+<tr>
+<td>PAGE_FREE</td>
+<td>2字节</td>
+<td>第一个已经标记为删除的记录的记录地址（各个已删除的记录通过<code>next_record</code>也会组成一个单链表，这个单链表中的记录可以被重新利用）</td>
+</tr>
+<tr>
+<td>PAGE_GARBAGE</td>
+<td>2字节</td>
+<td>已删除记录占用的字节数</td>
+</tr>
+<tr>
+<td>PAGE_LAST_INSERT</td>
+<td>2字节</td>
+<td>最后插入记录的位置</td>
+</tr>
+<tr>
+<td>PAGE_DIRECTION</td>
+<td>2字节</td>
+<td>记录插入的方向</td>
+</tr>
+<tr>
+<td>PAGE_N_DIRECTION</td>
+<td>2字节</td>
+<td>一个方向连续插入的记录数量</td>
+</tr>
+<tr>
+<td>PAGE_N_RECS</td>
+<td>2字节</td>
+<td>该页中记录的数量（不包括最小和最大记录以及被标记为删除的记录）</td>
+</tr>
+<tr>
+<td>PAGE_MAX_TRX_ID</td>
+<td>8字节</td>
+<td>修改当前页的最大事务ID，该值仅在二级索引中定义</td>
+</tr>
+<tr>
+<td>PAGE_LEVEL</td>
+<td>2字节</td>
+<td>当前页在B+树中所处的层级</td>
+</tr>
+<tr>
+<td>PAGE_INDEX_ID</td>
+<td>8字节</td>
+<td>索引ID，表示当前页属于哪个索引</td>
+</tr>
+<tr>
+<td>PAGE_BTR_SEG_LEAF</td>
+<td>10字节</td>
+<td>B+树叶子段的头部信息，仅在B+树的Root页定义</td>
+</tr>
+<tr>
+<td>PAGE_BTR_SEG_TOP</td>
+<td>10字节</td>
+<td>B+树非叶子段的头部信息，仅在B+树的Root页定义</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="3-InnoDB行格式（或记录格式）"><a href="#3-InnoDB行格式（或记录格式）" class="headerlink" title="3. InnoDB行格式（或记录格式）"></a>3. InnoDB行格式（或记录格式）</h4><h5 id="3-1-指定行格式的语法"><a href="#3-1-指定行格式的语法" class="headerlink" title="3.1 指定行格式的语法"></a>3.1 指定行格式的语法</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE 表名 (列的信息) ROW_FORMAT=行格式名称</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE 表名 ROW_FORMAT=行格式名称</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-COMPACT行格式"><a href="#3-2-COMPACT行格式" class="headerlink" title="3.2 COMPACT行格式"></a>3.2 COMPACT行格式</h5><p>在MySQL 5.1版本中，默认设置为Compact行格式。一条完整的记录其实可以被分为记录的额外信息和记录的真实数据两大部分。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301939611.png" alt="image-20220330193949517"></p>
+<h6 id="3-2-1-变长字段长度列表"><a href="#3-2-1-变长字段长度列表" class="headerlink" title="3.2.1 变长字段长度列表"></a>3.2.1 变长字段长度列表</h6><p>MySQL支持一些变长的数据类型，比如VARCHAR(M)、VARBINARY(M)、TEXT类型，BLOB类型，这些数据类型修饰列称为<code>变长字段</code>，变长字段中存储多少字节的数据不是固定的，所以我们在存储真实数据的时候需要顺便把这些数据占用的字节数也存起来。<code>在Compact行格式中，把所有变长字段的真实数据占用的字节长度都存放在记录的开头部位，从而形成一个变长字段长度列表。</code></p>
+<blockquote>
+<p> 注意：这里面存储的变长长度和字段顺序是反过来的。比如两个varchar字段在表结构的顺序是a(10)，b(15)。那么在变长字段长度列表中存储的长度顺序就是15，10，是反过来的。</p>
+</blockquote>
+<h6 id="3-2-2-NULL值列表"><a href="#3-2-2-NULL值列表" class="headerlink" title="3.2.2 NULL值列表"></a>3.2.2 NULL值列表</h6><p>Compact行格式会把可以为NULL的列统一管理起来，存在一个标记为NULL值列表中。如果表中没有允许存储 NULL 的列，则 NULL值列表也不存在了。<br><strong>为什么定义NULL值列表？</strong><br>之所以要存储NULL是因为数据都是需要对齐的，如果<code>没有标注出来NULL值的位置</code>，就有可能在查询数据的时候<code>出现混乱</code>。如果使用<code>一个特定的符号</code>放到相应的数据位表示空置的话，虽然能达到效果，但是这样很浪费空间，所以直接就在行数据得头部开辟出一块空间专门用来记录该行数据哪些是非空数据，哪些是空数据，格式如下：</p>
+<ol>
+<li>二进制位的值为1时，代表该列的值为NULL。</li>
+<li>二进制位的值为0时，代表该列的值不为NULL。</li>
+</ol>
+<blockquote>
+<p>注意：同样顺序也是反过来存放的</p>
+</blockquote>
+<h6 id="3-2-3-记录头信息（5字节）"><a href="#3-2-3-记录头信息（5字节）" class="headerlink" title="3.2.3 记录头信息（5字节）"></a>3.2.3 记录头信息（5字节）</h6><p><img src="https://cdn.jsdelivr.net/gh/aoshihuankong/cloudimg@master/img/202203301945235.png" alt="image-20220330194534127"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>大小（单位：bit）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>预留位1</code></td>
+<td>1</td>
+<td>没有使用</td>
+</tr>
+<tr>
+<td><code>预留位2</code></td>
+<td>1</td>
+<td>没有使用</td>
+</tr>
+<tr>
+<td><code>delete_mask</code></td>
+<td>1</td>
+<td>标记该记录是否被删除</td>
+</tr>
+<tr>
+<td><code>mini_rec_mask</code></td>
+<td>1</td>
+<td>B+树的每层非叶子节点中的最小记录都会添加该标记</td>
+</tr>
+<tr>
+<td><code>n_owned</code></td>
+<td>4</td>
+<td>表示当前记录拥有的记录数</td>
+</tr>
+<tr>
+<td><code>heap_no</code></td>
+<td>13</td>
+<td>表示当前记录在记录堆的位置信息</td>
+</tr>
+<tr>
+<td><code>record_type</code></td>
+<td>3</td>
+<td>表示当前记录的类型，<code>0</code>表示普通记录，<code>1</code>表示B+树非叶子节点记录，<code>2</code>表示最小记录，<code>3</code>表示最大记录</td>
+</tr>
+<tr>
+<td><code>next_record</code></td>
+<td>16</td>
+<td>表示下一条记录的相对位置</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>delete_mask</code>：这个属性标记着当前记录是否被删除，占用1个二进制位。<ul>
+<li>值为0：代表记录并没有被删除</li>
+<li>值为1：代表记录被删除掉了</li>
+</ul>
+</li>
+</ul>
+<p><strong>被删除的记录为什么还在页中存储呢？</strong><br>你以为它删除了，可它还在真实的磁盘上。这些被删除的记录之所以不立即从磁盘上移除，是因为移除它们之后其他的记录在磁盘上需要<code>重新排列，导致性能消耗</code>。所以只是打一个删除标记而已，所有被删除掉的记录都会组成一个所谓的<code>垃圾链表</code>，在这个链表中的记录占用的空间称之为<code>可重用空间</code>，之后如果有新记录插入到表中的话，可能把这些被删除的记录占用的存储空间覆盖掉。</p>
+<ul>
+<li><code>min_rec_mask</code>：B+树的每层非叶子节点中的最小记录都会添加该标记，min_rec_mask值为1。我们自己插入的四条记录的min_rec_mask值都是0，意味着它们都不是B+树的非叶子节点中的最小记录。</li>
+<li><code>record_type</code>：这个属性表示当前记录的类型，一共有4种类型的记录：<ul>
+<li>0：表示普通记录</li>
+<li>1：表示B+树非叶节点记录</li>
+<li>2：表示最小记录</li>
+<li>3：表示最大记录</li>
+</ul>
+</li>
+<li><code>heap_no</code>：这个属性表示当前记录在本页中的位置。</li>
+</ul>
+<p><strong>怎么不见heap_no值为0和1的记录呢</strong>？<br>MySQL会自动给每个页里加了两个记录，由于这两个记录并不是我们自己插入的，所以有时候也称为<code>伪记录</code>或者<code>虚拟记录</code>。这两个伪记录一个代表<code>最小记录</code>，一个代表<code>最大记录</code>。最小记录和最大记录的heap_no值分别是0和1，也就是说它们的位置最靠前</p>
+<ul>
+<li><code>n_owned</code>：页目录中每个组中最后一条记录的头信息中会存储该组一共有多少条记录，作为 n_owned 字段</li>
+<li><code>next_record</code>：记录头信息里该属性非常重要，它表示从当前记录的真实数据到下一条记录的真实数据的<code>地址偏移量</code>。</li>
+</ul>
+<h6 id="3-2-4-记录的真实数据"><a href="#3-2-4-记录的真实数据" class="headerlink" title="3.2.4 记录的真实数据"></a>3.2.4 记录的真实数据</h6><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>是否必须</th>
+<th>占用空间</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>row_id</td>
+<td>否</td>
+<td>6字节</td>
+<td>行ID，唯一标识一条记录</td>
+</tr>
+<tr>
+<td>transaction_id</td>
+<td>是</td>
+<td>6字节</td>
+<td>事务ID</td>
+</tr>
+<tr>
+<td>roll_pointer</td>
+<td>是</td>
+<td>7字节</td>
+<td>回滚指针</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>一个表没有手动定义主键，则会选取一个Unique键作为主键，如果连Unique键都没有定义的话，则会为表默认添加一个名为row_id的隐藏列作为主键。所以row_id是在没有自定义主键以及Unique键的情况下才会存在的。</p>
+<h5 id="3-3-Dynamic和Compressed行格式"><a href="#3-3-Dynamic和Compressed行格式" class="headerlink" title="3.3 Dynamic和Compressed行格式"></a>3.3 Dynamic和Compressed行格式</h5><p>我们可以知道一个页的大小一般是16KB，也就是16384字节，而一个VARCHAR(M)类型的列就最多可以存储65533个字节，这样就可能出现一个页存放不了一条记录，这种现象称为<code>行溢出</code></p>
+<p>在Compact和Reduntant行格式中，对于占用存储空间非常大的列，在记录的真实数据处只会存储该列的一部分数据，把剩余的数据分散存储在几个其他的页中进行<code>分页存储</code>，然后记录的真实数据处用20个字节存储指向这些页的地址（当然这20个字节中还包括这些分散在其他页面中的数据的占用的字节数），从而可以找到剩余数据所在的页。这称为<code>页的扩展</code>。</p>
+<p>在MySQL 8.0中，默认行格式就是Dynamic，Dynamic、Compressed行格式和Compact行格式挺像，只不过在处理行溢出数据时有分歧</p>
+<ul>
+<li>Compressed和Dynamic两种记录格式对于存放在BLOB中的数据采用了完全的行溢出的方式。如图，在数据页中只存放20个字节的指针（溢出页的地址），实际的数据都存放在Off Page（溢出页）中。</li>
+<li>Compact和Redundant两种格式会在记录的真实数据处存储一部分数据（存放768个前缀字节）。</li>
+</ul>
+<h4 id="4-区、段和碎片区"><a href="#4-区、段和碎片区" class="headerlink" title="4. 区、段和碎片区"></a>4. 区、段和碎片区</h4><h5 id="4-1-为什么要有区？"><a href="#4-1-为什么要有区？" class="headerlink" title="4.1 为什么要有区？"></a>4.1 为什么要有区？</h5><p><code>B+</code>树的每一层中的页都会形成一个双向链表，如果是以<code>页为单位</code>来分配存储空间的话，双向链表相邻的两个页之间的<code>物理位置可能离得非常远</code>。我们介绍B+树索引的使用场景的时候特别提到范围查询只需要定位到最左边的记录和最右边的记录，然后沿着双向链表一直扫描就可以了，而如果链表中相邻的两个页物理位置离得非常远，就是所谓的<code>随机I/O</code>。再一次强调，磁盘的速度和内存的速度差了好几个数量级，<code>随机I/O是非常慢</code>的，所以我们应该尽量让链表中相邻的页的物理位置也相邻，这样进行范围查询的时候才可以使用所谓的<code>顺序I/O</code>。</p>
+<p>引入<code>区</code>的概念，一个区就是物理位置上连续的<code>64个页</code>。因为InnoDB中的页的大小默认是16KB，所以一个区的大小是64*16KB=<code>1MB</code>。在表中<code>数据量大</code>的时候，为某个索引分配空间的时候就不再按照页的单位分配了，而是按照<code>区为单位分配</code>，甚至在表中的数据特别多的时候，可以一次性分配多个连续的区。虽然可能造成<code>一点点空间的浪费</code>（数据不足以填充满整个区），但是从性能角度看，可以消除很多的随机I/O，<code>功大于过</code>！</p>
+<h5 id="4-2-为什么要有段？"><a href="#4-2-为什么要有段？" class="headerlink" title="4.2 为什么要有段？"></a>4.2 为什么要有段？</h5><p>对于范围查询，其实是对B+树叶子节点中的记录进行顺序扫描，而如果不区分叶子节点和非叶子节点，统统把节点代表的页面放到申请到的区中的话，进行范围扫描的效果就大打折扣了。所以InnoDB对B+树的<code>叶子节点</code>和<code>非叶子节点</code>进行了区别对待，也就是说叶子节点有自己独有的区，非叶子节点也有自己独有的区。存放叶子节点的区的集合就算是一个<code>段（segment）</code>，存放非叶子节点的区的集合也算是一个段。也就是说一个索引会生成2个段，一个<code>叶子节点段</code>，一个<code>非叶子节点段</code>。</p>
+<p>除了索引的叶子节点段和非叶子节点段之外，InnoDB中还有为存储一些特殊的数据而定义的段，比如回滚段。所以，常见的段有<code>数据段</code>、<code>索引段</code>、<code>回滚段</code>。数据段即为B+树的叶子节点，索引段即为B+树的非叶子节点。</p>
+<p>在InnoDB存储引擎中，对段的管理都是由引擎自身所完成，DBA不能也没有必要对其进行控制。这从一定程度上简化了DBA对于段的管理。</p>
+<p>段其实不对应表空间中的某一个连续的物理区域，而是一个逻辑上的概念，由若干个零散的页面以及一些完整的区组成。</p>
+<h5 id="4-3-为什么要有碎片区？"><a href="#4-3-为什么要有碎片区？" class="headerlink" title="4.3 为什么要有碎片区？"></a>4.3 为什么要有碎片区？</h5><p>默认情况下，一个使用InnoDB存储引擎的表只有一个聚簇索引，一个索引会生成2个段，而段是以区为单位申请存储空间的，一个区默认占用1M（64<em>16KB=1024KB）存储空间，所以<em>*默认情况下一个只存在几条记录的小表也需要2M的存储空间么？</em></em>以后每次添加一个索引都要多申请2M的存储空间么？这对于存储记录比较少的表简直是天大的浪费。这个问题的症结在于到现在为止我们介绍的区都是非常<code>纯粹</code>的，也就是一个区被整个分配给某一个段，或者说区中的所有页面都是为了存储同一个段的数据而存在的，即使段的数据填不满区中所有的页面，那余下的页面也不能挪作他用。</p>
+<p>为了考虑以完整的区为单位分配给某个段对于<code>数据量较小</code>的表太浪费存储空间的这种情况，InnoDB提出了一个<code>碎片（fragment）区</code>的概念。在一个碎片区中，并不是所有的页都是为了存储同一个段的数据而存在的，而是碎片区中的页可以用于不同的目的，比如有些页面用于段A，有些页面用于段B，有些页甚至哪个段都不属于。<code>碎片区直属于表空间</code>，并不属于任何一个段。</p>
+<p>所以此后为某个段分配存储空间的策略是这样的：</p>
+<ul>
+<li>在刚开始向表中插入数据的时候，段是从某个碎片区以单个页面为单位来分配存储空间的。</li>
+<li>当某个段已经占用了<code>32个碎片区</code>页面之后，就会申请以完整的区为单位来分配存储空间。</li>
+</ul>
+<p>所以现在段不能仅定义为是某些区的集合，更精确的应该是<code>某些零散的页面</code>已经<code>一些完整的区</code>的集合。</p>
+<h5 id="4-4-区的分类"><a href="#4-4-区的分类" class="headerlink" title="4.4 区的分类"></a>4.4 区的分类</h5><p>区大体上可以分为4种类型：</p>
+<ul>
+<li><code>空闲的区(FREE)</code>：现在还没有用到这个区中的任何页面。</li>
+<li><code>有剩余空间的碎片区(FREE_FRAG)</code>：表示碎片区中还有可用的页面。</li>
+<li><code>没有剩余空间的碎片区(FULL_FRAG)</code>：表示碎片区中的所有页面都被使用，没有空闲页面。</li>
+<li><code>附属于某个段的区(FSEG)</code>：每一索引都可以分为叶子节点段和非叶子节点段</li>
+</ul>
+<p>处于<code>FREE</code>、<code>FREE_FRAG</code>以及<code>FULL_FRAG</code>这三种状态的区都是独立的，直属于表空间。而处于<code>FSEG</code>状态的区是附属于某个段的。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/yangzhengyz">YZ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/05/17/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC07%E7%AB%A0%20InnoDB%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">http://example.com/2022/05/17/MySQL/mysql高级篇笔记/第07章 InnoDB数据存储结构/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">YZ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/17/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"><img class="prev-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2022/05/17/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC05%E7%AB%A0%20%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/"><img class="next-cover" src="https://img1.baidu.com/it/u=3486908499,2121835088&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YZ</div><div class="author-info__description">YZ的博客,欢迎访问</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yangzhengyz"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yangzhengyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="twitter"><i class="fa-brands fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to  my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC07%E7%AB%A0-InnoDB%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">第07章 InnoDB数据存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%EF%BC%9A%E9%A1%B5"><span class="toc-number">1.1.</span> <span class="toc-text">1. 数据库的存储结构：页</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E7%A3%81%E7%9B%98%E4%B8%8E%E5%86%85%E5%AD%98%E4%BA%A4%E4%BA%92%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%EF%BC%9A%E9%A1%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 磁盘与内存交互基本单位：页</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E9%A1%B5%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 页结构概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E9%A1%B5%E7%9A%84%E4%B8%8A%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 页的上层结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A1%B5%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2. 页的内部结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E7%AC%AC1%E9%83%A8%E5%88%86%EF%BC%9A%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8%E5%92%8C%E6%96%87%E4%BB%B6%E5%B0%BE%E9%83%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 第1部分：文件头部和文件尾部</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-1-File-Header%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8%EF%BC%89%EF%BC%8838%E5%AD%97%E8%8A%82%EF%BC%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 File Header（文件头部）（38字节）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-2-File-Trailer%EF%BC%88%E6%96%87%E4%BB%B6%E5%B0%BE%E9%83%A8%EF%BC%89%EF%BC%888%E5%AD%97%E8%8A%82%EF%BC%89"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 File Trailer（文件尾部）（8字节）</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E7%AC%AC2%E9%83%A8%E5%88%86%EF%BC%9A%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4%E3%80%81%E7%94%A8%E6%88%B7%E8%AE%B0%E5%BD%95%E5%92%8C%E6%9C%80%E5%B0%8F%E6%9C%80%E5%A4%A7%E8%AE%B0%E5%BD%95"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 第2部分：空闲空间、用户记录和最小最大记录</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-1-Free-Space-%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 Free Space (空闲空间)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-2-User-Records-%E7%94%A8%E6%88%B7%E8%AE%B0%E5%BD%95"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.2.2 User Records (用户记录)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-3-Infimum-Supremum%EF%BC%88%E6%9C%80%E5%B0%8F%E6%9C%80%E5%A4%A7%E8%AE%B0%E5%BD%95%EF%BC%89"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.3 Infimum + Supremum（最小最大记录）</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E7%AC%AC3%E9%83%A8%E5%88%86%EF%BC%9A%E9%A1%B5%E7%9B%AE%E5%BD%95%E5%92%8C%E9%A1%B5%E9%9D%A2%E5%A4%B4%E9%83%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 第3部分：页目录和页面头部</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-3-1-Page-Directory%EF%BC%88%E9%A1%B5%E7%9B%AE%E5%BD%95%EF%BC%89"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">2.3.1 Page Directory（页目录）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-3-2-Page-Header%EF%BC%88%E9%A1%B5%E9%9D%A2%E5%A4%B4%E9%83%A8%EF%BC%89"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2.3.2 Page Header（页面头部）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-InnoDB%E8%A1%8C%E6%A0%BC%E5%BC%8F%EF%BC%88%E6%88%96%E8%AE%B0%E5%BD%95%E6%A0%BC%E5%BC%8F%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">3. InnoDB行格式（或记录格式）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E6%8C%87%E5%AE%9A%E8%A1%8C%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 指定行格式的语法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-COMPACT%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 COMPACT行格式</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#3-2-1-%E5%8F%98%E9%95%BF%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%88%97%E8%A1%A8"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">3.2.1 变长字段长度列表</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-2-2-NULL%E5%80%BC%E5%88%97%E8%A1%A8"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">3.2.2 NULL值列表</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-2-3-%E8%AE%B0%E5%BD%95%E5%A4%B4%E4%BF%A1%E6%81%AF%EF%BC%885%E5%AD%97%E8%8A%82%EF%BC%89"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">3.2.3 记录头信息（5字节）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-2-4-%E8%AE%B0%E5%BD%95%E7%9A%84%E7%9C%9F%E5%AE%9E%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">3.2.4 记录的真实数据</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-Dynamic%E5%92%8CCompressed%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 Dynamic和Compressed行格式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%8C%BA%E3%80%81%E6%AE%B5%E5%92%8C%E7%A2%8E%E7%89%87%E5%8C%BA"><span class="toc-number">1.4.</span> <span class="toc-text">4. 区、段和碎片区</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%8C%BA%EF%BC%9F"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 为什么要有区？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E6%AE%B5%EF%BC%9F"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 为什么要有段？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E7%A2%8E%E7%89%87%E5%8C%BA%EF%BC%9F"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 为什么要有碎片区？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-%E5%8C%BA%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.4.4.</span> <span class="toc-text">4.4 区的分类</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第18章_MySQL8其它新特性"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性">第18章_MySQL8其它新特性</a><time datetime="2022-05-17T12:37:18.000Z" title="发表于 2022-05-17 20:37:18">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第17章_触发器"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器">第17章_触发器</a><time datetime="2022-05-17T12:37:17.000Z" title="发表于 2022-05-17 20:37:17">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第16章_变量、流程控制与游标"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标">第16章_变量、流程控制与游标</a><time datetime="2022-05-17T12:37:16.000Z" title="发表于 2022-05-17 20:37:16">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第15章_存储过程与函数"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数">第15章_存储过程与函数</a><time datetime="2022-05-17T12:37:15.000Z" title="发表于 2022-05-17 20:37:15">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第14章_视图"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图">第14章_视图</a><time datetime="2022-05-17T12:37:14.000Z" title="发表于 2022-05-17 20:37:14">2022-05-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By YZ</div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><div class="aplayer no-destroy" data-id="7193364325" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

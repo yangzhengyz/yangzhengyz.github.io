@@ -1,0 +1,521 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第11章_数据处理之增删改 | YZ</title><meta name="keywords" content="MySQL"><meta name="author" content="YZ"><meta name="copyright" content="YZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第11章_数据处理之增删改讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  插入数据实际问题 解决方式：使用 INSERT 语句向表中插入数据。 方式1：VALUES的方式添加使用这种语法一次只能向表中插入一条数据。 情况1：为表的所有字段按默认顺序插入数据 INSERT INTO 表名VALUES (value1,value2,....); 值列表中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第11章_数据处理之增删改">
+<meta property="og:url" content="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/index.html">
+<meta property="og:site_name" content="YZ">
+<meta property="og:description" content="第11章_数据处理之增删改讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  插入数据实际问题 解决方式：使用 INSERT 语句向表中插入数据。 方式1：VALUES的方式添加使用这种语法一次只能向表中插入一条数据。 情况1：为表的所有字段按默认顺序插入数据 INSERT INTO 表名VALUES (value1,value2,....); 值列表中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360">
+<meta property="article:published_time" content="2022-05-17T12:37:11.000Z">
+<meta property="article:modified_time" content="2022-05-17T12:49:14.417Z">
+<meta property="article:author" content="YZ">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第11章_数据处理之增删改',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-17 20:49:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/constown/HexoCustomFile@0.0.4/dist/css/custom.min.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="YZ" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">YZ</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第11章_数据处理之增删改</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-17T12:37:11.000Z" title="发表于 2022-05-17 20:37:11">2022-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-17T12:49:14.417Z" title="更新于 2022-05-17 20:49:14">2022-05-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第11章_数据处理之增删改"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第11章-数据处理之增删改"><a href="#第11章-数据处理之增删改" class="headerlink" title="第11章_数据处理之增删改"></a>第11章_数据处理之增删改</h1><p>讲师：尚硅谷-宋红康（江湖人称：康师傅）</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://www.atguigu.com/">http://www.atguigu.com</a></p>
+<hr>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><h3 id="实际问题"><a href="#实际问题" class="headerlink" title="实际问题"></a>实际问题</h3><p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/1555425366064.png" alt="1555425366064" style="zoom:80%;"></p>
+<p>解决方式：使用 INSERT 语句向表中插入数据。</p>
+<h3 id="方式1：VALUES的方式添加"><a href="#方式1：VALUES的方式添加" class="headerlink" title="方式1：VALUES的方式添加"></a>方式1：VALUES的方式添加</h3><p>使用这种语法一次只能向表中插入<strong>一条</strong>数据。</p>
+<p><strong>情况1：为表的所有字段按默认顺序插入数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO 表名</span><br><span class="line">VALUES (value1,value2,....);</span><br></pre></td></tr></table></figure>
+<p>值列表中需要为表的每一个字段指定值，并且值的顺序必须和数据表中字段定义时的顺序相同。</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO departments</span><br><span class="line">VALUES (70, &#x27;Pub&#x27;, 100, 1700);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO	departments</span><br><span class="line">VALUES		(100, &#x27;Finance&#x27;, NULL, NULL);</span><br></pre></td></tr></table></figure>
+<p><strong>情况2：为表的指定字段插入数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO 表名(column1 [, column2, …, columnn]) </span><br><span class="line">VALUES (value1 [,value2, …, valuen]);</span><br></pre></td></tr></table></figure>
+<p>为表的指定字段插入数据，就是在INSERT语句中只向部分字段中插入值，而其他字段的值为表定义时的默认值。</p>
+<p>在 INSERT 子句中随意列出列名，但是一旦列出，VALUES中要插入的value1,….valuen需要与column1,…columnn列一一对应。如果类型不同，将无法插入，并且MySQL会产生错误。</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO departments(department_id, department_name)</span><br><span class="line">VALUES (80, &#x27;IT&#x27;);</span><br></pre></td></tr></table></figure>
+<p> <strong>情况3：同时插入多条记录</strong></p>
+<p>INSERT语句可以同时向数据表中插入多条记录，插入时指定多个值列表，每个值列表之间用逗号分隔开，基本语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO table_name </span><br><span class="line">VALUES </span><br><span class="line">(value1 [,value2, …, valuen]),</span><br><span class="line">(value1 [,value2, …, valuen]),</span><br><span class="line">……</span><br><span class="line">(value1 [,value2, …, valuen]);</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO table_name(column1 [, column2, …, columnn]) </span><br><span class="line">VALUES </span><br><span class="line">(value1 [,value2, …, valuen]),</span><br><span class="line">(value1 [,value2, …, valuen]),</span><br><span class="line">……</span><br><span class="line">(value1 [,value2, …, valuen]);</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; INSERT INTO emp(emp_id,emp_name)</span><br><span class="line">    -&gt; VALUES (1001,&#x27;shkstart&#x27;),</span><br><span class="line">    -&gt; (1002,&#x27;atguigu&#x27;),</span><br><span class="line">    -&gt; (1003,&#x27;Tom&#x27;);</span><br><span class="line">Query OK, 3 rows affected (0.00 sec)</span><br><span class="line">Records: 3  Duplicates: 0  Warnings: 0</span><br></pre></td></tr></table></figure>
+<p>使用INSERT同时插入多条记录时，MySQL会返回一些在执行单行插入时没有的额外信息，这些信息的含义如下：<br>●　Records：表明插入的记录条数。<br>●　Duplicates：表明插入时被忽略的记录，原因可能是这些记录包含了重复的主键值。<br>●　Warnings：表明有问题的数据值，例如发生数据类型转换。</p>
+<blockquote>
+<p>一个同时插入多行记录的INSERT语句等同于多个单行插入的INSERT语句，但是多行的INSERT语句在处理过程中<code>效率更高</code>。因为MySQL执行单条INSERT语句插入多行数据比使用多条INSERT语句快，所以在插入多条记录时最好选择使用单条INSERT语句的方式插入。</p>
+</blockquote>
+<p><strong>小结：</strong></p>
+<ul>
+<li><code>VALUES</code>也可以写成<code>VALUE</code>，但是VALUES是标准写法。</li>
+</ul>
+<ul>
+<li>字符和日期型数据应包含在单引号中。</li>
+</ul>
+<h3 id="方式2：将查询结果插入到表中"><a href="#方式2：将查询结果插入到表中" class="headerlink" title="方式2：将查询结果插入到表中"></a>方式2：将查询结果插入到表中</h3><p>INSERT还可以将SELECT语句查询的结果插入到表中，此时不需要把每一条记录的值一个一个输入，只需要使用一条INSERT语句和一条SELECT语句组成的组合语句即可快速地从一个或多个表中向一个表中插入多行。</p>
+<p>基本语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO 目标表名</span><br><span class="line">(tar_column1 [, tar_column2, …, tar_columnn])</span><br><span class="line">SELECT</span><br><span class="line">(src_column1 [, src_column2, …, src_columnn])</span><br><span class="line">FROM 源表名</span><br><span class="line">[WHERE condition]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 INSERT 语句中加入子查询。 </li>
+<li><strong>不必书写</strong> <strong>VALUES</strong> <strong>子句。</strong> </li>
+<li>子查询中的值列表应与 INSERT 子句中的列名对应。</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp2 </span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> department_id <span class="operator">=</span> <span class="number">90</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> sales_reps(id, name, salary, commission_pct)</span><br><span class="line"><span class="keyword">SELECT</span> employee_id, last_name, salary, commission_pct</span><br><span class="line"><span class="keyword">FROM</span>   employees</span><br><span class="line"><span class="keyword">WHERE</span>  job_id <span class="keyword">LIKE</span> <span class="string">&#x27;%REP%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/1555425824246.png" alt="1555425824246"></p>
+<ul>
+<li>使用 UPDATE 语句更新数据。语法如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE table_name</span><br><span class="line">SET column1=value1, column2=value2, … , column=valuen</span><br><span class="line">[WHERE condition]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可以一次更新<strong>多条</strong>数据。</p>
+</li>
+<li><p>如果需要回滚数据，需要保证在DML前，进行设置：<strong>SET AUTOCOMMIT = FALSE;</strong></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用 <strong>WHERE</strong> 子句指定需要更新的数据。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> employees</span><br><span class="line"><span class="keyword">SET</span>    department_id <span class="operator">=</span> <span class="number">70</span></span><br><span class="line"><span class="keyword">WHERE</span>  employee_id <span class="operator">=</span> <span class="number">113</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果省略 WHERE 子句，则表中的所有数据都将被更新。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 	copy_emp</span><br><span class="line"><span class="keyword">SET</span>    	department_id <span class="operator">=</span> <span class="number">110</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>更新中的数据完整性错误</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> employees</span><br><span class="line"><span class="keyword">SET</span>    department_id <span class="operator">=</span> <span class="number">55</span></span><br><span class="line"><span class="keyword">WHERE</span>  department_id <span class="operator">=</span> <span class="number">110</span>;</span><br></pre></td></tr></table></figure>
+<p> <img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/1555426069578.png" alt="1555426069578"></p>
+<blockquote>
+<p>说明：不存在 55 号部门</p>
+</blockquote>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/1555426124751.png" alt="1555426124751"></p>
+<ul>
+<li>使用 DELETE 语句从表中删除数据</li>
+</ul>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/1555426162264.png" alt="1555426162264"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE &lt;condition&gt;];</span><br></pre></td></tr></table></figure>
+<p>table_name指定要执行删除操作的表；“[WHERE <condition>]”为可选参数，指定删除条件，如果没有WHERE子句，DELETE语句将删除表中的所有记录。</condition></p>
+<ul>
+<li>使用 WHERE 子句删除指定的记录。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> departments</span><br><span class="line"><span class="keyword">WHERE</span>  department_name <span class="operator">=</span> <span class="string">&#x27;Finance&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果省略 WHERE 子句，则表中的全部数据将被删除</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span>  copy_emp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>删除中的数据完整性错误</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> departments</span><br><span class="line"><span class="keyword">WHERE</span>       department_id <span class="operator">=</span> <span class="number">60</span>;</span><br></pre></td></tr></table></figure>
+<p> <img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/1555426258516.png" alt="1555426258516"></p>
+<blockquote>
+<p>说明：You cannot delete a row that contains a primary key that is used as a foreign key in another table.</p>
+</blockquote>
+<h2 id="MySQL8新特性：计算列"><a href="#MySQL8新特性：计算列" class="headerlink" title="MySQL8新特性：计算列"></a>MySQL8新特性：计算列</h2><p>什么叫计算列呢？简单来说就是某一列的值是通过别的列计算得来的。例如，a列值为1、b列值为2，c列不需要手动插入，定义a+b的结果为c的值，那么c就是计算列，是通过别的列计算得来的。</p>
+<p>在MySQL 8.0中，CREATE TABLE 和 ALTER TABLE 中都支持增加计算列。下面以CREATE TABLE为例进行讲解。</p>
+<p>举例：定义数据表tb1，然后定义字段id、字段a、字段b和字段c，其中字段c为计算列，用于计算a+b的值。<br>首先创建测试表tb1，语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE tb1(</span><br><span class="line">id INT,</span><br><span class="line">a INT,</span><br><span class="line">b INT,</span><br><span class="line">c INT GENERATED ALWAYS AS (a + b) VIRTUAL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>插入演示数据，语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO tb1(a,b) VALUES (100,200);</span><br></pre></td></tr></table></figure>
+<p>查询数据表tb1中的数据，结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM tb1;</span><br><span class="line">+------+------+------+------+</span><br><span class="line">| id   | a    | b    | c    |</span><br><span class="line">+------+------+------+------+</span><br><span class="line">| NULL |  100 |  200 |  300 |</span><br><span class="line">+------+------+------+------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>更新数据中的数据，语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; UPDATE tb1 SET a = 500;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 0  Warnings: 0</span><br></pre></td></tr></table></figure>
+<h2 id="综合案例"><a href="#综合案例" class="headerlink" title="综合案例"></a>综合案例</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1、创建数据库test01_library</span><br><span class="line"></span><br><span class="line"># 2、创建表 books，表结构如下：</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>字段说明</th>
+<th>数据类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>书编号</td>
+<td>INT</td>
+</tr>
+<tr>
+<td>name</td>
+<td>书名</td>
+<td>VARCHAR(50)</td>
+</tr>
+<tr>
+<td>authors</td>
+<td>作者</td>
+<td>VARCHAR(100)</td>
+</tr>
+<tr>
+<td>price</td>
+<td>价格</td>
+<td>FLOAT</td>
+</tr>
+<tr>
+<td>pubdate</td>
+<td>出版日期</td>
+<td>YEAR</td>
+</tr>
+<tr>
+<td>note</td>
+<td>说明</td>
+<td>VARCHAR(100)</td>
+</tr>
+<tr>
+<td>num</td>
+<td>库存</td>
+<td>INT</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 3、向books表中插入记录</span><br><span class="line"></span><br><span class="line"># 1）不指定字段名称，插入第一条记录</span><br><span class="line"># 2）指定所有字段名称，插入第二记录</span><br><span class="line"># 3）同时插入多条记录（剩下的所有记录）</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>authors</th>
+<th>price</th>
+<th>pubdate</th>
+<th>note</th>
+<th>num</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tal of AAA</td>
+<td>Dickes</td>
+<td>23</td>
+<td>1995</td>
+<td>novel</td>
+<td>11</td>
+</tr>
+<tr>
+<td>2</td>
+<td>EmmaT</td>
+<td>Jane lura</td>
+<td>35</td>
+<td>1993</td>
+<td>joke</td>
+<td>22</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Story of Jane</td>
+<td>Jane Tim</td>
+<td>40</td>
+<td>2001</td>
+<td>novel</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Lovey Day</td>
+<td>George Byron</td>
+<td>20</td>
+<td>2005</td>
+<td>novel</td>
+<td>30</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Old land</td>
+<td>Honore Blade</td>
+<td>30</td>
+<td>2010</td>
+<td>law</td>
+<td>0</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The Battle</td>
+<td>Upton Sara</td>
+<td>30</td>
+<td>1999</td>
+<td>medicine</td>
+<td>40</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Rose Hood</td>
+<td>Richard haggard</td>
+<td>28</td>
+<td>2008</td>
+<td>cartoon</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 4、将小说类型(novel)的书的价格都增加5。</span><br><span class="line"></span><br><span class="line"># 5、将名称为EmmaT的书的价格改为40，并将说明改为drama。</span><br><span class="line"></span><br><span class="line"># 6、删除库存为0的记录。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 7、统计书名中包含a字母的书</span><br><span class="line"></span><br><span class="line"># 8、统计书名中包含a字母的书的数量和库存总量</span><br><span class="line"></span><br><span class="line"># 9、找出“novel”类型的书，按照价格降序排列</span><br><span class="line"></span><br><span class="line"># 10、查询图书信息，按照库存量降序排列，如果库存量相同的按照note升序排列</span><br><span class="line"></span><br><span class="line"># 11、按照note分类统计书的数量</span><br><span class="line"></span><br><span class="line"># 12、按照note分类统计书的库存量，显示库存量超过30本的</span><br><span class="line"></span><br><span class="line"># 13、查询所有图书，每页显示5本，显示第二页</span><br><span class="line"></span><br><span class="line"># 14、按照note分类统计书的库存量，显示库存量最多的</span><br><span class="line"></span><br><span class="line"># 15、查询书名达到10个字符的书，不包括里面的空格</span><br><span class="line"></span><br><span class="line"># 16、查询书名和类型，其中note值为novel显示小说，law显示法律，medicine显示医药，cartoon显示卡通，joke显示笑话</span><br><span class="line"></span><br><span class="line"># 17、查询书名、库存，其中num值超过30本的，显示滞销，大于0并低于10的，显示畅销，为0的显示需要无货</span><br><span class="line"></span><br><span class="line"># 18、统计每一种note的库存量，并合计总量</span><br><span class="line"></span><br><span class="line"># 19、统计每一种note的数量，并合计总量</span><br><span class="line"></span><br><span class="line"># 20、统计库存量前三名的图书</span><br><span class="line"></span><br><span class="line"># 21、找出最早出版的一本书</span><br><span class="line"></span><br><span class="line"># 22、找出novel中价格最高的一本书</span><br><span class="line"></span><br><span class="line"># 23、找出书名中字数最多的一本书，不含空格</span><br></pre></td></tr></table></figure>
+<p>答案：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#1、创建数据库test01_library</span><br><span class="line">CREATE DATABASE IF NOT EXISTS test01_library CHARACTER SET &#x27;utf8&#x27;;</span><br><span class="line"></span><br><span class="line">#指定使用哪个数据库</span><br><span class="line">USE test01_library;</span><br><span class="line"></span><br><span class="line">#2、创建表 books</span><br><span class="line">CREATE TABLE books(</span><br><span class="line">	id INT,</span><br><span class="line">	name VARCHAR(50),</span><br><span class="line">	`authors` VARCHAR(100) ,</span><br><span class="line">	price FLOAT,</span><br><span class="line">	pubdate YEAR ,</span><br><span class="line">	note VARCHAR(100),</span><br><span class="line">	num INT</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#3、向books表中插入记录</span><br><span class="line"># 1）不指定字段名称，插入第一条记录</span><br><span class="line">INSERT INTO books </span><br><span class="line">VALUES(1,&#x27;Tal of AAA&#x27;,&#x27;Dickes&#x27;,23,1995,&#x27;novel&#x27;,11);</span><br><span class="line"># 2）指定所有字段名称，插入第二记录</span><br><span class="line">INSERT INTO books (id,name,`authors`,price,pubdate,note,num)</span><br><span class="line">VALUES(2,&#x27;EmmaT&#x27;,&#x27;Jane lura&#x27;,35,1993,&#x27;Joke&#x27;,22);</span><br><span class="line"># 3）同时插入多条记录（剩下的所有记录）</span><br><span class="line">INSERT INTO books (id,name,`authors`,price,pubdate,note,num) VALUES</span><br><span class="line">(3,&#x27;Story of Jane&#x27;,&#x27;Jane Tim&#x27;,40,2001,&#x27;novel&#x27;,0),</span><br><span class="line">(4,&#x27;Lovey Day&#x27;,&#x27;George Byron&#x27;,20,2005,&#x27;novel&#x27;,30),</span><br><span class="line">(5,&#x27;Old land&#x27;,&#x27;Honore Blade&#x27;,30,2010,&#x27;Law&#x27;,0),</span><br><span class="line">(6,&#x27;The Battle&#x27;,&#x27;Upton Sara&#x27;,30,1999,&#x27;medicine&#x27;,40),</span><br><span class="line">(7,&#x27;Rose Hood&#x27;,&#x27;Richard haggard&#x27;,28,2008,&#x27;cartoon&#x27;,28);</span><br><span class="line"></span><br><span class="line"># 4、将小说类型(novel)的书的价格都增加5。</span><br><span class="line">UPDATE books SET price=price+5 WHERE note = &#x27;novel&#x27;;</span><br><span class="line"></span><br><span class="line"># 5、将名称为EmmaT的书的价格改为40，并将说明改为drama。</span><br><span class="line">UPDATE books SET price=40,note=&#x27;drama&#x27; WHERE name=&#x27;EmmaT&#x27;;</span><br><span class="line"></span><br><span class="line"># 6、删除库存为0的记录。</span><br><span class="line">DELETE FROM books WHERE num=0;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 7、统计书名中包含a字母的书</span><br><span class="line">SELECT * FROM books WHERE name LIKE &#x27;%a%&#x27;;</span><br><span class="line"></span><br><span class="line"># 8、统计书名中包含a字母的书的数量和库存总量</span><br><span class="line">SELECT COUNT(*),SUM(num) FROM books WHERE name LIKE &#x27;%a%&#x27;;</span><br><span class="line"></span><br><span class="line"># 9、找出“novel”类型的书，按照价格降序排列</span><br><span class="line">SELECT * FROM books WHERE note = &#x27;novel&#x27; ORDER BY price DESC;</span><br><span class="line"></span><br><span class="line"># 10、查询图书信息，按照库存量降序排列，如果库存量相同的按照note升序排列</span><br><span class="line">SELECT * FROM books ORDER BY num DESC,note ASC;</span><br><span class="line"></span><br><span class="line"># 11、按照note分类统计书的数量</span><br><span class="line">SELECT note,COUNT(*) FROM books GROUP BY note;</span><br><span class="line"></span><br><span class="line"># 12、按照note分类统计书的库存量，显示库存量超过30本的</span><br><span class="line">SELECT note,SUM(num) FROM books GROUP BY note HAVING SUM(num)&gt;30;</span><br><span class="line"></span><br><span class="line"># 13、查询所有图书，每页显示5本，显示第二页</span><br><span class="line">SELECT * FROM books LIMIT 5,5;</span><br><span class="line"></span><br><span class="line"># 14、按照note分类统计书的库存量，显示库存量最多的</span><br><span class="line">SELECT note,SUM(num) sum_num FROM books GROUP BY note ORDER BY sum_num DESC LIMIT 0,1;</span><br><span class="line"></span><br><span class="line"># 15、查询书名达到10个字符的书，不包括里面的空格</span><br><span class="line">SELECT * FROM books WHERE CHAR_LENGTH(REPLACE(name,&#x27; &#x27;,&#x27;&#x27;))&gt;=10;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">16、查询书名和类型，</span><br><span class="line"> 其中note值为 novel显示小说，law显示法律，medicine显示医药，cartoon显示卡通，joke显示笑话</span><br><span class="line">*/</span><br><span class="line">SELECT name AS &quot;书名&quot; ,note, CASE note </span><br><span class="line"> WHEN &#x27;novel&#x27; THEN &#x27;小说&#x27;</span><br><span class="line"> WHEN &#x27;law&#x27; THEN &#x27;法律&#x27;</span><br><span class="line"> WHEN &#x27;medicine&#x27; THEN &#x27;医药&#x27;</span><br><span class="line"> WHEN &#x27;cartoon&#x27; THEN &#x27;卡通&#x27;</span><br><span class="line"> WHEN &#x27;joke&#x27; THEN &#x27;笑话&#x27;</span><br><span class="line"> END AS &quot;类型&quot;</span><br><span class="line">FROM books;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 17、查询书名、库存，其中num值超过30本的，显示滞销，大于0并低于10的，显示畅销，为0的显示需要无货</span><br><span class="line">SELECT name,num,CASE </span><br><span class="line">  WHEN num&gt;30 THEN &#x27;滞销&#x27;</span><br><span class="line">  WHEN num&gt;0 AND num&lt;10 THEN &#x27;畅销&#x27;</span><br><span class="line">  WHEN num=0 THEN &#x27;无货&#x27;</span><br><span class="line">  ELSE &#x27;正常&#x27;</span><br><span class="line">  END AS &quot;库存状态&quot;</span><br><span class="line">FROM books;</span><br><span class="line"></span><br><span class="line"># 18、统计每一种note的库存量，并合计总量</span><br><span class="line">SELECT IFNULL(note,&#x27;合计总库存量&#x27;) AS note,SUM(num) FROM books GROUP BY note WITH ROLLUP;</span><br><span class="line"></span><br><span class="line"># 19、统计每一种note的数量，并合计总量</span><br><span class="line">SELECT IFNULL(note,&#x27;合计总数&#x27;) AS note,COUNT(*) FROM books GROUP BY note WITH ROLLUP;</span><br><span class="line"></span><br><span class="line"># 20、统计库存量前三名的图书</span><br><span class="line">SELECT * FROM books ORDER BY num DESC LIMIT 0,3;</span><br><span class="line"></span><br><span class="line"># 21、找出最早出版的一本书</span><br><span class="line">SELECT * FROM books ORDER BY pubdate ASC LIMIT 0,1;</span><br><span class="line"></span><br><span class="line"># 22、找出novel中价格最高的一本书</span><br><span class="line">SELECT * FROM books WHERE note = &#x27;novel&#x27; ORDER BY price DESC LIMIT 0,1;</span><br><span class="line"></span><br><span class="line"># 23、找出书名中字数最多的一本书，不含空格</span><br><span class="line">SELECT * FROM books ORDER BY CHAR_LENGTH(REPLACE(name,&#x27; &#x27;,&#x27;&#x27;)) DESC LIMIT 0,1;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/yangzhengyz">YZ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC11%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/">http://example.com/2022/05/17/MySQL/mysql基础篇笔记/第11章_数据处理之增删改/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">YZ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC12%E7%AB%A0_MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%B2%BE%E8%AE%B2/"><img class="prev-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第12章_MySQL数据类型精讲</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC10%E7%AB%A0_%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E8%A1%A8/"><img class="next-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第10章_创建和管理表</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC00%E7%AB%A0_%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2/" title="第00章_写在前面"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第00章_写在前面</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC01%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E8%BF%B0/" title="第01章_数据库概述"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第01章_数据库概述</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC02%E7%AB%A0_MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="第02章_MySQL环境搭建"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第02章_MySQL环境搭建</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC03%E7%AB%A0_%E5%9F%BA%E6%9C%AC%E7%9A%84SELECT%E8%AF%AD%E5%8F%A5/" title="第03章_基本的SELECT语句"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第03章_基本的SELECT语句</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC05%E7%AB%A0_%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E9%A1%B5/" title="第05章_排序与分页"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第05章_排序与分页</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/" title="第04章_运算符"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第04章_运算符</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YZ</div><div class="author-info__description">YZ的博客,欢迎访问</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yangzhengyz"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yangzhengyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="twitter"><i class="fa-brands fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to  my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC11%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9"><span class="toc-number">1.</span> <span class="toc-text">第11章_数据处理之增删改</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.</span> <span class="toc-text">插入数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">实际问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F1%EF%BC%9AVALUES%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.1.2.</span> <span class="toc-text">方式1：VALUES的方式添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F2%EF%BC%9A%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E5%88%B0%E8%A1%A8%E4%B8%AD"><span class="toc-number">1.1.3.</span> <span class="toc-text">方式2：将查询结果插入到表中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.</span> <span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL8%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E8%AE%A1%E7%AE%97%E5%88%97"><span class="toc-number">1.4.</span> <span class="toc-text">MySQL8新特性：计算列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B"><span class="toc-number">1.5.</span> <span class="toc-text">综合案例</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第18章_MySQL8其它新特性"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性">第18章_MySQL8其它新特性</a><time datetime="2022-05-17T12:37:18.000Z" title="发表于 2022-05-17 20:37:18">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第17章_触发器"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器">第17章_触发器</a><time datetime="2022-05-17T12:37:17.000Z" title="发表于 2022-05-17 20:37:17">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第16章_变量、流程控制与游标"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标">第16章_变量、流程控制与游标</a><time datetime="2022-05-17T12:37:16.000Z" title="发表于 2022-05-17 20:37:16">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第15章_存储过程与函数"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数">第15章_存储过程与函数</a><time datetime="2022-05-17T12:37:15.000Z" title="发表于 2022-05-17 20:37:15">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第14章_视图"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图">第14章_视图</a><time datetime="2022-05-17T12:37:14.000Z" title="发表于 2022-05-17 20:37:14">2022-05-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By YZ</div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><div class="aplayer no-destroy" data-id="7193364325" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

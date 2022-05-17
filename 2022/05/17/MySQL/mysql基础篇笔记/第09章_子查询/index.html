@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第09章_子查询 | YZ</title><meta name="keywords" content="MySQL"><meta name="author" content="YZ"><meta name="copyright" content="YZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第09章_子查询讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  子查询指一个查询语句嵌套在另一个查询语句内部的查询，这个特性从MySQL 4.1开始引入。 SQL 中子查询的使用大大增强了 SELECT 查询的能力，因为很多时候查询需要从结果集中获取数据，或者需要从同一个表中先计算得出一个数据结果，然后与这个数据结果（可能是某个标量，也可能是某个集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第09章_子查询">
+<meta property="og:url" content="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/index.html">
+<meta property="og:site_name" content="YZ">
+<meta property="og:description" content="第09章_子查询讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  子查询指一个查询语句嵌套在另一个查询语句内部的查询，这个特性从MySQL 4.1开始引入。 SQL 中子查询的使用大大增强了 SELECT 查询的能力，因为很多时候查询需要从结果集中获取数据，或者需要从同一个表中先计算得出一个数据结果，然后与这个数据结果（可能是某个标量，也可能是某个集合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360">
+<meta property="article:published_time" content="2022-05-17T12:37:09.000Z">
+<meta property="article:modified_time" content="2022-05-17T12:49:14.717Z">
+<meta property="article:author" content="YZ">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第09章_子查询',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-17 20:49:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/constown/HexoCustomFile@0.0.4/dist/css/custom.min.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="YZ" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">YZ</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第09章_子查询</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-17T12:37:09.000Z" title="发表于 2022-05-17 20:37:09">2022-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-17T12:49:14.717Z" title="更新于 2022-05-17 20:49:14">2022-05-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第09章_子查询"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第09章-子查询"><a href="#第09章-子查询" class="headerlink" title="第09章_子查询"></a>第09章_子查询</h1><p>讲师：尚硅谷-宋红康（江湖人称：康师傅）</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://www.atguigu.com/">http://www.atguigu.com</a></p>
+<hr>
+<p>子查询指一个查询语句嵌套在另一个查询语句内部的查询，这个特性从MySQL 4.1开始引入。</p>
+<p>SQL 中子查询的使用大大增强了 SELECT 查询的能力，因为很多时候查询需要从结果集中获取数据，或者需要从同一个表中先计算得出一个数据结果，然后与这个数据结果（可能是某个标量，也可能是某个集合）进行比较。</p>
+<h2 id="需求分析与问题解决"><a href="#需求分析与问题解决" class="headerlink" title="需求分析与问题解决"></a>需求分析与问题解决</h2><h3 id="实际问题"><a href="#实际问题" class="headerlink" title="实际问题"></a>实际问题</h3><p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991034688.png" alt="1554991034688" style="zoom:80%;"></p>
+<p>现有解决方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#方式一：</span><br><span class="line">SELECT salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE last_name = &#x27;Abel&#x27;;</span><br><span class="line"></span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE salary &gt; 11000;</span><br><span class="line"></span><br><span class="line">#方式二：自连接</span><br><span class="line">SELECT e2.last_name,e2.salary</span><br><span class="line">FROM employees e1,employees e2</span><br><span class="line">WHERE e1.last_name = &#x27;Abel&#x27;</span><br><span class="line">AND e1.`salary` &lt; e2.`salary`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#方式三：子查询</span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE salary &gt; (</span><br><span class="line">		SELECT salary</span><br><span class="line">		FROM employees</span><br><span class="line">		WHERE last_name = &#x27;Abel&#x27;</span><br><span class="line">		);</span><br></pre></td></tr></table></figure>
+<p> <img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991316599.png" alt="1554991316599"></p>
+<h3 id="子查询的基本使用"><a href="#子查询的基本使用" class="headerlink" title="子查询的基本使用"></a>子查询的基本使用</h3><ul>
+<li><p>子查询的基本语法结构：</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991054388.png" alt="1554991054388"></p>
+</li>
+<li><p>子查询（内查询）在主查询之前一次执行完成。</p>
+</li>
+<li>子查询的结果被主查询（外查询）使用 。</li>
+<li><strong>注意事项</strong><ul>
+<li>子查询要包含在括号内</li>
+<li>将子查询放在比较条件的右侧</li>
+<li>单行操作符对应单行子查询，多行操作符对应多行子查询</li>
+</ul>
+</li>
+</ul>
+<h3 id="子查询的分类"><a href="#子查询的分类" class="headerlink" title="子查询的分类"></a>子查询的分类</h3><p><strong>分类方式1：</strong></p>
+<p>我们按内查询的结果返回一条还是多条记录，将子查询分为<code>单行子查询</code>、<code>多行子查询</code>。</p>
+<ul>
+<li><p>单行子查询</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991538719.png" alt="1554991538719"></p>
+</li>
+<li><p>多行子查询</p>
+</li>
+</ul>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991555669.png" alt="1554991555669"></p>
+<p><strong>分类方式2：</strong></p>
+<p>我们按内查询是否被执行多次，将子查询划分为<code>相关(或关联)子查询</code>和<code>不相关(或非关联)子查询</code>。</p>
+<p>子查询从数据表中查询了数据结果，如果这个数据结果只执行一次，然后这个数据结果作为主查询的条件进行执行，那么这样的子查询叫做不相关子查询。</p>
+<p>同样，如果子查询需要执行多次，即采用循环的方式，先从外部查询开始，每次都传入子查询进行查询，然后再将结果反馈给外部，这种嵌套的执行方式就称为相关子查询。</p>
+<h2 id="单行子查询"><a href="#单行子查询" class="headerlink" title="单行子查询"></a>单行子查询</h2><h3 id="单行比较操作符"><a href="#单行比较操作符" class="headerlink" title="单行比较操作符"></a>单行比较操作符</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>equal to</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>greater than or equal to</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>less than</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>less than or equal to</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>not equal to</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><p><strong>题目：查询工资大于149号员工工资的员工的信息</strong></p>
+<p> <img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/image-20210914232952626.png" alt="image-20210914232952626"></p>
+<p> <img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/image-20210914232935062.png" alt="image-20210914232935062"></p>
+<p><strong>题目：返回job_id与141号员工相同，salary比143号员工多的员工姓名，job_id和工资</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name, job_id, salary</span><br><span class="line"><span class="keyword">FROM</span>   employees</span><br><span class="line"><span class="keyword">WHERE</span>  job_id <span class="operator">=</span>  </span><br><span class="line">                (<span class="keyword">SELECT</span> job_id</span><br><span class="line">                 <span class="keyword">FROM</span>   employees</span><br><span class="line">                 <span class="keyword">WHERE</span>  employee_id <span class="operator">=</span> <span class="number">141</span>)</span><br><span class="line"><span class="keyword">AND</span>    salary <span class="operator">&gt;</span></span><br><span class="line">                (<span class="keyword">SELECT</span> salary</span><br><span class="line">                 <span class="keyword">FROM</span>   employees</span><br><span class="line">                 <span class="keyword">WHERE</span>  employee_id <span class="operator">=</span> <span class="number">143</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991892770.png" alt="1554991892770"></p>
+<p><strong>题目：返回公司工资最少的员工的last_name,job_id和salary</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name, job_id, salary</span><br><span class="line"><span class="keyword">FROM</span>   employees</span><br><span class="line"><span class="keyword">WHERE</span>  salary <span class="operator">=</span> </span><br><span class="line">                (<span class="keyword">SELECT</span> <span class="built_in">MIN</span>(salary)</span><br><span class="line">                 <span class="keyword">FROM</span>   employees);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554991935186.png" alt="1554991935186"></p>
+<p><strong>题目：查询与141号或174号员工的manager_id和department_id相同的其他员工的employee_id，manager_id，department_id</strong></p>
+<p>实现方式1：不成对比较</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT  employee_id, manager_id, department_id</span><br><span class="line">FROM    employees</span><br><span class="line">WHERE   manager_id IN</span><br><span class="line">		  (SELECT  manager_id</span><br><span class="line">                   FROM    employees</span><br><span class="line">                   WHERE   employee_id IN (174,141))</span><br><span class="line">AND     department_id IN </span><br><span class="line">		  (SELECT  department_id</span><br><span class="line">                   FROM    employees</span><br><span class="line">                   WHERE   employee_id IN (174,141))</span><br><span class="line">AND	employee_id NOT IN(174,141);</span><br></pre></td></tr></table></figure>
+<p>实现方式2：成对比较</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT	employee_id, manager_id, department_id</span><br><span class="line">FROM	employees</span><br><span class="line">WHERE  (manager_id, department_id) IN</span><br><span class="line">                      (SELECT manager_id, department_id</span><br><span class="line">                       FROM   employees</span><br><span class="line">                       WHERE  employee_id IN (141,174))</span><br><span class="line">AND	employee_id NOT IN (141,174);</span><br></pre></td></tr></table></figure>
+<h3 id="HAVING-中的子查询"><a href="#HAVING-中的子查询" class="headerlink" title="HAVING 中的子查询"></a>HAVING 中的子查询</h3><ul>
+<li>首先执行子查询。</li>
+<li>向主查询中的HAVING 子句返回结果。</li>
+</ul>
+<p><strong>题目：查询最低工资大于50号部门最低工资的部门id和其最低工资</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>   department_id, <span class="built_in">MIN</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span>     employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department_id</span><br><span class="line"><span class="keyword">HAVING</span>   <span class="built_in">MIN</span>(salary) <span class="operator">&gt;</span></span><br><span class="line">                       (<span class="keyword">SELECT</span> <span class="built_in">MIN</span>(salary)</span><br><span class="line">                        <span class="keyword">FROM</span>   employees</span><br><span class="line">                        <span class="keyword">WHERE</span>  department_id <span class="operator">=</span> <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="CASE中的子查询"><a href="#CASE中的子查询" class="headerlink" title="CASE中的子查询"></a>CASE中的子查询</h3><p>在CASE表达式中使用单列子查询：</p>
+<p><strong>题目：显式员工的employee_id,last_name和location。其中，若员工department_id与location_id为1800的department_id相同，则location为’Canada’，其余则为’USA’。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT employee_id, last_name,</span><br><span class="line">       (CASE department_id</span><br><span class="line">        WHEN</span><br><span class="line">             (SELECT department_id FROM departments</span><br><span class="line">	      WHERE location_id = 1800)           </span><br><span class="line">        THEN &#x27;Canada&#x27; ELSE &#x27;USA&#x27; END) location</span><br><span class="line">FROM   employees;</span><br></pre></td></tr></table></figure>
+<h3 id="子查询中的空值问题"><a href="#子查询中的空值问题" class="headerlink" title="子查询中的空值问题"></a>子查询中的空值问题</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name, job_id</span><br><span class="line"><span class="keyword">FROM</span>   employees</span><br><span class="line"><span class="keyword">WHERE</span>  job_id <span class="operator">=</span></span><br><span class="line">                (<span class="keyword">SELECT</span> job_id</span><br><span class="line">                 <span class="keyword">FROM</span>   employees</span><br><span class="line">                 <span class="keyword">WHERE</span>  last_name <span class="operator">=</span> <span class="string">&#x27;Haas&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992067381.png" alt="1554992067381"></p>
+<blockquote>
+<p><strong>子查询不返回任何行</strong></p>
+</blockquote>
+<h3 id="非法使用子查询"><a href="#非法使用子查询" class="headerlink" title="非法使用子查询"></a>非法使用子查询</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee_id, last_name</span><br><span class="line"><span class="keyword">FROM</span>   employees</span><br><span class="line"><span class="keyword">WHERE</span>  salary <span class="operator">=</span></span><br><span class="line">                (<span class="keyword">SELECT</span>   <span class="built_in">MIN</span>(salary)</span><br><span class="line">                 <span class="keyword">FROM</span>     employees</span><br><span class="line">                 <span class="keyword">GROUP</span> <span class="keyword">BY</span> department_id);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992135819.png" alt="1554992135819"></p>
+<blockquote>
+<p><strong>多行子查询使用单行比较符</strong></p>
+</blockquote>
+<h2 id="多行子查询"><a href="#多行子查询" class="headerlink" title="多行子查询"></a>多行子查询</h2><ul>
+<li>也称为集合比较子查询</li>
+<li>内查询返回多行</li>
+<li>使用多行比较操作符</li>
+</ul>
+<h3 id="多行比较操作符"><a href="#多行比较操作符" class="headerlink" title="多行比较操作符"></a>多行比较操作符</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IN</td>
+<td>等于列表中的<strong>任意一个</strong></td>
+</tr>
+<tr>
+<td>ANY</td>
+<td>需要和单行比较操作符一起使用，和子查询返回的<strong>某一个</strong>值比较</td>
+</tr>
+<tr>
+<td>ALL</td>
+<td>需要和单行比较操作符一起使用，和子查询返回的<strong>所有</strong>值比较</td>
+</tr>
+<tr>
+<td>SOME</td>
+<td>实际上是ANY的别名，作用相同，一般常使用ANY</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>体会 ANY 和 ALL 的区别</p>
+</blockquote>
+<h3 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例"></a>代码示例</h3><p><strong>题目：返回其它job_id中比job_id为‘IT_PROG’部门任一工资低的员工的员工号、姓名、job_id 以及salary</strong></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992658876.png" alt="1554992658876"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992664594.png" alt="1554992664594"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992668429.png" alt="1554992668429"></p>
+<p><strong>题目：返回其它job_id中比job_id为‘IT_PROG’部门所有工资都低的员工的员工号、姓名、job_id以及salary</strong></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992753654.png" alt="1554992753654"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992759467.png" alt="1554992759467"></p>
+<p><strong>题目：查询平均工资最低的部门id</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#方式1：</span><br><span class="line">SELECT department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY department_id</span><br><span class="line">HAVING AVG(salary) = (</span><br><span class="line">			SELECT MIN(avg_sal)</span><br><span class="line">			FROM (</span><br><span class="line">				SELECT AVG(salary) avg_sal</span><br><span class="line">				FROM employees</span><br><span class="line">				GROUP BY department_id</span><br><span class="line">				) dept_avg_sal</span><br><span class="line">			)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#方式2：</span><br><span class="line">SELECT department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY department_id</span><br><span class="line">HAVING AVG(salary) &lt;= ALL (</span><br><span class="line">				SELECT AVG(salary) avg_sal</span><br><span class="line">				FROM employees</span><br><span class="line">				GROUP BY department_id</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="空值问题"><a href="#空值问题" class="headerlink" title="空值问题"></a>空值问题</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT last_name</span><br><span class="line">FROM employees</span><br><span class="line">WHERE employee_id NOT IN (</span><br><span class="line">			SELECT manager_id</span><br><span class="line">			FROM employees</span><br><span class="line">			);</span><br></pre></td></tr></table></figure>
+<p> <img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/image-20211027195906773.png" alt="image-20211027195906773"></p>
+<h2 id="相关子查询"><a href="#相关子查询" class="headerlink" title="相关子查询"></a>相关子查询</h2><h3 id="相关子查询执行流程"><a href="#相关子查询执行流程" class="headerlink" title="相关子查询执行流程"></a>相关子查询执行流程</h3><p>如果子查询的执行依赖于外部查询，通常情况下都是因为子查询中的表用到了外部的表，并进行了条件关联，因此每执行一次外部查询，子查询都要重新计算一次，这样的子查询就称之为<code>关联子查询</code>。</p>
+<p>相关子查询按照一行接一行的顺序执行，主查询的每一行都执行一次子查询。</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992898234.png" alt="1554992898234" style="zoom:80%;"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992925281.png" alt="1554992925281" style="zoom:80%;"></p>
+<p>说明：<strong>子查询中使用主查询中的列</strong></p>
+<h3 id="代码示例-2"><a href="#代码示例-2" class="headerlink" title="代码示例"></a>代码示例</h3><p><strong>题目：查询员工中工资大于本部门平均工资的员工的last_name,salary和其department_id</strong></p>
+<p><strong>方式一：相关子查询</strong></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554992986225.png" alt="1554992986225"></p>
+<p><strong>方式二：在 FROM 中使用子查询</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,salary,e1.department_id</span><br><span class="line"><span class="keyword">FROM</span> employees e1,(<span class="keyword">SELECT</span> department_id,<span class="built_in">AVG</span>(salary) dept_avg_sal <span class="keyword">FROM</span> employees <span class="keyword">GROUP</span> <span class="keyword">BY</span> department_id) e2</span><br><span class="line"><span class="keyword">WHERE</span> e1.`department_id` <span class="operator">=</span> e2.department_id</span><br><span class="line"><span class="keyword">AND</span> e2.dept_avg_sal <span class="operator">&lt;</span> e1.`salary`;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>from型的子查询：子查询是作为from的一部分，子查询要用()引起来，并且要给这个子查询取别名，<br>把它当成一张“临时的虚拟的表”来使用。</p>
+</blockquote>
+<p>在ORDER BY 中使用子查询：</p>
+<p><strong>题目：查询员工的id,salary,按照department_name 排序</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee_id,salary</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> (</span><br><span class="line">	  <span class="keyword">SELECT</span> department_name</span><br><span class="line">	  <span class="keyword">FROM</span> departments d</span><br><span class="line">	  <span class="keyword">WHERE</span> e.`department_id` <span class="operator">=</span> d.`department_id`</span><br><span class="line">	);</span><br></pre></td></tr></table></figure>
+<p><strong>题目：若employees表中employee_id与job_history表中employee_id相同的数目不小于2，输出这些相同id的员工的employee_id,last_name和其job_id</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT e.employee_id, last_name,e.job_id</span><br><span class="line">FROM   employees e </span><br><span class="line">WHERE  2 &lt;= (SELECT COUNT(*)</span><br><span class="line">             FROM   job_history </span><br><span class="line">             WHERE  employee_id = e.employee_id);</span><br></pre></td></tr></table></figure>
+<h3 id="EXISTS-与-NOT-EXISTS关键字"><a href="#EXISTS-与-NOT-EXISTS关键字" class="headerlink" title="EXISTS 与 NOT EXISTS关键字"></a>EXISTS 与 NOT EXISTS关键字</h3><ul>
+<li>关联子查询通常也会和 EXISTS操作符一起来使用，用来检查在子查询中是否存在满足条件的行。</li>
+<li><strong>如果在子查询中不存在满足条件的行：</strong><ul>
+<li>条件返回 FALSE</li>
+<li>继续在子查询中查找</li>
+</ul>
+</li>
+<li><strong>如果在子查询中存在满足条件的行：</strong><ul>
+<li>不在子查询中继续查找</li>
+<li>条件返回 TRUE</li>
+</ul>
+</li>
+<li>NOT EXISTS关键字表示如果不存在某种条件，则返回TRUE，否则返回FALSE。</li>
+</ul>
+<p><strong>题目：查询公司管理者的employee_id，last_name，job_id，department_id信息</strong></p>
+<p>方式一：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee_id, last_name, job_id, department_id</span><br><span class="line"><span class="keyword">FROM</span>   employees e1</span><br><span class="line"><span class="keyword">WHERE</span>  <span class="keyword">EXISTS</span> ( <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">                 <span class="keyword">FROM</span>   employees e2</span><br><span class="line">                 <span class="keyword">WHERE</span>  e2.manager_id <span class="operator">=</span> </span><br><span class="line">                        e1.employee_id);</span><br></pre></td></tr></table></figure>
+<p>方式二：自连接</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> e1.employee_id, e1.last_name, e1.job_id, e1.department_id</span><br><span class="line"><span class="keyword">FROM</span>   employees e1 <span class="keyword">JOIN</span> employees e2</span><br><span class="line"><span class="keyword">WHERE</span> e1.employee_id <span class="operator">=</span> e2.manager_id;</span><br></pre></td></tr></table></figure>
+<p>方式三：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee_id,last_name,job_id,department_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> employee_id <span class="keyword">IN</span> (</span><br><span class="line">		     <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> manager_id</span><br><span class="line">		     <span class="keyword">FROM</span> employees</span><br><span class="line">		     </span><br><span class="line">		     );</span><br></pre></td></tr></table></figure>
+<p><strong>题目：查询departments表中，不存在于employees表中的部门的department_id和department_name</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department_id, department_name</span><br><span class="line"><span class="keyword">FROM</span> departments d</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="string">&#x27;X&#x27;</span></span><br><span class="line">                  <span class="keyword">FROM</span>   employees</span><br><span class="line">                  <span class="keyword">WHERE</span>  department_id <span class="operator">=</span> d.department_id);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/1554993169269.png" alt="1554993169269"></p>
+<h3 id="相关更新"><a href="#相关更新" class="headerlink" title="相关更新"></a>相关更新</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> table1 alias1</span><br><span class="line"><span class="keyword">SET</span>    <span class="keyword">column</span> <span class="operator">=</span> (<span class="keyword">SELECT</span> expression</span><br><span class="line">                 <span class="keyword">FROM</span>   table2 alias2</span><br><span class="line">                 <span class="keyword">WHERE</span>  alias1.column <span class="operator">=</span> alias2.column);</span><br></pre></td></tr></table></figure>
+<p>使用相关子查询依据一个表中的数据更新另一个表的数据。</p>
+<p><strong>题目：在employees中增加一个department_name字段，数据为员工对应的部门名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1）</span><br><span class="line">ALTER TABLE employees</span><br><span class="line">ADD(department_name VARCHAR2(14));</span><br><span class="line"></span><br><span class="line"># 2）</span><br><span class="line">UPDATE employees e</span><br><span class="line">SET department_name =  (SELECT department_name </span><br><span class="line">	                       FROM   departments d</span><br><span class="line">	                       WHERE  e.department_id = d.department_id);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="相关删除"><a href="#相关删除" class="headerlink" title="相关删除"></a>相关删除</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table1 alias1</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">column</span> operator (<span class="keyword">SELECT</span> expression</span><br><span class="line">                       <span class="keyword">FROM</span>   table2 alias2</span><br><span class="line">                       <span class="keyword">WHERE</span>  alias1.column <span class="operator">=</span> alias2.column);</span><br></pre></td></tr></table></figure>
+<p>使用相关子查询依据一个表中的数据删除另一个表的数据。</p>
+<p><strong>题目：删除表employees中，其与emp_history表皆有的数据</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">WHERE</span> employee_id <span class="keyword">in</span>  </span><br><span class="line">           (<span class="keyword">SELECT</span> employee_id</span><br><span class="line">            <span class="keyword">FROM</span>   emp_history </span><br><span class="line">            <span class="keyword">WHERE</span>  employee_id <span class="operator">=</span> e.employee_id);</span><br></pre></td></tr></table></figure>
+<h2 id="抛一个思考题"><a href="#抛一个思考题" class="headerlink" title="抛一个思考题"></a>抛一个思考题</h2><p><strong>问题：</strong>谁的工资比Abel的高？</p>
+<p><strong>解答：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#方式1：自连接</span><br><span class="line">SELECT e2.last_name,e2.salary</span><br><span class="line">FROM employees e1,employees e2</span><br><span class="line">WHERE e1.last_name = &#x27;Abel&#x27;</span><br><span class="line">AND e1.`salary` &lt; e2.`salary`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#方式2：子查询</span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE salary &gt; (</span><br><span class="line">		SELECT salary</span><br><span class="line">		FROM employees</span><br><span class="line">		WHERE last_name = &#x27;Abel&#x27;</span><br><span class="line">		);</span><br></pre></td></tr></table></figure>
+<p><strong>问题：</strong>以上两种方式有好坏之分吗？</p>
+<p><strong>解答：</strong>自连接方式好！</p>
+<p>题目中可以使用子查询，也可以使用自连接。一般情况建议你使用自连接，因为在许多 DBMS 的处理过程中，对于自连接的处理速度要比子查询快得多。</p>
+<p>可以这样理解：子查询实际上是通过未知表进行查询后的条件判断，而自连接是通过已知的自身数据表进行条件判断，因此在大部分 DBMS 中都对自连接处理进行了优化。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/yangzhengyz">YZ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC09%E7%AB%A0_%E5%AD%90%E6%9F%A5%E8%AF%A2/">http://example.com/2022/05/17/MySQL/mysql基础篇笔记/第09章_子查询/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">YZ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC10%E7%AB%A0_%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E8%A1%A8/"><img class="prev-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第10章_创建和管理表</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC08%E7%AB%A0_%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/"><img class="next-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第08章_聚合函数</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC00%E7%AB%A0_%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2/" title="第00章_写在前面"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第00章_写在前面</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC01%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E8%BF%B0/" title="第01章_数据库概述"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第01章_数据库概述</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC02%E7%AB%A0_MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="第02章_MySQL环境搭建"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第02章_MySQL环境搭建</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC03%E7%AB%A0_%E5%9F%BA%E6%9C%AC%E7%9A%84SELECT%E8%AF%AD%E5%8F%A5/" title="第03章_基本的SELECT语句"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第03章_基本的SELECT语句</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC05%E7%AB%A0_%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E9%A1%B5/" title="第05章_排序与分页"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第05章_排序与分页</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/" title="第04章_运算符"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第04章_运算符</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YZ</div><div class="author-info__description">YZ的博客,欢迎访问</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yangzhengyz"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yangzhengyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="twitter"><i class="fa-brands fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to  my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC09%E7%AB%A0-%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.</span> <span class="toc-text">第09章_子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%B8%8E%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-number">1.1.</span> <span class="toc-text">需求分析与问题解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">实际问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">子查询的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.3.</span> <span class="toc-text">子查询的分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.2.</span> <span class="toc-text">单行子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">单行比较操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HAVING-%E4%B8%AD%E7%9A%84%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.2.3.</span> <span class="toc-text">HAVING 中的子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CASE%E4%B8%AD%E7%9A%84%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.2.4.</span> <span class="toc-text">CASE中的子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%E4%B8%AD%E7%9A%84%E7%A9%BA%E5%80%BC%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.5.</span> <span class="toc-text">子查询中的空值问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E6%B3%95%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.2.6.</span> <span class="toc-text">非法使用子查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.3.</span> <span class="toc-text">多行子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.3.1.</span> <span class="toc-text">多行比较操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.3.</span> <span class="toc-text">空值问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.</span> <span class="toc-text">相关子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">相关子查询执行流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.4.2.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXISTS-%E4%B8%8E-NOT-EXISTS%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.4.3.</span> <span class="toc-text">EXISTS 与 NOT EXISTS关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%9B%B4%E6%96%B0"><span class="toc-number">1.4.4.</span> <span class="toc-text">相关更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%88%A0%E9%99%A4"><span class="toc-number">1.4.5.</span> <span class="toc-text">相关删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%9B%E4%B8%80%E4%B8%AA%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">1.5.</span> <span class="toc-text">抛一个思考题</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第18章_MySQL8其它新特性"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性">第18章_MySQL8其它新特性</a><time datetime="2022-05-17T12:37:18.000Z" title="发表于 2022-05-17 20:37:18">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第17章_触发器"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器">第17章_触发器</a><time datetime="2022-05-17T12:37:17.000Z" title="发表于 2022-05-17 20:37:17">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第16章_变量、流程控制与游标"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标">第16章_变量、流程控制与游标</a><time datetime="2022-05-17T12:37:16.000Z" title="发表于 2022-05-17 20:37:16">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第15章_存储过程与函数"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数">第15章_存储过程与函数</a><time datetime="2022-05-17T12:37:15.000Z" title="发表于 2022-05-17 20:37:15">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第14章_视图"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图">第14章_视图</a><time datetime="2022-05-17T12:37:14.000Z" title="发表于 2022-05-17 20:37:14">2022-05-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By YZ</div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><div class="aplayer no-destroy" data-id="7193364325" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

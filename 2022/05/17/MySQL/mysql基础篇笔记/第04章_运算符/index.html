@@ -1,0 +1,472 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第04章_运算符 | YZ</title><meta name="keywords" content="MySQL"><meta name="author" content="YZ"><meta name="copyright" content="YZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第04章_运算符讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  算术运算符算术运算符主要用于数学运算，其可以连接运算符前后的两个数值或表达式，对数值或表达式进行加（+）、减（-）、乘（*）、除（&#x2F;）和取模（%）运算。  1．加法与减法运算符 mysql&gt; SELECT 100, 100 + 0, 100 - 0, 100 + 50, 100 +">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第04章_运算符">
+<meta property="og:url" content="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
+<meta property="og:site_name" content="YZ">
+<meta property="og:description" content="第04章_运算符讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  算术运算符算术运算符主要用于数学运算，其可以连接运算符前后的两个数值或表达式，对数值或表达式进行加（+）、减（-）、乘（*）、除（&#x2F;）和取模（%）运算。  1．加法与减法运算符 mysql&gt; SELECT 100, 100 + 0, 100 - 0, 100 + 50, 100 +">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360">
+<meta property="article:published_time" content="2022-05-17T12:37:04.000Z">
+<meta property="article:modified_time" content="2022-05-17T12:49:14.694Z">
+<meta property="article:author" content="YZ">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第04章_运算符',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-17 20:49:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/constown/HexoCustomFile@0.0.4/dist/css/custom.min.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="YZ" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">YZ</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第04章_运算符</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-17T12:37:04.000Z" title="发表于 2022-05-17 20:37:04">2022-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-17T12:49:14.694Z" title="更新于 2022-05-17 20:49:14">2022-05-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第04章_运算符"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第04章-运算符"><a href="#第04章-运算符" class="headerlink" title="第04章_运算符"></a>第04章_运算符</h1><p>讲师：尚硅谷-宋红康（江湖人称：康师傅）</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://www.atguigu.com/">http://www.atguigu.com</a></p>
+<hr>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>算术运算符主要用于数学运算，其可以连接运算符前后的两个数值或表达式，对数值或表达式进行加（+）、减（-）、乘（*）、除（/）和取模（%）运算。</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012100749193.png" alt="image-20211012100749193"></p>
+<p><strong>1．加法与减法运算符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 100, 100 + 0, 100 - 0, 100 + 50, 100 + 50 -30, 100 + 35.5, 100 - 35.5 FROM dual;</span><br><span class="line">+-----+---------+---------+----------+--------------+------------+------------+</span><br><span class="line">| 100 | 100 + 0 | 100 - 0 | 100 + 50 | 100 + 50 -30 | 100 + 35.5 | 100 - 35.5 |</span><br><span class="line">+-----+---------+---------+----------+--------------+------------+------------+</span><br><span class="line">| 100 |     100 |     100 |      150 |          120 |      135.5 |       64.5 |</span><br><span class="line">+-----+---------+---------+----------+--------------+------------+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>由运算结果可以得出如下结论：</p>
+<blockquote>
+<ul>
+<li>一个整数类型的值对整数进行加法和减法操作，结果还是一个整数；</li>
+<li>一个整数类型的值对浮点数进行加法和减法操作，结果是一个浮点数；</li>
+<li>加法和减法的优先级相同，进行先加后减操作与进行先减后加操作的结果是一样的；</li>
+<li>在Java中，+的左右两边如果有字符串，那么表示字符串的拼接。但是在MySQL中+只表示数值相加。如果遇到非数值类型，先尝试转成数值，如果转失败，就按0计算。（补充：MySQL中字符串拼接要使用字符串函数CONCAT()实现）</li>
+</ul>
+</blockquote>
+<p><strong>2．乘法与除法运算符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 100, 100 * 1, 100 * 1.0, 100 / 1.0, 100 / 2,100 + 2 * 5 / 2,100 /3, 100 DIV 0 FROM dual;</span><br><span class="line">+-----+---------+-----------+-----------+---------+-----------------+---------+-----------+</span><br><span class="line">| 100 | 100 * 1 | 100 * 1.0 | 100 / 1.0 | 100 / 2 | 100 + 2 * 5 / 2 | 100 /3  | 100 DIV 0 |</span><br><span class="line">+-----+---------+-----------+-----------+---------+-----------------+---------+-----------+</span><br><span class="line">| 100 |     100 |     100.0 |  100.0000 | 50.0000 |        105.0000 | 33.3333 |      NULL |</span><br><span class="line">+-----+---------+-----------+-----------+---------+-----------------+---------+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#计算出员工的年基本工资</span><br><span class="line">SELECT employee_id,salary,salary * 12 annual_sal </span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+<p>由运算结果可以得出如下结论：</p>
+<blockquote>
+<ul>
+<li>一个数乘以整数1和除以整数1后仍得原数；</li>
+<li>一个数乘以浮点数1和除以浮点数1后变成浮点数，数值与原数相等；</li>
+<li>一个数除以整数后，不管是否能除尽，结果都为一个浮点数；</li>
+<li>一个数除以另一个数，除不尽时，结果为一个浮点数，并保留到小数点后4位；</li>
+<li>乘法和除法的优先级相同，进行先乘后除操作与先除后乘操作，得出的结果相同。</li>
+<li>在数学运算中，0不能用作除数，在MySQL中，一个数除以0为NULL。</li>
+</ul>
+</blockquote>
+<p><strong>3．求模（求余）运算符</strong><br>将t22表中的字段i对3和5进行求模（求余）运算。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 12 % 3, 12 MOD 5 FROM dual;</span><br><span class="line">+--------+----------+</span><br><span class="line">| 12 % 3 | 12 MOD 5 |</span><br><span class="line">+--------+----------+</span><br><span class="line">|      0 |        2 |</span><br><span class="line">+--------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#筛选出employee_id是偶数的员工</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE employee_id MOD 2 = 0;</span><br></pre></td></tr></table></figure>
+<p>可以看到，100对3求模后的结果为3，对5求模后的结果为0。</p>
+<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><p>比较运算符用来对表达式左边的操作数和右边的操作数进行比较，比较的结果为真则返回1，比较的结果为假则返回0，其他情况则返回NULL。</p>
+<p>比较运算符经常被用来作为SELECT查询语句的条件来使用，返回符合条件的结果记录。</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012101110021.png" alt="image-20211012101110021"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012104955094.png" alt="image-20211012104955094"></p>
+<p><strong>1．等号运算符</strong></p>
+<ul>
+<li><p>等号运算符（=）判断等号两边的值、字符串或表达式是否相等，如果相等则返回1，不相等则返回0。</p>
+</li>
+<li><p>在使用等号运算符时，遵循如下规则：</p>
+<ul>
+<li>如果等号两边的值、字符串或表达式都为字符串，则MySQL会按照字符串进行比较，其比较的是每个字符串中字符的ANSI编码是否相等。</li>
+<li>如果等号两边的值都是整数，则MySQL会按照整数来比较两个值的大小。</li>
+<li>如果等号两边的值一个是整数，另一个是字符串，则MySQL会将字符串转化为数字进行比较。</li>
+<li>如果等号两边的值、字符串或表达式中有一个为NULL，则比较结果为NULL。</li>
+</ul>
+</li>
+<li><p>对比：SQL中赋值符号使用 := </p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 = 1, 1 = &#x27;1&#x27;, 1 = 0, &#x27;a&#x27; = &#x27;a&#x27;, (5 + 3) = (2 + 6), &#x27;&#x27; = NULL , NULL = NULL; </span><br><span class="line">+-------+---------+-------+-----------+-------------------+-----------+-------------+</span><br><span class="line">| 1 = 1 | 1 = &#x27;1&#x27; | 1 = 0 | &#x27;a&#x27; = &#x27;a&#x27; | (5 + 3) = (2 + 6) | &#x27;&#x27; = NULL | NULL = NULL |</span><br><span class="line">+-------+---------+-------+-----------+-------------------+-----------+-------------+</span><br><span class="line">|    1  |     1   |   0   |      1    |             1     |    NULL   |        NULL  |</span><br><span class="line">+-------+---------+-------+-----------+-------------------+-----------+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 = 2, 0 = &#x27;abc&#x27;, 1 = &#x27;abc&#x27; FROM dual;</span><br><span class="line">+-------+-----------+-----------+</span><br><span class="line">| 1 = 2 | 0 = &#x27;abc&#x27; | 1 = &#x27;abc&#x27; |</span><br><span class="line">+-------+-----------+-----------+</span><br><span class="line">|     0 |         1 |         0 |</span><br><span class="line">+-------+-----------+-----------+</span><br><span class="line">1 row in set, 2 warnings (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询salary=10000，注意在Java中比较是==</span><br><span class="line">SELECT employee_id,salary FROM employees WHERE salary = 10000;</span><br></pre></td></tr></table></figure>
+<p><strong>2．安全等于运算符</strong><br>安全等于运算符（&lt;=&gt;）与等于运算符（=）的作用是相似的，<code>唯一的区别</code>是‘&lt;=&gt;’可以用来对NULL进行判断。在两个操作数均为NULL时，其返回值为1，而不为NULL；当一个操作数为NULL时，其返回值为0，而不为NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 &lt;=&gt; &#x27;1&#x27;, 1 &lt;=&gt; 0, &#x27;a&#x27; &lt;=&gt; &#x27;a&#x27;, (5 + 3) &lt;=&gt; (2 + 6), &#x27;&#x27; &lt;=&gt; NULL,NULL &lt;=&gt; NULL FROM dual;</span><br><span class="line">+-----------+---------+-------------+---------------------+-------------+---------------+</span><br><span class="line">| 1 &lt;=&gt; &#x27;1&#x27; | 1 &lt;=&gt; 0 | &#x27;a&#x27; &lt;=&gt; &#x27;a&#x27; | (5 + 3) &lt;=&gt; (2 + 6) | &#x27;&#x27; &lt;=&gt; NULL | NULL &lt;=&gt; NULL |</span><br><span class="line">+-----------+---------+-------------+---------------------+-------------+---------------+</span><br><span class="line">|         1 |       0 |           1 |                   1 |           0 |             1 |</span><br><span class="line">+-----------+---------+-------------+---------------------+-------------+---------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询commission_pct等于0.40</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE commission_pct = 0.40;</span><br><span class="line"></span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE commission_pct &lt;=&gt; 0.40;</span><br><span class="line"></span><br><span class="line">#如果把0.40改成 NULL 呢？</span><br></pre></td></tr></table></figure>
+<p>可以看到，使用安全等于运算符时，两边的操作数的值都为NULL时，返回的结果为1而不是NULL，其他返回结果与等于运算符相同。</p>
+<p><strong>3．不等于运算符</strong><br>不等于运算符（&lt;&gt;和!=）用于判断两边的数字、字符串或者表达式的值是否不相等，如果不相等则返回1，相等则返回0。不等于运算符不能判断NULL值。如果两边的值有任意一个为NULL，或两边都为NULL，则结果为NULL。<br>SQL语句示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 &lt;&gt; 1, 1 != 2, &#x27;a&#x27; != &#x27;b&#x27;, (3+4) &lt;&gt; (2+6), &#x27;a&#x27; != NULL, NULL &lt;&gt; NULL; </span><br><span class="line">+--------+--------+------------+----------------+-------------+--------------+</span><br><span class="line">| 1 &lt;&gt; 1 | 1 != 2 | &#x27;a&#x27; != &#x27;b&#x27; | (3+4) &lt;&gt; (2+6) | &#x27;a&#x27; != NULL | NULL &lt;&gt; NULL |</span><br><span class="line">+--------+--------+------------+----------------+-------------+--------------+</span><br><span class="line">|      0 |   1    |       1    |            1   |     NULL    |         NULL |</span><br><span class="line">+--------+--------+------------+----------------+-------------+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>此外，还有非符号类型的运算符：</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012105303219.png" alt="image-20211012105303219"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012105030527.png" alt="image-20211012105030527"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012105052456.png" alt="image-20211012105052456"></p>
+<p><strong>4. 空运算符</strong><br>空运算符（IS NULL或者ISNULL）判断一个值是否为NULL，如果为NULL则返回1，否则返回0。<br>SQL语句示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT NULL IS NULL, ISNULL(NULL), ISNULL(&#x27;a&#x27;), 1 IS NULL;</span><br><span class="line">+--------------+--------------+-------------+-----------+</span><br><span class="line">| NULL IS NULL | ISNULL(NULL) | ISNULL(&#x27;a&#x27;) | 1 IS NULL |</span><br><span class="line">+--------------+--------------+-------------+-----------+</span><br><span class="line">|            1 |            1 |           0 |         0 |</span><br><span class="line">+--------------+--------------+-------------+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询commission_pct等于NULL。比较如下的四种写法</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE commission_pct IS NULL;</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE commission_pct &lt;=&gt; NULL;</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE ISNULL(commission_pct);</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE commission_pct = NULL;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT last_name, manager_id</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  manager_id IS NULL;</span><br></pre></td></tr></table></figure>
+<p><strong>5. 非空运算符</strong><br>非空运算符（IS NOT NULL）判断一个值是否不为NULL，如果不为NULL则返回1，否则返回0。<br>SQL语句示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT NULL IS NOT NULL, &#x27;a&#x27; IS NOT NULL,  1 IS NOT NULL; </span><br><span class="line">+------------------+-----------------+---------------+</span><br><span class="line">| NULL IS NOT NULL | &#x27;a&#x27; IS NOT NULL | 1 IS NOT NULL |</span><br><span class="line">+------------------+-----------------+---------------+</span><br><span class="line">|                0 |               1 |             1 |</span><br><span class="line">+------------------+-----------------+---------------+</span><br><span class="line">1 row in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询commission_pct不等于NULL</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE commission_pct IS NOT NULL;</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE NOT commission_pct &lt;=&gt; NULL;</span><br><span class="line">SELECT employee_id,commission_pct FROM employees WHERE NOT ISNULL(commission_pct);</span><br></pre></td></tr></table></figure>
+<p><strong>6. 最小值运算符</strong><br>语法格式为：LEAST(值1，值2，…，值n)。其中，“值n”表示参数列表中有n个值。在有两个或多个参数的情况下，返回最小值。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT LEAST (1,0,2), LEAST(&#x27;b&#x27;,&#x27;a&#x27;,&#x27;c&#x27;), LEAST(1,NULL,2);</span><br><span class="line">+---------------+--------------------+-----------------+</span><br><span class="line">| LEAST (1,0,2) | LEAST(&#x27;b&#x27;,&#x27;a&#x27;,&#x27;c&#x27;) | LEAST(1,NULL,2) |</span><br><span class="line">+---------------+--------------------+-----------------+</span><br><span class="line">|       0       |        a           |      NULL       |</span><br><span class="line">+---------------+--------------------+-----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>由结果可以看到，当参数是整数或者浮点数时，LEAST将返回其中最小的值；当参数为字符串时，返回字母表中顺序最靠前的字符；当比较值列表中有NULL时，不能判断大小，返回值为NULL。</p>
+<p><strong>7. 最大值运算符</strong><br>语法格式为：GREATEST(值1，值2，…，值n)。其中，n表示参数列表中有n个值。当有两个或多个参数时，返回值为最大值。假如任意一个自变量为NULL，则GREATEST()的返回值为NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT GREATEST(1,0,2), GREATEST(&#x27;b&#x27;,&#x27;a&#x27;,&#x27;c&#x27;), GREATEST(1,NULL,2);</span><br><span class="line">+-----------------+-----------------------+--------------------+</span><br><span class="line">| GREATEST(1,0,2) | GREATEST(&#x27;b&#x27;,&#x27;a&#x27;,&#x27;c&#x27;) | GREATEST(1,NULL,2) |</span><br><span class="line">+-----------------+-----------------------+--------------------+</span><br><span class="line">|               2 | c                     |               NULL |</span><br><span class="line">+-----------------+-----------------------+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>由结果可以看到，当参数中是整数或者浮点数时，GREATEST将返回其中最大的值；当参数为字符串时，返回字母表中顺序最靠后的字符；当比较值列表中有NULL时，不能判断大小，返回值为NULL。</p>
+<p><strong>8. BETWEEN AND运算符</strong><br>BETWEEN运算符使用的格式通常为SELECT D FROM TABLE WHERE C BETWEEN A AND B，此时，当C大于或等于A，并且C小于或等于B时，结果为1，否则结果为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 BETWEEN 0 AND 1, 10 BETWEEN 11 AND 12, &#x27;b&#x27; BETWEEN &#x27;a&#x27; AND &#x27;c&#x27;;</span><br><span class="line">+-------------------+----------------------+-------------------------+</span><br><span class="line">| 1 BETWEEN 0 AND 1 | 10 BETWEEN 11 AND 12 | &#x27;b&#x27; BETWEEN &#x27;a&#x27; AND &#x27;c&#x27; |</span><br><span class="line">+-------------------+----------------------+-------------------------+</span><br><span class="line">|                 1 |                    0 |                       1 |</span><br><span class="line">+-------------------+----------------------+-------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT last_name, salary</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  salary BETWEEN 2500 AND 3500;</span><br></pre></td></tr></table></figure>
+<p><strong>9. IN运算符</strong><br>IN运算符用于判断给定的值是否是IN列表中的一个值，如果是则返回1，否则返回0。如果给定的值为NULL，或者IN列表中存在NULL，则结果为NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT &#x27;a&#x27; IN (&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;), 1 IN (2,3), NULL IN (&#x27;a&#x27;,&#x27;b&#x27;), &#x27;a&#x27; IN (&#x27;a&#x27;, NULL);</span><br><span class="line">+----------------------+------------+-------------------+--------------------+</span><br><span class="line">| &#x27;a&#x27; IN (&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;) | 1 IN (2,3) | NULL IN (&#x27;a&#x27;,&#x27;b&#x27;) | &#x27;a&#x27; IN (&#x27;a&#x27;, NULL) |</span><br><span class="line">+----------------------+------------+-------------------+--------------------+</span><br><span class="line">|            1         |        0   |         NULL      |         1          |</span><br><span class="line">+----------------------+------------+-------------------+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT employee_id, last_name, salary, manager_id</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  manager_id IN (100, 101, 201);</span><br></pre></td></tr></table></figure>
+<p><strong>10. NOT IN运算符</strong><br>NOT IN运算符用于判断给定的值是否不是IN列表中的一个值，如果不是IN列表中的一个值，则返回1，否则返回0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT &#x27;a&#x27; NOT IN (&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;), 1 NOT IN (2,3);</span><br><span class="line">+--------------------------+----------------+</span><br><span class="line">| &#x27;a&#x27; NOT IN (&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;) | 1 NOT IN (2,3) |</span><br><span class="line">+--------------------------+----------------+</span><br><span class="line">|                 0        |            1   |</span><br><span class="line">+--------------------------+----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>11. LIKE运算符</strong><br>LIKE运算符主要用来匹配字符串，通常用于模糊匹配，如果满足条件则返回1，否则返回0。如果给定的值或者匹配条件为NULL，则返回结果为NULL。</p>
+<p>LIKE运算符通常使用如下通配符：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">“%”：匹配0个或多个字符。</span><br><span class="line">“_”：只能匹配一个字符。</span><br></pre></td></tr></table></figure>
+<p>SQL语句示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT NULL LIKE &#x27;abc&#x27;, &#x27;abc&#x27; LIKE NULL;  </span><br><span class="line">+-----------------+-----------------+</span><br><span class="line">| NULL LIKE &#x27;abc&#x27; | &#x27;abc&#x27; LIKE NULL |</span><br><span class="line">+-----------------+-----------------+</span><br><span class="line">|          NULL   |          NULL   |</span><br><span class="line">+-----------------+-----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT	first_name</span><br><span class="line">FROM 	employees</span><br><span class="line">WHERE	first_name LIKE &#x27;S%&#x27;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT last_name</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  last_name LIKE &#x27;_o%&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>ESCAPE</strong></p>
+<ul>
+<li>回避特殊符号的：<strong>使用转义符</strong>。例如：将[%]转为[$%]、[]转为[$]，然后再加上[ESCAPE‘$’]即可。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT job_id</span><br><span class="line">FROM   jobs</span><br><span class="line">WHERE  job_id LIKE ‘IT\_%‘;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果使用\表示转义，要省略ESCAPE。如果不是\，则要加上ESCAPE。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT job_id</span><br><span class="line">FROM   jobs</span><br><span class="line">WHERE  job_id LIKE ‘IT$_%‘ escape ‘$‘;</span><br></pre></td></tr></table></figure>
+<p><strong>12. REGEXP运算符</strong></p>
+<p>REGEXP运算符用来匹配字符串，语法格式为：<code>expr REGEXP 匹配条件</code>。如果expr满足匹配条件，返回1；如果不满足，则返回0。若expr或匹配条件任意一个为NULL，则结果为NULL。</p>
+<p>REGEXP运算符在进行匹配时，常用的有下面几种通配符：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（1）‘^’匹配以该字符后面的字符开头的字符串。</span><br><span class="line">（2）‘$’匹配以该字符前面的字符结尾的字符串。</span><br><span class="line">（3）‘.’匹配任何一个单字符。</span><br><span class="line">（4）“[...]”匹配在方括号内的任何字符。例如，“[abc]”匹配“a”或“b”或“c”。为了命名字符的范围，使用一个‘-’。“[a-z]”匹配任何字母，而“[0-9]”匹配任何数字。</span><br><span class="line">（5）‘*’匹配零个或多个在它前面的字符。例如，“x*”匹配任何数量的‘x’字符，“[0-9]*”匹配任何数量的数字，而“*”匹配任何数量的任何字符。</span><br></pre></td></tr></table></figure>
+<p>SQL语句示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT &#x27;shkstart&#x27; REGEXP &#x27;^s&#x27;, &#x27;shkstart&#x27; REGEXP &#x27;t$&#x27;, &#x27;shkstart&#x27; REGEXP &#x27;hk&#x27;;</span><br><span class="line">+------------------------+------------------------+-------------------------+</span><br><span class="line">| &#x27;shkstart&#x27; REGEXP &#x27;^s&#x27; | &#x27;shkstart&#x27; REGEXP &#x27;t$&#x27; | &#x27;shkstart&#x27; REGEXP &#x27;hk&#x27;  |</span><br><span class="line">+------------------------+------------------------+-------------------------+</span><br><span class="line">|                      1 |                      1 |                       1 |</span><br><span class="line">+------------------------+------------------------+-------------------------+</span><br><span class="line">1 row in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT &#x27;atguigu&#x27; REGEXP &#x27;gu.gu&#x27;, &#x27;atguigu&#x27; REGEXP &#x27;[ab]&#x27;;</span><br><span class="line">+--------------------------+-------------------------+</span><br><span class="line">| &#x27;atguigu&#x27; REGEXP &#x27;gu.gu&#x27; | &#x27;atguigu&#x27; REGEXP &#x27;[ab]&#x27; |</span><br><span class="line">+--------------------------+-------------------------+</span><br><span class="line">|                        1 |                       1 |</span><br><span class="line">+--------------------------+-------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>逻辑运算符主要用来判断表达式的真假，在MySQL中，逻辑运算符的返回结果为1、0或者NULL。</p>
+<p>MySQL中支持4种逻辑运算符如下：</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012110241418.png" alt="image-20211012110241418"></p>
+<p><strong>1．逻辑非运算符</strong><br>逻辑非（NOT或!）运算符表示当给定的值为0时返回1；当给定的值为非0值时返回0；当给定的值为NULL时，返回NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT NOT 1, NOT 0, NOT(1+1), NOT !1, NOT NULL;    </span><br><span class="line">+-------+-------+----------+--------+----------+</span><br><span class="line">| NOT 1 | NOT 0 | NOT(1+1) | NOT !1 | NOT NULL |</span><br><span class="line">+-------+-------+----------+--------+----------+</span><br><span class="line">|     0 |     1 |        0 |      1 |     NULL |</span><br><span class="line">+-------+-------+----------+--------+----------+</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT last_name, job_id</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  job_id NOT IN (&#x27;IT_PROG&#x27;, &#x27;ST_CLERK&#x27;, &#x27;SA_REP&#x27;);</span><br></pre></td></tr></table></figure>
+<p><strong>2．逻辑与运算符</strong><br>逻辑与（AND或&amp;&amp;）运算符是当给定的所有值均为非0值，并且都不为NULL时，返回1；当给定的一个值或者多个值为0时则返回0；否则返回NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 AND -1, 0 AND 1, 0 AND NULL, 1 AND NULL;</span><br><span class="line">+----------+---------+------------+------------+</span><br><span class="line">| 1 AND -1 | 0 AND 1 | 0 AND NULL | 1 AND NULL |</span><br><span class="line">+----------+---------+------------+------------+</span><br><span class="line">|        1 |       0 |          0 |       NULL |</span><br><span class="line">+----------+---------+------------+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT employee_id, last_name, job_id, salary</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  salary &gt;=10000</span><br><span class="line">AND    job_id LIKE &#x27;%MAN%&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>3．逻辑或运算符</strong><br>逻辑或（OR或||）运算符是当给定的值都不为NULL，并且任何一个值为非0值时，则返回1，否则返回0；当一个值为NULL，并且另一个值为非0值时，返回1，否则返回NULL；当两个值都为NULL时，返回NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 OR -1, 1 OR 0, 1 OR NULL, 0 || NULL, NULL || NULL;     </span><br><span class="line">+---------+--------+-----------+-----------+--------------+</span><br><span class="line">| 1 OR -1 | 1 OR 0 | 1 OR NULL | 0 || NULL | NULL || NULL |</span><br><span class="line">+---------+--------+-----------+-----------+--------------+</span><br><span class="line">|       1 |      1 |         1 |    NULL   |       NULL   |</span><br><span class="line">+---------+--------+-----------+-----------+--------------+</span><br><span class="line">1 row in set, 2 warnings (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询基本薪资不在9000-12000之间的员工编号和基本薪资</span><br><span class="line">SELECT employee_id,salary FROM employees </span><br><span class="line">WHERE NOT (salary &gt;= 9000 AND salary &lt;= 12000);</span><br><span class="line"></span><br><span class="line">SELECT employee_id,salary FROM employees </span><br><span class="line">WHERE salary &lt;9000 OR salary &gt; 12000;</span><br><span class="line"></span><br><span class="line">SELECT employee_id,salary FROM employees </span><br><span class="line">WHERE salary NOT BETWEEN 9000 AND 12000;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT employee_id, last_name, job_id, salary</span><br><span class="line">FROM   employees</span><br><span class="line">WHERE  salary &gt;= 10000</span><br><span class="line">OR     job_id LIKE &#x27;%MAN%&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：</p>
+<p>OR可以和AND一起使用，但是在使用时要注意两者的优先级，由于AND的优先级高于OR，因此先对AND两边的操作数进行操作，再与OR中的操作数结合。</p>
+</blockquote>
+<p><strong>4．逻辑异或运算符</strong><br>逻辑异或（XOR）运算符是当给定的值中任意一个值为NULL时，则返回NULL；如果两个非NULL的值都是0或者都不等于0时，则返回0；如果一个值为0，另一个值不为0时，则返回1。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 XOR -1, 1 XOR 0, 0 XOR 0, 1 XOR NULL, 1 XOR 1 XOR 1, 0 XOR 0 XOR 0;</span><br><span class="line">+----------+---------+---------+------------+---------------+---------------+</span><br><span class="line">| 1 XOR -1 | 1 XOR 0 | 0 XOR 0 | 1 XOR NULL | 1 XOR 1 XOR 1 | 0 XOR 0 XOR 0 |</span><br><span class="line">+----------+---------+---------+------------+---------------+---------------+</span><br><span class="line">|        0 |       1 |       0 |       NULL |             1 |             0 |</span><br><span class="line">+----------+---------+---------+------------+---------------+---------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select last_name,department_id,salary </span><br><span class="line">from employees</span><br><span class="line">where department_id in (10,20) XOR salary &gt; 8000;</span><br></pre></td></tr></table></figure>
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><p>位运算符是在二进制数上进行计算的运算符。位运算符会先将操作数变成二进制数，然后进行位运算，最后将计算结果从二进制变回十进制数。</p>
+<p>MySQL支持的位运算符如下：</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012110511223.png" alt="image-20211012110511223"></p>
+<p><strong>1．按位与运算符</strong><br>按位与（&amp;）运算符将给定值对应的二进制数逐位进行逻辑与运算。当给定值对应的二进制位的数值都为1时，则该位返回1，否则返回0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 &amp; 10, 20 &amp; 30;</span><br><span class="line">+--------+---------+</span><br><span class="line">| 1 &amp; 10 | 20 &amp; 30 |</span><br><span class="line">+--------+---------+</span><br><span class="line">|      0 |      20 |</span><br><span class="line">+--------+---------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>1的二进制数为0001，10的二进制数为1010，所以1 &amp; 10的结果为0000，对应的十进制数为0。20的二进制数为10100，30的二进制数为11110，所以20 &amp; 30的结果为10100，对应的十进制数为20。</p>
+<p><strong>2. 按位或运算符</strong><br>按位或（|）运算符将给定的值对应的二进制数逐位进行逻辑或运算。当给定值对应的二进制位的数值有一个或两个为1时，则该位返回1，否则返回0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 | 10, 20 | 30; </span><br><span class="line">+--------+---------+</span><br><span class="line">| 1 | 10 | 20 | 30 |</span><br><span class="line">+--------+---------+</span><br><span class="line">|     11 |      30 |</span><br><span class="line">+--------+---------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>1的二进制数为0001，10的二进制数为1010，所以1 | 10的结果为1011，对应的十进制数为11。20的二进制数为10100，30的二进制数为11110，所以20 | 30的结果为11110，对应的十进制数为30。</p>
+<p><strong>3. 按位异或运算符</strong><br>按位异或（^）运算符将给定的值对应的二进制数逐位进行逻辑异或运算。当给定值对应的二进制位的数值不同时，则该位返回1，否则返回0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 ^ 10, 20 ^ 30; </span><br><span class="line">+--------+---------+</span><br><span class="line">| 1 ^ 10 | 20 ^ 30 |</span><br><span class="line">+--------+---------+</span><br><span class="line">|     11 |      10 |</span><br><span class="line">+--------+---------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>1的二进制数为0001，10的二进制数为1010，所以1 ^ 10的结果为1011，对应的十进制数为11。20的二进制数为10100，30的二进制数为11110，所以20 ^ 30的结果为01010，对应的十进制数为10。</p>
+<p>再举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 12 &amp; 5, 12 | 5,12 ^ 5 FROM DUAL;</span><br><span class="line">+--------+--------+--------+</span><br><span class="line">| 12 &amp; 5 | 12 | 5 | 12 ^ 5 |</span><br><span class="line">+--------+--------+--------+</span><br><span class="line">|      4 |     13 |      9 |</span><br><span class="line">+--------+--------+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211023115738415.png" alt="image-20211023115738415" style="zoom:80%;"></p>
+<p><strong>4. 按位取反运算符</strong><br>按位取反（~）运算符将给定的值的二进制数逐位进行取反操作，即将1变为0，将0变为1。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 10 &amp; ~1;</span><br><span class="line">+---------+</span><br><span class="line">| 10 &amp; ~1 |</span><br><span class="line">+---------+</span><br><span class="line">|      10 |</span><br><span class="line">+---------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>由于按位取反（~）运算符的优先级高于按位与（&amp;）运算符的优先级，所以10 &amp; ~1，首先，对数字1进行按位取反操作，结果除了最低位为0，其他位都为1，然后与10进行按位与操作，结果为10。</p>
+<p><strong>5. 按位右移运算符</strong><br>按位右移（&gt;&gt;）运算符将给定的值的二进制数的所有位右移指定的位数。右移指定的位数后，右边低位的数值被移出并丢弃，左边高位空出的位置用0补齐。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 &gt;&gt; 2, 4 &gt;&gt; 2;</span><br><span class="line">+--------+--------+</span><br><span class="line">| 1 &gt;&gt; 2 | 4 &gt;&gt; 2 |</span><br><span class="line">+--------+--------+</span><br><span class="line">|      0 |      1 |</span><br><span class="line">+--------+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>1的二进制数为0000 0001，右移2位为0000 0000，对应的十进制数为0。4的二进制数为0000 0100，右移2位为0000 0001，对应的十进制数为1。</p>
+<p><strong>6. 按位左移运算符</strong><br>按位左移（&lt;&lt;）运算符将给定的值的二进制数的所有位左移指定的位数。左移指定的位数后，左边高位的数值被移出并丢弃，右边低位空出的位置用0补齐。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT 1 &lt;&lt; 2, 4 &lt;&lt; 2;  </span><br><span class="line">+--------+--------+</span><br><span class="line">| 1 &lt;&lt; 2 | 4 &lt;&lt; 2 |</span><br><span class="line">+--------+--------+</span><br><span class="line">|      4 |     16 |</span><br><span class="line">+--------+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>1的二进制数为0000 0001，左移两位为0000 0100，对应的十进制数为4。4的二进制数为0000 0100，左移两位为0001 0000，对应的十进制数为16。</p>
+<h2 id="5-运算符的优先级"><a href="#5-运算符的优先级" class="headerlink" title="5. 运算符的优先级"></a>5. 运算符的优先级</h2><p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012111042395.png" alt="image-20211012111042395"></p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211012110731059.png" alt="image-20211012110731059"></p>
+<p>数字编号越大，优先级越高，优先级高的运算符先进行计算。可以看到，赋值运算符的优先级最低，使用“()”括起来的表达式的优先级最高。</p>
+<h2 id="拓展：使用正则表达式查询"><a href="#拓展：使用正则表达式查询" class="headerlink" title="拓展：使用正则表达式查询"></a>拓展：使用正则表达式查询</h2><p>正则表达式通常被用来检索或替换那些符合某个模式的文本内容，根据指定的匹配模式匹配文本中符合要求的特殊字符串。例如，从一个文本文件中提取电话号码，查找一篇文章中重复的单词或者替换用户输入的某些敏感词语等，这些地方都可以使用正则表达式。正则表达式强大而且灵活，可以应用于非常复杂的查询。</p>
+<p>MySQL中使用REGEXP关键字指定正则表达式的字符匹配模式。下表列出了REGEXP操作符中常用字符匹配列表。</p>
+<p><img src="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/image-20210926151249943.png" alt="image-20210926151249943"></p>
+<p><strong>1. 查询以特定字符或字符串开头的记录</strong><br>字符‘^’匹配以特定字符或者字符串开头的文本。</p>
+<p>在fruits表中，查询f_name字段以字母‘b’开头的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;^b&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>2. 查询以特定字符或字符串结尾的记录</strong><br>字符‘$’匹配以特定字符或者字符串结尾的文本。</p>
+<p>在fruits表中，查询f_name字段以字母‘y’结尾的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;y$&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>3. 用符号”.”来替代字符串中的任意一个字符</strong><br>字符‘.’匹配任意一个字符。<br>在fruits表中，查询f_name字段值包含字母‘a’与‘g’且两个字母之间只有一个字母的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;a.g&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>4. 使用”*”和”+”来匹配多个字符</strong><br>星号‘*’匹配前面的字符任意多次，包括0次。加号‘+’匹配前面的字符至少一次。</p>
+<p>在fruits表中，查询f_name字段值以字母‘b’开头且‘b’后面出现字母‘a’的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;^ba*&#x27;;</span><br></pre></td></tr></table></figure>
+<p>在fruits表中，查询f_name字段值以字母‘b’开头且‘b’后面出现字母‘a’至少一次的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;^ba+&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>5. 匹配指定字符串</strong><br>正则表达式可以匹配指定字符串，只要这个字符串在查询文本中即可，如要匹配多个字符串，多个字符串之间使用分隔符‘|’隔开。</p>
+<p>在fruits表中，查询f_name字段值包含字符串“on”的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;on&#x27;;</span><br></pre></td></tr></table></figure>
+<p>在fruits表中，查询f_name字段值包含字符串“on”或者“ap”的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;on|ap&#x27;;</span><br></pre></td></tr></table></figure>
+<p>之前介绍过，LIKE运算符也可以匹配指定的字符串，但与REGEXP不同，LIKE匹配的字符串如果在文本中间出现，则找不到它，相应的行也不会返回。REGEXP在文本内进行匹配，如果被匹配的字符串在文本中出现，REGEXP将会找到它，相应的行也会被返回。对比结果如下所示。</p>
+<p>在fruits表中，使用LIKE运算符查询f_name字段值为“on”的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name like &#x27;on&#x27;;</span><br><span class="line">Empty set(0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>6. 匹配指定字符中的任意一个</strong><br>方括号“[]”指定一个字符集合，只匹配其中任何一个字符，即为所查找的文本。</p>
+<p>在fruits表中，查找f_name字段中包含字母‘o’或者‘t’的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;[ot]&#x27;;</span><br></pre></td></tr></table></figure>
+<p>在fruits表中，查询s_id字段中包含4、5或者6的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE s_id REGEXP &#x27;[456]&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>7. 匹配指定字符以外的字符</strong><br><code>“[^字符集合]”</code>匹配不在指定集合中的任何字符。</p>
+<p>在fruits表中，查询f_id字段中包含字母a~e和数字1~2以外字符的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_id REGEXP &#x27;[^a-e1-2]&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>8. 使用{n,}或者{n,m}来指定字符串连续出现的次数</strong><br>“字符串{n,}”表示至少匹配n次前面的字符；“字符串{n,m}”表示匹配前面的字符串不少于n次，不多于m次。例如，a{2,}表示字母a连续出现至少2次，也可以大于2次；a{2,4}表示字母a连续出现最少2次，最多不能超过4次。</p>
+<p>在fruits表中，查询f_name字段值出现字母‘x’至少2次的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;x&#123;2,&#125;&#x27;;</span><br></pre></td></tr></table></figure>
+<p>在fruits表中，查询f_name字段值出现字符串“ba”最少1次、最多3次的记录，SQL语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM fruits WHERE f_name REGEXP &#x27;ba&#123;1,3&#125;&#x27;;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/yangzhengyz">YZ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC04%E7%AB%A0_%E8%BF%90%E7%AE%97%E7%AC%A6/">http://example.com/2022/05/17/MySQL/mysql基础篇笔记/第04章_运算符/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">YZ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC05%E7%AB%A0_%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E9%A1%B5/"><img class="prev-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第05章_排序与分页</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC03%E7%AB%A0_%E5%9F%BA%E6%9C%AC%E7%9A%84SELECT%E8%AF%AD%E5%8F%A5/"><img class="next-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第03章_基本的SELECT语句</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC00%E7%AB%A0_%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2/" title="第00章_写在前面"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第00章_写在前面</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC01%E7%AB%A0_%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E8%BF%B0/" title="第01章_数据库概述"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第01章_数据库概述</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC02%E7%AB%A0_MySQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="第02章_MySQL环境搭建"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第02章_MySQL环境搭建</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC03%E7%AB%A0_%E5%9F%BA%E6%9C%AC%E7%9A%84SELECT%E8%AF%AD%E5%8F%A5/" title="第03章_基本的SELECT语句"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第03章_基本的SELECT语句</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC05%E7%AB%A0_%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E9%A1%B5/" title="第05章_排序与分页"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第05章_排序与分页</div></div></a></div><div><a href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC08%E7%AB%A0_%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" title="第08章_聚合函数"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">第08章_聚合函数</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YZ</div><div class="author-info__description">YZ的博客,欢迎访问</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yangzhengyz"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yangzhengyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="twitter"><i class="fa-brands fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to  my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC04%E7%AB%A0-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.</span> <span class="toc-text">第04章_运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.2.</span> <span class="toc-text">比较运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.3.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.4.</span> <span class="toc-text">位运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.5.</span> <span class="toc-text">5. 运算符的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.6.</span> <span class="toc-text">拓展：使用正则表达式查询</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第18章_MySQL8其它新特性"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC18%E7%AB%A0_MySQL8%E5%85%B6%E5%AE%83%E6%96%B0%E7%89%B9%E6%80%A7/" title="第18章_MySQL8其它新特性">第18章_MySQL8其它新特性</a><time datetime="2022-05-17T12:37:18.000Z" title="发表于 2022-05-17 20:37:18">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第17章_触发器"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC17%E7%AB%A0_%E8%A7%A6%E5%8F%91%E5%99%A8/" title="第17章_触发器">第17章_触发器</a><time datetime="2022-05-17T12:37:17.000Z" title="发表于 2022-05-17 20:37:17">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第16章_变量、流程控制与游标"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC16%E7%AB%A0_%E5%8F%98%E9%87%8F%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B8%8E%E6%B8%B8%E6%A0%87/" title="第16章_变量、流程控制与游标">第16章_变量、流程控制与游标</a><time datetime="2022-05-17T12:37:16.000Z" title="发表于 2022-05-17 20:37:16">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第15章_存储过程与函数"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC15%E7%AB%A0_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0/" title="第15章_存储过程与函数">第15章_存储过程与函数</a><time datetime="2022-05-17T12:37:15.000Z" title="发表于 2022-05-17 20:37:15">2022-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第14章_视图"/></a><div class="content"><a class="title" href="/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC14%E7%AB%A0_%E8%A7%86%E5%9B%BE/" title="第14章_视图">第14章_视图</a><time datetime="2022-05-17T12:37:14.000Z" title="发表于 2022-05-17 20:37:14">2022-05-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By YZ</div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><div class="aplayer no-destroy" data-id="7193364325" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
