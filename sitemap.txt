@@ -1,3 +1,4 @@
+http://example.com/2022/09/02/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/
 http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC13%E7%AB%A0_%E7%BA%A6%E6%9D%9F/
 http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC00%E7%AB%A0_%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2/
 http://example.com/2022/05/17/MySQL/mysql%E5%9F%BA%E7%A1%80%E7%AF%87%E7%AC%94%E8%AE%B0/%E7%AC%AC06%E7%AB%A0_%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/
@@ -57,6 +58,7 @@ http://example.com/tags/MySQL/
 http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/
 http://example.com/categories/%E5%85%B3%E4%BA%8EHexo/
 http://example.com/categories/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96/
+http://example.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
 http://example.com/categories/MySQL/
 http://example.com/categories/MySQL/%E5%9F%BA%E7%A1%80%E7%89%88/
 http://example.com/categories/%E7%AE%97%E6%B3%95/
