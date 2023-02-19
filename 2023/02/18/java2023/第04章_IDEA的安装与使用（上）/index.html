@@ -1,0 +1,635 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第04章_IDEA的安装与使用（上） | YZ</title><meta name="keywords" content="java"><meta name="author" content="YZ"><meta name="copyright" content="YZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第04章_IDEA的安装与使用（上）讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  本章专题与脉络  【Why IDEA ?】    【注】JetBrains官方说明： 尽管我们采取了多种措施确保受访者的代表性，但结果可能会略微偏向 JetBrains 产品的用户，因为这些用户更有可能参加调查。  此外，2022年，某美国软件开发商在对近千名专业的J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第04章_IDEA的安装与使用（上）">
+<meta property="og:url" content="http://example.com/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:site_name" content="YZ">
+<meta property="og:description" content="第04章_IDEA的安装与使用（上）讲师：尚硅谷-宋红康（江湖人称：康师傅） 官网：http:&#x2F;&#x2F;www.atguigu.com  本章专题与脉络  【Why IDEA ?】    【注】JetBrains官方说明： 尽管我们采取了多种措施确保受访者的代表性，但结果可能会略微偏向 JetBrains 产品的用户，因为这些用户更有可能参加调查。  此外，2022年，某美国软件开发商在对近千名专业的J">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360">
+<meta property="article:published_time" content="2023-02-18T12:37:01.000Z">
+<meta property="article:modified_time" content="2023-02-19T01:43:30.644Z">
+<meta property="article:author" content="YZ">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第04章_IDEA的安装与使用（上）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-19 09:43:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/constown/HexoCustomFile@0.0.4/dist/css/custom.min.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="YZ" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">YZ</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第04章_IDEA的安装与使用（上）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-18T12:37:01.000Z" title="发表于 2023-02-18 20:37:01">2023-02-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-19T01:43:30.644Z" title="更新于 2023-02-19 09:43:30">2023-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java2023/">Java2023</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第04章_IDEA的安装与使用（上）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第04章-IDEA的安装与使用（上）"><a href="#第04章-IDEA的安装与使用（上）" class="headerlink" title="第04章_IDEA的安装与使用（上）"></a>第04章_IDEA的安装与使用（上）</h1><p>讲师：尚硅谷-宋红康（江湖人称：康师傅）</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://www.atguigu.com/">http://www.atguigu.com</a></p>
+<hr>
+<h2 id="本章专题与脉络"><a href="#本章专题与脉络" class="headerlink" title="本章专题与脉络"></a>本章专题与脉络</h2><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/第1阶段：Java基本语法-第04章.png" alt="第1阶段：Java基本语法-第04章" style="zoom:50%;"></p>
+<hr>
+<p><strong>【Why IDEA ?】</strong></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018105217845.png" alt="image-20221018105217845"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/2022-10-18_11-00-29.jpg" alt="2022-10-18_11-00-29" style="zoom:80%;"></p>
+<blockquote>
+<p>【注】JetBrains官方说明：</p>
+<p>尽管我们采取了多种措施确保受访者的代表性，但结果可能会略微偏向 JetBrains 产品的用户，因为这些用户更有可能参加调查。</p>
+</blockquote>
+<p>此外，2022年，某美国软件开发商在对近千名专业的Java开发者调研后，发布了《2022年Java开发者生产力报告》。报告提到：JetBrains 的 IntelliJ IDEA是最受欢迎的 Java IDE，占 <code>48%</code>，其次是 Eclipse，占 24%，Visual Studio Code 占 18%。</p>
+<hr>
+<p>本着”<code>工欲善其事必先利其器</code>“的精神，本章从IDEA的介绍、安装、设置入手，讲解IDEA中项目的创建、快捷键与模板的使用、断点调试、常用插件等。</p>
+<h2 id="1-认识IntelliJ-IDEA"><a href="#1-认识IntelliJ-IDEA" class="headerlink" title="1. 认识IntelliJ IDEA"></a>1. 认识IntelliJ IDEA</h2><h3 id="1-1-JetBrains-公司介绍"><a href="#1-1-JetBrains-公司介绍" class="headerlink" title="1.1 JetBrains  公司介绍"></a>1.1 JetBrains  公司介绍</h3><p>IDEA，是 JetBrains (<a target="_blank" rel="noopener" href="https://www.jetbrains.com/)公司的产品，该公司成立于2000年，总部位于捷克的布拉格，致力于为开发者打造最高效智能的开发工具。">https://www.jetbrains.com/)公司的产品，该公司成立于2000年，总部位于捷克的布拉格，致力于为开发者打造最高效智能的开发工具。</a></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1576217376761.png" alt="1576217376761" style="zoom:80%;"></p>
+<p>公司旗下还有其它产品，比如：</p>
+<ul>
+<li>WebStorm：用于开发 JavaScript、HTML5、CSS3 等前端技术</li>
+<li>PyCharm：用于开发 python</li>
+<li>PhpStorm：用于开发 PHP</li>
+<li>RubyMine：用于开发 Ruby/Rails</li>
+<li>AppCode：用于开发 Objective - C/Swift</li>
+<li>CLion：用于开发 C/C++</li>
+<li>DataGrip：用于开发数据库和 SQL</li>
+<li>Rider：用于开发.NET</li>
+<li>GoLand：用于开发 Go</li>
+</ul>
+<p>用于开发 Android的Android Studio，也是Google 基于 IDEA 社区版进行迭代的。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1593264471351.png" alt="1593264471351"></p>
+<h3 id="1-2-IntelliJ-IDEA-介绍"><a href="#1-2-IntelliJ-IDEA-介绍" class="headerlink" title="1.2 IntelliJ IDEA  介绍"></a>1.2 IntelliJ IDEA  介绍</h3><p>IDEA，全称 <code>IntelliJ IDEA</code>，是 Java 语言的集成开发环境，目前已经（基本）<code>代替</code>了Eclipse的使用。IDEA 在业界被公认为是最好的 Java 开发工具（之一），因其<code>功能强悍</code>、<code>设置人性化</code>，而深受Java、大数据、移动端程序员的喜爱。</p>
+<p>IntelliJ IDEA 在 2015 年的官网上这样介绍自己：</p>
+<blockquote>
+<p>Excel at enterprise, mobile and web development with Java, Scala and Groovy,with all the latest modern technologies and frameworks available out of thebox.</p>
+</blockquote>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018104714861.png" alt="image-20221018104714861"></p>
+<h3 id="1-3-IDEA的主要优势：-vs-Eclipse"><a href="#1-3-IDEA的主要优势：-vs-Eclipse" class="headerlink" title="1.3 IDEA的主要优势：(vs Eclipse)"></a>1.3 IDEA的主要优势：(vs Eclipse)</h3><p><strong>功能强大：</strong></p>
+<p>① 强大的整合能力。比如：Git、Maven、Spring等</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/内置的工具和支持的框架.png" alt="1576218068631" style="zoom: 67%;"></p>
+<p>② 开箱即用的体验（集成版本控制系统、多语言支持的框架随时可用，无需额外安装插件）</p>
+<p><strong>符合人体工程学：</strong></p>
+<p>① 高度智能（快速的智能代码补全、实时代码分析、可靠的重构工具）</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018104821144.png" alt="image-20221018104821144"></p>
+<p>② 提示功能的快速、便捷、范围广</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/clip_imrage002.jpg" alt="img"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018104942633.png" alt="image-20221018104942633"></p>
+<p>③ 好用的快捷键和代码模板</p>
+<p>④ 精准搜索</p>
+<h3 id="1-4-IDEA-的下载"><a href="#1-4-IDEA-的下载" class="headerlink" title="1.4 IDEA  的下载"></a>1.4 IDEA  的下载</h3><ul>
+<li>下载网址： <a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/download/#section=windows">https://www.jetbrains.com/idea/download/#section=windows</a></li>
+</ul>
+<ul>
+<li>IDEA 分为两个版本： <code>旗舰版(Ultimate)</code>和 <code>社区版(Community)</code>。</li>
+</ul>
+<ul>
+<li>IDEA的大版本每年迭代一次，大版本下的小版本（如：2022.x）迭代时间不固定，一般每年3个小版本。</li>
+</ul>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606191620253.png" alt="image-20220606191620253"></p>
+<p>两个不同版本的详细对比，可以参照官网：<br><a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/features/editions_comparison_matrix.html">https://www.jetbrains.com/idea/features/editions_comparison_matrix.html</a></p>
+<p>官网提供的详细使用文档：<br><a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/meet-intellij-idea.html">https://www.jetbrains.com/help/idea/meet-intellij-idea.html</a></p>
+<h2 id="2-卸载与安装"><a href="#2-卸载与安装" class="headerlink" title="2. 卸载与安装"></a>2. 卸载与安装</h2><h3 id="2-1-卸载过程"><a href="#2-1-卸载过程" class="headerlink" title="2.1 卸载过程"></a>2.1 卸载过程</h3><p>这里以卸载2022.1.2版本为例说明。在【控制面板】找到【卸载程序】</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019120032582.png" alt="image-20221019120032582" style="zoom: 80%;"></p>
+<p>右键点击或左键双击IntelliJ IDEA 2022.1.2进行卸载：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019121258294.png" alt="image-20221019121258294" style="zoom:80%;"></p>
+<p>如果需要保留下述数据，就不要打√。如果想彻底删除IDEA所有数据，那就打上√。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019122135368.png" alt="image-20221019122135368" style="zoom:80%;"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019122323575.png" alt="image-20221019122323575" style="zoom:80%;"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019122349195.png" alt="image-20221019122349195" style="zoom:80%;"></p>
+<p>软件卸载完以后，还需要删除其它几个位置的残留：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019161147552.png" alt="image-20221019161147552"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019161226843.png" alt="image-20221019161226843"></p>
+<h3 id="2-2-安装前的准备"><a href="#2-2-安装前的准备" class="headerlink" title="2.2 安装前的准备"></a>2.2 安装前的准备</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018110944516.png" alt="image-20221018110944516"></p>
+<ul>
+<li>64 位 Microsoft Windows 11、10、8</li>
+<li>最低 2 GB 可用 RAM，推荐 8 GB 系统总 RAM</li>
+<li>2.5 GB 硬盘空间，推荐 SSD</li>
+<li>最低屏幕分辨率 1024x768</li>
+</ul>
+<p>从安装上来看，IntelliJ IDEA 对硬件的要求<code>似乎不是很高</code>。可是在实际开发中并不是这样的，因为 IntelliJ IDEA 执行时会有大量的缓存、索引文件，所以如果你正在使用 Eclipse / MyEclipse，想通过 IntelliJ IDEA 来解决计算机的卡、慢等问题，这基本上是不可能的，本质上你应该对自己的硬件设备进行升级。</p>
+<h3 id="2-3-安装过程"><a href="#2-3-安装过程" class="headerlink" title="2.3 安装过程"></a>2.3 安装过程</h3><p>1、下载完安装包，双击直接安装<img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606191800719.png" alt="image-20220606191800719"></p>
+<p>2、欢迎安装</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606191825728.png" alt="image-20220606191825728"></p>
+<p>3、是否删除电脑上低版本的IDEA（如果有，可以选择忽略）</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606191838180.png" alt="image-20220606191838180"></p>
+<ul>
+<li><p>如果电脑上有低版本的IDEA，可以选择删除或保留。</p>
+</li>
+<li><p>这里没有卸载旧版本，如果需要卸载，记得勾选下面的保留旧的设置和配置。</p>
+</li>
+</ul>
+<p>4、选择安装目录</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606191942308.png" alt="image-20220606191942308"></p>
+<p>选择安装目录，目录中要避免中文和空格。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606192004081.png" alt="image-20220606192004081"></p>
+<p>5、创建桌面快捷图标等</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606192053432.png" alt="image-20220606192053432"></p>
+<p>确认是否与.java、.groovy、.kt 格式文件进行关联。这里建议不关联。</p>
+<p>6、在【开始】菜单新建一个文件夹（这里需要确认文件夹的名称），来管理IDEA的相关内容。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606192126130.png" alt="image-20220606192126130"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606192135684.png" alt="image-20220606192135684"></p>
+<p>7、完成安装</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606192148284.png" alt="image-20220606192148284"></p>
+<p>重启以后，单击登录：<img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615164056349.png" alt="image-20220615164056349"></p>
+<h3 id="2-4-注册"><a href="#2-4-注册" class="headerlink" title="2.4 注册"></a>2.4 注册</h3><p>首先，需要通过用户协议：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019170223226.png" alt="image-20221019170223226" style="zoom:80%;"></p>
+<p>是否同意发送用户数据（特性、使用的插件、硬件与软件配置等），建议选择：不发送。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019170301256.png" alt="image-20221019170301256" style="zoom:80%;"></p>
+<p>接着，会提示我们进行注册。</p>
+<ul>
+<li><p>选择1：试用30天。在IDEA2022.1.2版本中，需要先登录，才能开启试用。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019170638164.png" alt="image-20221019170638164" style="zoom:80%;"></p>
+</li>
+<li><p>选择2：付费购买旗舰版</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019170740875.png" alt="image-20221019170740875" style="zoom:80%;"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019170820975.png" alt="image-20221019170820975" style="zoom:50%;"></p>
+</li>
+<li><p>选择3：（推荐）</p>
+<ul>
+<li>大家参照《<code>.\03-资料\01-IDEA 2022.1 注册文档\IntelliJ IDEA2022.1注册文档.docx</code>》操作即可。</li>
+<li>由于存在时效性，如果失效，大家可以自行搜索注册方式即可。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-闪退问题"><a href="#2-5-闪退问题" class="headerlink" title="2.5 闪退问题"></a>2.5 闪退问题</h3><p>问题描述：2022.1启动不了，双击桌面图标，没有响应。</p>
+<p>解决办法：</p>
+<p>打开<code>C:\Users\songhk\AppData\Roaming\JetBrains\IntelliJIdea2022.1\idea64.exe.vmoptions</code> 这个文件。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606195927066.png" alt="image-20220606195927066"></p>
+<p>内容如下所示：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606195938517.png" alt="image-20220606195938517"></p>
+<p>删除红框的数据以后，再登录即可正常进入。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220606200011927.png" alt="image-20220606200011927"></p>
+<p>原因：之前使用过的比如2021.2.2版本，pojie了。新版IEDA太智能了，把现有的启运参数也都复制过去了。又因为最新的IDEA，不兼容pojie程序-javaagent:D:\develop_tools\IDEA\IntelliJ IDEA 2021.2.2\bin\jetbrains-agent.jar了，所以报错了，所以JVM结束了，所以没有启动画面，凉凉了。</p>
+<h2 id="3-HelloWorld的实现"><a href="#3-HelloWorld的实现" class="headerlink" title="3. HelloWorld的实现"></a>3. HelloWorld的实现</h2><h3 id="3-1-新建Project-Class"><a href="#3-1-新建Project-Class" class="headerlink" title="3.1 新建Project - Class"></a>3.1 新建Project - Class</h3><p>选择”New Project”：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174051967.png" alt="image-20221019174051967" style="zoom:80%;"></p>
+<p>指名工程名、使用的JDK版本等信息。如下所示：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174355370.png" alt="image-20221019174355370"></p>
+<p>接着创建Java类：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174505876.png" alt="image-20221019174505876"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174551606.png" alt="image-20221019174551606"></p>
+<h3 id="3-2-编写代码"><a href="#3-2-编写代码" class="headerlink" title="3.2 编写代码"></a>3.2 编写代码</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello,World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-运行"><a href="#3-3-运行" class="headerlink" title="3.3 运行"></a>3.3 运行</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174716442.png" alt="image-20221019174716442"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174801370.png" alt="image-20221019174801370"></p>
+<h2 id="4-JDK相关设置"><a href="#4-JDK相关设置" class="headerlink" title="4. JDK相关设置"></a>4. JDK相关设置</h2><h3 id="4-1-项目的JDK设置"><a href="#4-1-项目的JDK设置" class="headerlink" title="4.1 项目的JDK设置"></a>4.1 项目的JDK设置</h3><p><code>File--&gt;Project Structure...--&gt;Platform Settings --&gt;SDKs</code></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019174847921.png" alt="image-20221019174847921"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019175030852.png" alt="image-20221019175030852"></p>
+<ul>
+<li>注1：SDKs全称是Software Development Kit ，这里一定是选择JDK的安装根目录，不是JRE的目录。</li>
+<li>注2：这里还可以从本地添加多个JDK。使用“+”即可实现。</li>
+</ul>
+<h3 id="4-2-out目录和编译版本"><a href="#4-2-out目录和编译版本" class="headerlink" title="4.2 out目录和编译版本"></a>4.2 out目录和编译版本</h3><p><code>File--&gt;Project Structure...--&gt;Project Settings --&gt;Project</code></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019175358200.png" alt="image-20221019175358200"></p>
+<h2 id="5-详细设置"><a href="#5-详细设置" class="headerlink" title="5. 详细设置"></a>5. 详细设置</h2><h3 id="5-1-如何打开详细配置界面"><a href="#5-1-如何打开详细配置界面" class="headerlink" title="5.1 如何打开详细配置界面"></a>5.1 如何打开详细配置界面</h3><p>1、显示工具栏</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019175536721.png" alt="image-20221019175536721"></p>
+<p>2、选择详细配置菜单或按钮</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019175620422.png" alt="image-20221019175620422"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019175953767.png" alt="image-20221019175953767"></p>
+<h3 id="5-2-系统设置"><a href="#5-2-系统设置" class="headerlink" title="5.2 系统设置"></a>5.2 系统设置</h3><h4 id="1、默认启动项目配置"><a href="#1、默认启动项目配置" class="headerlink" title="1、默认启动项目配置"></a>1、默认启动项目配置</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019180050832.png" alt="image-20221019180050832"></p>
+<p>启动IDEA时，默认自动打开上次开发的项目？还是自己选择？</p>
+<p>如果去掉Reopen projects on startup前面的对勾，每次启动IDEA就会出现如下界面：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019180304644.png" alt="image-20221019180304644"></p>
+<h4 id="2、取消自动更新"><a href="#2、取消自动更新" class="headerlink" title="2、取消自动更新"></a>2、取消自动更新</h4><p>Settings—&gt;Appearance &amp; Behavior-&gt;System Settings -&gt; Updates</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019180428323.png" alt="image-20221019180428323"></p>
+<p>默认都打√了，建议检查IDE更新的√去掉，检查插件更新的√选上。</p>
+<h3 id="5-3-设置整体主题"><a href="#5-3-设置整体主题" class="headerlink" title="5.3 设置整体主题"></a>5.3 设置整体主题</h3><h4 id="1、选择主题"><a href="#1、选择主题" class="headerlink" title="1、选择主题"></a>1、选择主题</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019180637822.png" alt="image-20221019180637822"></p>
+<h4 id="2、设置菜单和窗口字体和大小"><a href="#2、设置菜单和窗口字体和大小" class="headerlink" title="2、设置菜单和窗口字体和大小"></a>2、设置菜单和窗口字体和大小</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655136527800.png" alt="1655136527800"></p>
+<h4 id="3、设置IDEA背景图"><a href="#3、设置IDEA背景图" class="headerlink" title="3、设置IDEA背景图"></a>3、设置IDEA背景图</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018204241748.png" alt="image-20221018204241748"></p>
+<p>选择一张合适的图片作为背景，即可。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018204305159.png" alt="image-20221018204305159"></p>
+<h3 id="5-4-设置编辑器主题样式"><a href="#5-4-设置编辑器主题样式" class="headerlink" title="5.4 设置编辑器主题样式"></a>5.4 设置编辑器主题样式</h3><h4 id="1、编辑器主题"><a href="#1、编辑器主题" class="headerlink" title="1、编辑器主题"></a>1、编辑器主题</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655136655026.png" alt="1655136655026"></p>
+<h4 id="2、字体大小"><a href="#2、字体大小" class="headerlink" title="2、字体大小"></a>2、字体大小</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655136907073.png" alt="1655136907073"></p>
+<p>更详细的字体与颜色如下：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019182625234.png" alt="image-20221019182625234"></p>
+<blockquote>
+<p>温馨提示：如果选择某个font字体，中文乱码，可以在fallback font（备选字体）中选择一个支持中文的字体。</p>
+</blockquote>
+<h4 id="3、注释的字体颜色"><a href="#3、注释的字体颜色" class="headerlink" title="3、注释的字体颜色"></a>3、注释的字体颜色</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220616121435182.png" alt="image-20220616121435182"></p>
+<ul>
+<li>Block comment：修改多行注释的字体颜色</li>
+<li>Doc Comment –&gt; Text：修改文档注释的字体颜色</li>
+<li>Line comment：修改单行注释的字体颜色</li>
+</ul>
+<h3 id="5-5-显示行号与方法分隔符"><a href="#5-5-显示行号与方法分隔符" class="headerlink" title="5.5 显示行号与方法分隔符"></a>5.5 显示行号与方法分隔符</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655137441471.png" alt="1655137441471"></p>
+<h3 id="5-6-代码智能提示功能"><a href="#5-6-代码智能提示功能" class="headerlink" title="5.6 代码智能提示功能"></a>5.6 代码智能提示功能</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655137649491.png" alt="1655137649491"></p>
+<p>IntelliJ IDEA 的代码提示和补充功能有一个特性：<code>区分大小写</code>。 如果想不区分大小写的话，就把这个对勾去掉。<code>建议去掉勾选</code>。</p>
+<h3 id="5-7-自动导包配置"><a href="#5-7-自动导包配置" class="headerlink" title="5.7 自动导包配置"></a>5.7 自动导包配置</h3><ul>
+<li>默认需要自己手动导包，Alt+Enter快捷键</li>
+</ul>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655138308426.png" alt="1655138308426"></p>
+<ul>
+<li>自动导包设置<ul>
+<li>动态导入明确的包：Add unambiguous imports on the fly，该设置具有全局性；</li>
+<li>优化动态导入的包：Optimize imports on the fly，该设置只对当前项目有效；</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655138465774.png" alt="1655138465774"></p>
+<h3 id="5-8-设置项目文件编码（一定要改）"><a href="#5-8-设置项目文件编码（一定要改）" class="headerlink" title="5.8 设置项目文件编码（一定要改）"></a>5.8 设置项目文件编码（一定要改）</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615190832482.png" alt="image-20220615190832482"></p>
+<p>说明： Transparent native-to-ascii conversion主要用于转换ascii，显式原生内容。一般都要勾选。</p>
+<h3 id="5-9-设置控制台的字符编码"><a href="#5-9-设置控制台的字符编码" class="headerlink" title="5.9 设置控制台的字符编码"></a>5.9 设置控制台的字符编码</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221019003153265.png" alt="image-20221019003153265"></p>
+<h3 id="5-10-修改类头的文档注释信息"><a href="#5-10-修改类头的文档注释信息" class="headerlink" title="5.10 修改类头的文档注释信息"></a>5.10 修改类头的文档注释信息</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018114632127.png" alt="image-20221018114632127"></p>
+<p>比如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* ClassName: $&#123;NAME&#125;</span></span><br><span class="line"><span class="comment">* Package: $&#123;PACKAGE_NAME&#125;</span></span><br><span class="line"><span class="comment">* Description: </span></span><br><span class="line"><span class="comment">* <span class="doctag">@Author</span> 尚硅谷-宋红康</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Create</span> $&#123;DATE&#125; $&#123;TIME&#125; </span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0   </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>常用的预设的变量，这里直接贴出官网给的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$&#123;PACKAGE_NAME&#125; - the name of the target <span class="keyword">package</span> where the <span class="keyword">new</span> <span class="title class_">class</span> or <span class="keyword">interface</span> <span class="title class_">will</span> be created. </span><br><span class="line">$&#123;PROJECT_NAME&#125; - the name of the current project. </span><br><span class="line">$&#123;FILE_NAME&#125; - the name of the PHP file that will be created. </span><br><span class="line">$&#123;NAME&#125; - the name of the <span class="keyword">new</span> <span class="title class_">file</span> which you specify in the New File dialog box during the file creation. </span><br><span class="line">$&#123;USER&#125; - the login name of the current user. </span><br><span class="line">$&#123;DATE&#125; - the current system date. </span><br><span class="line">$&#123;TIME&#125; - the current system time. </span><br><span class="line">$&#123;YEAR&#125; - the current year. </span><br><span class="line">$&#123;MONTH&#125; - the current month. </span><br><span class="line">$&#123;DAY&#125; - the current day of the month. </span><br><span class="line">$&#123;HOUR&#125; - the current hour. </span><br><span class="line">$&#123;MINUTE&#125; - the current minute. </span><br><span class="line">$&#123;PRODUCT_NAME&#125; - the name of the IDE in which the file will be created. </span><br><span class="line">$&#123;MONTH_NAME_SHORT&#125; - the first <span class="number">3</span> letters of the month name. Example: Jan, Feb, etc. </span><br><span class="line">$&#123;MONTH_NAME_FULL&#125; - full name of a month. Example: January, February, etc.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="5-11-设置自动编译"><a href="#5-11-设置自动编译" class="headerlink" title="5.11 设置自动编译"></a>5.11 设置自动编译</h3><p><code>Settings--&gt;Build,Execution,Deployment--&gt;Compiler</code></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655109415450.png" alt="1655109415450" style="zoom: 67%;"></p>
+<h3 id="5-12-设置为省电模式-可忽略"><a href="#5-12-设置为省电模式-可忽略" class="headerlink" title="5.12 设置为省电模式 (可忽略)"></a>5.12 设置为省电模式 (可忽略)</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220616121851207.png" alt="image-20220616121851207"></p>
+<p>IntelliJ IDEA 有一种叫做<code>省电模式</code>的状态，开启这种模式之后 IntelliJ IDEA 会<code>关掉代码检查</code>和<code>代码提示</code>等功能。所以一般也可认为这是一种<code>阅读模式</code>，如果你在开发过程中遇到突然代码文件不能进行检查和提示，可以来看看这里是否有开启该功能。</p>
+<h3 id="5-13-取消双击shift搜索"><a href="#5-13-取消双击shift搜索" class="headerlink" title="5.13 取消双击shift搜索"></a>5.13 取消双击shift搜索</h3><p>因为我们按shift切换中英文输入方式，经常被按到，总是弹出搜索框，太麻烦了。可以取消它。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659191272699.png" alt="1659191272699" style="zoom:80%;"></p>
+<ul>
+<li>方式1：适用于IDEA 2022.1.2版本</li>
+</ul>
+<p>在2022.1版本中，采用如下方式消双击shift出现搜索框：搜索double即可，勾选Disable double modifier key shortcuts，禁用这个选项。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659190132458.png" alt="1659190132458"></p>
+<ul>
+<li>方式2：适用于IDEA 2022.1.2之前版本</li>
+</ul>
+<p>双击shift 或 ctrl + shift + a，打开如下搜索窗口：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1577243967254.png" alt="1577243967254"></p>
+<p>选择registry…，找到”ide.suppress.double.click.handler”，把复选框打上勾就可以取消双击shift出现搜索框了。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1577244045320.png" alt="1577244045320"></p>
+<h2 id="6-工程与模块管理"><a href="#6-工程与模块管理" class="headerlink" title="6. 工程与模块管理"></a>6. 工程与模块管理</h2><h3 id="6-1-IDEA项目结构"><a href="#6-1-IDEA项目结构" class="headerlink" title="6.1 IDEA项目结构"></a>6.1 IDEA项目结构</h3><p><strong>层级关系：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">project(工程) - module(模块) - package(包) - class(类)</span><br></pre></td></tr></table></figure>
+<p><strong>具体的：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">一个project中可以创建多个module</span><br><span class="line"></span><br><span class="line">一个module中可以创建多个package</span><br><span class="line"></span><br><span class="line">一个package中可以创建多个class</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这些结构的划分，是为了方便管理功能代码。</p>
+</blockquote>
+<h3 id="6-2-Project和Module的概念"><a href="#6-2-Project和Module的概念" class="headerlink" title="6.2 Project和Module的概念"></a>6.2 Project和Module的概念</h3><p>在 IntelliJ IDEA 中，提出了Project和Module这两个概念。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220523014358169.png" alt="image-20220523014358169" style="zoom:80%;"></p>
+<p>在 IntelliJ IDEA 中Project是<code>最顶级的结构单元</code>，然后就是Module。目前，主流的大型项目结构基本都是多Module的结构，这类项目一般是<code>按功能划分</code>的，比如：user-core-module、user-facade-module和user-hessian-module等等，模块之间彼此可以<code>相互依赖</code>，有着不可分割的业务关系。因此，对于一个Project来说：</p>
+<ul>
+<li>当为单Module项目的时候，这个单独的Module实际上就是一个Project。</li>
+<li>当为多Module项目的时候，多个模块处于同一个Project之中，此时彼此之间具有<code>互相依赖</code>的关联关系。</li>
+<li>当然多个模块没有建立依赖关系的话，也可以作为单独一个“小项目”运行。</li>
+</ul>
+<h3 id="6-3-Module和Package"><a href="#6-3-Module和Package" class="headerlink" title="6.3 Module和Package"></a>6.3 Module和Package</h3><p>在一个module下，可以声明多个包（package），一般命名规范如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.不要有中文</span><br><span class="line">2.不要以数字开头</span><br><span class="line">3.给包取名时一般都是公司域名倒着写,而且都是小写</span><br><span class="line">  比如：尚硅谷网址是www.atguigu.com</span><br><span class="line">  那么我们的package包名应该写成：com.atguigu.子名字。</span><br></pre></td></tr></table></figure>
+<h3 id="6-4-创建Module"><a href="#6-4-创建Module" class="headerlink" title="6.4 创建Module"></a>6.4 创建Module</h3><p>建议创建“Empty空工程”，然后创建多模块，每一个模块可以独立运行，相当于一个小项目。JavaSE阶段不涉及到模块之间的依赖。后期再学习模块之间的依赖。</p>
+<p>步骤：</p>
+<p>（1）选择创建模块</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655167625885.png" alt="1655167625885"></p>
+<p>（2）选择模块类型：这里选择创建Java模块，给模块命名，确定存放位置</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659191966074.png" alt="1659191966074"></p>
+<p>（4）模块声明在工程下面</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192028623.png" alt="1659192028623"></p>
+<h3 id="6-5-删除模块"><a href="#6-5-删除模块" class="headerlink" title="6.5 删除模块"></a>6.5 删除模块</h3><p>（1）移除模块</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192150052.png" alt="1659192150052"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192180062.png" alt="1659192180062"></p>
+<p>（2）彻底删除模块</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192241224.png" alt="1659192241224"></p>
+<h3 id="6-6-导入老师的模块"><a href="#6-6-导入老师的模块" class="headerlink" title="6.6 导入老师的模块"></a>6.6 导入老师的模块</h3><p>（1）将老师的模块<code>teacher_chapter04</code>整个的复制到自己IDEA项目的路径下</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192514219.png" alt="1659192514219"></p>
+<p>接着打开自己IDEA的项目，会在项目目录下看到拷贝过来的module，只不过不是以模块的方式呈现。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192692658.png" alt="1659192692658"></p>
+<p>（2）查看Project Structure，选择import module</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615213827271.png" alt="image-20220615213827271"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615214746952.png" alt="image-20220615214746952"></p>
+<p>（3）选择要导入的module：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192850055.png" alt="1659192850055"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615214916374.png" alt="image-20220615214916374"></p>
+<p>（4）接着可以一路Next下去，最后选择Overwrite</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192928140.png" alt="1659192928140"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1659192995900.png" alt="1659192995900"></p>
+<p>最后点击OK即可了。</p>
+<h3 id="6-7-同时打开两个IDEA项目工程"><a href="#6-7-同时打开两个IDEA项目工程" class="headerlink" title="6.7 同时打开两个IDEA项目工程"></a>6.7 同时打开两个IDEA项目工程</h3><h4 id="1、两个IDEA项目工程效果"><a href="#1、两个IDEA项目工程效果" class="headerlink" title="1、两个IDEA项目工程效果"></a>1、两个IDEA项目工程效果</h4><p>有些同学想要把上课练习代码和作业代码分开两个IDEA项目工程。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20211229111753237.png" alt="image-20211229111753237"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20211229111906342.png" alt="image-20211229111906342"></p>
+<h4 id="2、新建一个IDEA项目"><a href="#2、新建一个IDEA项目" class="headerlink" title="2、新建一个IDEA项目"></a>2、新建一个IDEA项目</h4><p>注意：第一次需要新建，之后直接打开项目工程即可</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655170522054.png" alt="1655170522054"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655170341953.png" alt="1655170341953"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655170765902.png" alt="1655170765902"></p>
+<h4 id="3、打开两个IDEA项目"><a href="#3、打开两个IDEA项目" class="headerlink" title="3、打开两个IDEA项目"></a>3、打开两个IDEA项目</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20211229112314671.png" alt="image-20211229112314671"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20211229112343470.png" alt="image-20211229112343470"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655173351720.png" alt="1655173351720"></p>
+<h3 id="6-8-导入前几章非IDEA工程代码"><a href="#6-8-导入前几章非IDEA工程代码" class="headerlink" title="6.8 导入前几章非IDEA工程代码"></a>6.8 导入前几章非IDEA工程代码</h3><p><strong>1、创建chapter01、chapter02、chapter03等章节的module</strong></p>
+<p>将相应章节的源文件粘贴到module的src下。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615220728669.png" alt="image-20220615220728669"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615220755529.png" alt="image-20220615220755529"></p>
+<p>打开其中各个源文件，会发现有乱码。比如：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615220846097.png" alt="image-20220615220846097"></p>
+<p><strong>2、设置编码</strong></p>
+<p>当前项目是UTF-8。如果原来的.java文件都是GBK的（如果原来.java文件有的是GBK，有的是UTF-8就比较麻烦了）。</p>
+<p>可以单独把这两个模块设置为GBK编码的。</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615220544760.png" alt="image-20220615220544760"></p>
+<p>改为GBK，确认即可。如图：</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220615220950214.png" alt="image-20220615220950214"></p>
+<h2 id="7-代码模板的使用"><a href="#7-代码模板的使用" class="headerlink" title="7. 代码模板的使用"></a>7. 代码模板的使用</h2><h3 id="7-1-查看Postfix-Completion模板-后缀补全"><a href="#7-1-查看Postfix-Completion模板-后缀补全" class="headerlink" title="7.1 查看Postfix Completion模板(后缀补全)"></a>7.1 查看Postfix Completion模板(后缀补全)</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1655173712802.png" alt="1655173712802"></p>
+<h3 id="7-2-查看Live-Templates模板-实时模板"><a href="#7-2-查看Live-Templates模板-实时模板" class="headerlink" title="7.2 查看Live Templates模板(实时模板)"></a>7.2 查看Live Templates模板(实时模板)</h3><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/wps2.jpg" alt="img"></p>
+<h3 id="7-3-常用代码模板"><a href="#7-3-常用代码模板" class="headerlink" title="7.3 常用代码模板"></a>7.3 常用代码模板</h3><h4 id="1、非空判断"><a href="#1、非空判断" class="headerlink" title="1、非空判断"></a>1、非空判断</h4><ul>
+<li>变量.null：if(变量 == null)</li>
+<li>变量.nn：if(变量 != null) </li>
+<li>变量.notnull：if(变量 != null) </li>
+<li>ifn：if(xx  == null)</li>
+<li>inn：if(xx  != null)</li>
+</ul>
+<h4 id="2、遍历数组和集合"><a href="#2、遍历数组和集合" class="headerlink" title="2、遍历数组和集合"></a>2、遍历数组和集合</h4><ul>
+<li>数组或集合变量.fori：for循环</li>
+<li>数组或集合变量.for：增强for循环</li>
+<li>数组或集合变量.forr：反向for循环</li>
+<li>数组或集合变量.iter：增强for循环遍历数组或集合</li>
+</ul>
+<h4 id="3、输出语句"><a href="#3、输出语句" class="headerlink" title="3、输出语句"></a>3、输出语句</h4><ul>
+<li>sout：相当于System.out.println</li>
+<li>soutm：打印当前方法的名称</li>
+<li>soutp：打印当前方法的形参及形参对应的实参值</li>
+<li>soutv：打印方法中声明的最近的变量的值</li>
+<li>变量.sout：打印当前变量值</li>
+<li>变量.soutv：打印当前变量名及变量值</li>
+</ul>
+<h4 id="4、对象操作"><a href="#4、对象操作" class="headerlink" title="4、对象操作"></a>4、对象操作</h4><ul>
+<li>创建对象<ul>
+<li>Xxx.new  .var ：创建Xxx类的对象，并赋给相应的变量</li>
+<li>Xxx.new  .field：会将方法内刚创建的Xxx对象抽取为一个属性</li>
+</ul>
+</li>
+<li>强转<ul>
+<li>对象.cast：将对象进行强转</li>
+<li>对象.castvar：将对象强转后，并赋给一个变量</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、静态常量声明"><a href="#5、静态常量声明" class="headerlink" title="5、静态常量声明"></a>5、静态常量声明</h4><ul>
+<li>psf：public static final</li>
+<li>psfi：public static final int</li>
+<li>psfs：public static final String</li>
+<li>prsf：private static final</li>
+</ul>
+<h3 id="7-4-自定义代码模板"><a href="#7-4-自定义代码模板" class="headerlink" title="7.4 自定义代码模板"></a>7.4 自定义代码模板</h3><h4 id="7-4-1-自定义后缀补全模板"><a href="#7-4-1-自定义后缀补全模板" class="headerlink" title="7.4.1 自定义后缀补全模板"></a>7.4.1 自定义后缀补全模板</h4><p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018143204667.png" alt="image-20221018143204667"></p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20221018143606913.png" alt="image-20221018143606913"></p>
+<h4 id="7-4-2-自定义Live-Templates"><a href="#7-4-2-自定义Live-Templates" class="headerlink" title="7.4.2 自定义Live Templates"></a>7.4.2 自定义Live Templates</h4><p>例如：定义sop代表System.out.print();语句</p>
+<p>①在Live Templates中增加模板</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1576467339631.png" alt="1576467339631"></p>
+<p>②先定义一个模板的组，这样方便管理所有自定义的代码模板</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1576467395084.png" alt="1576467395084"></p>
+<p>③在模板组里新建模板</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1576467478993.png" alt="1576467478993"></p>
+<p>④定义模板（以输出语句为例）</p>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1576467712251.png" alt="1576467712251"></p>
+<ul>
+<li>Abbreviation：模板的缩略名称</li>
+<li>Description：模板的描述</li>
+<li>Template text：模板的代码片段</li>
+<li>模板应用范围。比如点击Define。选择如下：应用在java代码中。</li>
+</ul>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/1576467768103.png" alt="1576467768103"></p>
+<p><strong>其它模板1：单元测试模板：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> test$var1$()&#123;</span><br><span class="line">    $var2$</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220612124137427.png" alt="image-20220612124137427"></p>
+<p><strong>其它模板2：创建多线程</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>()&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">        $<span class="keyword">var</span>$</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220612124221967.png" alt="image-20220612124221967"></p>
+<p><strong>其它模板3：冒泡排序</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">$INDEX$</span> <span class="operator">=</span> <span class="number">1</span>; $INDEX$ &lt; $ARRAY$.length; $INDEX$++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">$INDEX2$</span> <span class="operator">=</span> <span class="number">0</span>; $INDEX2$ &lt; $ARRAY$.length-$INDEX$; $INDEX2$++) &#123;</span><br><span class="line">        <span class="keyword">if</span>($ARRAY$[$INDEX2$] &gt; $ARRAY$[$INDEX2$+<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="type">$ELEMENT_TYPE$</span> <span class="variable">temp</span> <span class="operator">=</span> $ARRAY$[$INDEX2$];</span><br><span class="line">            $ARRAY$[$INDEX2$] = $ARRAY$[$INDEX2$+<span class="number">1</span>];</span><br><span class="line">            $ARRAY$[$INDEX2$+<span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/image-20220612124541378.png" alt="image-20220612124541378"></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8B%EF%BC%89/"><img class="prev-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第04章_IDEA的安装与使用（下）</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/18/java2023/%E7%AC%AC05%E7%AB%A0_%E6%95%B0%E7%BB%84/"><img class="next-cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第05章_数组</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/18/java2023/%E7%AC%AC01%E7%AB%A0_Java%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/" title="第01章_Java语言概述"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">第01章_Java语言概述</div></div></a></div><div><a href="/2023/02/18/java2023/%E7%AC%AC02%E7%AB%A0_%E5%8F%98%E9%87%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" title="第02章_变量与运算符"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">第02章_变量与运算符</div></div></a></div><div><a href="/2023/02/18/java2023/%E7%AC%AC03%E7%AB%A0_%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" title="第03章_流程控制语句"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">第03章_流程控制语句</div></div></a></div><div><a href="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第04章_IDEA的安装与使用（下）"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">第04章_IDEA的安装与使用（下）</div></div></a></div><div><a href="/2023/02/18/java2023/%E7%AC%AC05%E7%AB%A0_%E6%95%B0%E7%BB%84/" title="第05章_数组"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">第05章_数组</div></div></a></div><div><a href="/2023/02/18/java2023/%E7%AC%AC06%E7%AB%A0_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/" title="第06章_面向对象编程（基础）"><img class="cover" src="https://img0.baidu.com/it/u=2434210581,3590463476&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=360" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">第06章_面向对象编程（基础）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YZ</div><div class="author-info__description">YZ的博客,欢迎访问</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yangzhengyz"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yangzhengyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="twitter"><i class="fa-brands fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to  my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC04%E7%AB%A0-IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第04章_IDEA的安装与使用（上）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E4%B8%93%E9%A2%98%E4%B8%8E%E8%84%89%E7%BB%9C"><span class="toc-number">1.1.</span> <span class="toc-text">本章专题与脉络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%A4%E8%AF%86IntelliJ-IDEA"><span class="toc-number">1.2.</span> <span class="toc-text">1. 认识IntelliJ IDEA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-JetBrains-%E5%85%AC%E5%8F%B8%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.1 JetBrains  公司介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-IntelliJ-IDEA-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2 IntelliJ IDEA  介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-IDEA%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BC%98%E5%8A%BF%EF%BC%9A-vs-Eclipse"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.3 IDEA的主要优势：(vs Eclipse)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-IDEA-%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.4 IDEA  的下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="toc-number">1.3.</span> <span class="toc-text">2. 卸载与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8D%B8%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 卸载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2 安装前的准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3 安装过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%B3%A8%E5%86%8C"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.4 注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.5 闪退问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HelloWorld%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.4.</span> <span class="toc-text">3. HelloWorld的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%96%B0%E5%BB%BAProject-Class"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1 新建Project - Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2 编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3 运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.5.</span> <span class="toc-text">4. JDK相关设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%A1%B9%E7%9B%AE%E7%9A%84JDK%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1 项目的JDK设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-out%E7%9B%AE%E5%BD%95%E5%92%8C%E7%BC%96%E8%AF%91%E7%89%88%E6%9C%AC"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2 out目录和编译版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AF%A6%E7%BB%86%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.6.</span> <span class="toc-text">5. 详细设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%A6%82%E4%BD%95%E6%89%93%E5%BC%80%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE%E7%95%8C%E9%9D%A2"><span class="toc-number">1.6.1.</span> <span class="toc-text">5.1 如何打开详细配置界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.6.2.</span> <span class="toc-text">5.2 系统设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">1、默认启动项目配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%8F%96%E6%B6%88%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">2、取消自动更新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%AE%BE%E7%BD%AE%E6%95%B4%E4%BD%93%E4%B8%BB%E9%A2%98"><span class="toc-number">1.6.3.</span> <span class="toc-text">5.3 设置整体主题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%80%89%E6%8B%A9%E4%B8%BB%E9%A2%98"><span class="toc-number">1.6.3.1.</span> <span class="toc-text">1、选择主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95%E5%92%8C%E7%AA%97%E5%8F%A3%E5%AD%97%E4%BD%93%E5%92%8C%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.6.3.2.</span> <span class="toc-text">2、设置菜单和窗口字体和大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AEIDEA%E8%83%8C%E6%99%AF%E5%9B%BE"><span class="toc-number">1.6.3.3.</span> <span class="toc-text">3、设置IDEA背景图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E8%AE%BE%E7%BD%AE%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.6.4.</span> <span class="toc-text">5.4 设置编辑器主题样式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%BB%E9%A2%98"><span class="toc-number">1.6.4.1.</span> <span class="toc-text">1、编辑器主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.6.4.2.</span> <span class="toc-text">2、字体大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%B3%A8%E9%87%8A%E7%9A%84%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2"><span class="toc-number">1.6.4.3.</span> <span class="toc-text">3、注释的字体颜色</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7%E4%B8%8E%E6%96%B9%E6%B3%95%E5%88%86%E9%9A%94%E7%AC%A6"><span class="toc-number">1.6.5.</span> <span class="toc-text">5.5 显示行号与方法分隔符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E4%BB%A3%E7%A0%81%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA%E5%8A%9F%E8%83%BD"><span class="toc-number">1.6.6.</span> <span class="toc-text">5.6 代码智能提示功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-%E8%87%AA%E5%8A%A8%E5%AF%BC%E5%8C%85%E9%85%8D%E7%BD%AE"><span class="toc-number">1.6.7.</span> <span class="toc-text">5.7 自动导包配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8-%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%EF%BC%88%E4%B8%80%E5%AE%9A%E8%A6%81%E6%94%B9%EF%BC%89"><span class="toc-number">1.6.8.</span> <span class="toc-text">5.8 设置项目文件编码（一定要改）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-9-%E8%AE%BE%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="toc-number">1.6.9.</span> <span class="toc-text">5.9 设置控制台的字符编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-10-%E4%BF%AE%E6%94%B9%E7%B1%BB%E5%A4%B4%E7%9A%84%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A%E4%BF%A1%E6%81%AF"><span class="toc-number">1.6.10.</span> <span class="toc-text">5.10 修改类头的文档注释信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-11-%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91"><span class="toc-number">1.6.11.</span> <span class="toc-text">5.11 设置自动编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-12-%E8%AE%BE%E7%BD%AE%E4%B8%BA%E7%9C%81%E7%94%B5%E6%A8%A1%E5%BC%8F-%E5%8F%AF%E5%BF%BD%E7%95%A5"><span class="toc-number">1.6.12.</span> <span class="toc-text">5.12 设置为省电模式 (可忽略)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-13-%E5%8F%96%E6%B6%88%E5%8F%8C%E5%87%BBshift%E6%90%9C%E7%B4%A2"><span class="toc-number">1.6.13.</span> <span class="toc-text">5.13 取消双击shift搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%B7%A5%E7%A8%8B%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86"><span class="toc-number">1.7.</span> <span class="toc-text">6. 工程与模块管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-IDEA%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.7.1.</span> <span class="toc-text">6.1 IDEA项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Project%E5%92%8CModule%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.7.2.</span> <span class="toc-text">6.2 Project和Module的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Module%E5%92%8CPackage"><span class="toc-number">1.7.3.</span> <span class="toc-text">6.3 Module和Package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%88%9B%E5%BB%BAModule"><span class="toc-number">1.7.4.</span> <span class="toc-text">6.4 创建Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E5%88%A0%E9%99%A4%E6%A8%A1%E5%9D%97"><span class="toc-number">1.7.5.</span> <span class="toc-text">6.5 删除模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6-%E5%AF%BC%E5%85%A5%E8%80%81%E5%B8%88%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.7.6.</span> <span class="toc-text">6.6 导入老师的模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-7-%E5%90%8C%E6%97%B6%E6%89%93%E5%BC%80%E4%B8%A4%E4%B8%AAIDEA%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.7.7.</span> <span class="toc-text">6.7 同时打开两个IDEA项目工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B8%A4%E4%B8%AAIDEA%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B%E6%95%88%E6%9E%9C"><span class="toc-number">1.7.7.1.</span> <span class="toc-text">1、两个IDEA项目工程效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAIDEA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.7.7.2.</span> <span class="toc-text">2、新建一个IDEA项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%89%93%E5%BC%80%E4%B8%A4%E4%B8%AAIDEA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.7.7.3.</span> <span class="toc-text">3、打开两个IDEA项目</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-8-%E5%AF%BC%E5%85%A5%E5%89%8D%E5%87%A0%E7%AB%A0%E9%9D%9EIDEA%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">1.7.8.</span> <span class="toc-text">6.8 导入前几章非IDEA工程代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.8.</span> <span class="toc-text">7. 代码模板的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%9F%A5%E7%9C%8BPostfix-Completion%E6%A8%A1%E6%9D%BF-%E5%90%8E%E7%BC%80%E8%A1%A5%E5%85%A8"><span class="toc-number">1.8.1.</span> <span class="toc-text">7.1 查看Postfix Completion模板(后缀补全)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%9F%A5%E7%9C%8BLive-Templates%E6%A8%A1%E6%9D%BF-%E5%AE%9E%E6%97%B6%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.8.2.</span> <span class="toc-text">7.2 查看Live Templates模板(实时模板)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.8.3.</span> <span class="toc-text">7.3 常用代码模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%9D%9E%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="toc-number">1.8.3.1.</span> <span class="toc-text">1、非空判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E5%92%8C%E9%9B%86%E5%90%88"><span class="toc-number">1.8.3.2.</span> <span class="toc-text">2、遍历数组和集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.8.3.3.</span> <span class="toc-text">3、输出语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%AF%B9%E8%B1%A1%E6%93%8D%E4%BD%9C"><span class="toc-number">1.8.3.4.</span> <span class="toc-text">4、对象操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E9%9D%99%E6%80%81%E5%B8%B8%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="toc-number">1.8.3.5.</span> <span class="toc-text">5、静态常量声明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.8.4.</span> <span class="toc-text">7.4 自定义代码模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8E%E7%BC%80%E8%A1%A5%E5%85%A8%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.8.4.1.</span> <span class="toc-text">7.4.1 自定义后缀补全模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-2-%E8%87%AA%E5%AE%9A%E4%B9%89Live-Templates"><span class="toc-number">1.8.4.2.</span> <span class="toc-text">7.4.2 自定义Live Templates</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/18/java2023/%E7%AC%AC01%E7%AB%A0_Java%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/" title="第01章_Java语言概述"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第01章_Java语言概述"/></a><div class="content"><a class="title" href="/2023/02/18/java2023/%E7%AC%AC01%E7%AB%A0_Java%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/" title="第01章_Java语言概述">第01章_Java语言概述</a><time datetime="2023-02-18T12:37:01.000Z" title="发表于 2023-02-18 20:37:01">2023-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/18/java2023/%E7%AC%AC02%E7%AB%A0_%E5%8F%98%E9%87%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" title="第02章_变量与运算符"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第02章_变量与运算符"/></a><div class="content"><a class="title" href="/2023/02/18/java2023/%E7%AC%AC02%E7%AB%A0_%E5%8F%98%E9%87%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" title="第02章_变量与运算符">第02章_变量与运算符</a><time datetime="2023-02-18T12:37:01.000Z" title="发表于 2023-02-18 20:37:01">2023-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/18/java2023/%E7%AC%AC03%E7%AB%A0_%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" title="第03章_流程控制语句"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第03章_流程控制语句"/></a><div class="content"><a class="title" href="/2023/02/18/java2023/%E7%AC%AC03%E7%AB%A0_%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" title="第03章_流程控制语句">第03章_流程控制语句</a><time datetime="2023-02-18T12:37:01.000Z" title="发表于 2023-02-18 20:37:01">2023-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第04章_IDEA的安装与使用（下）"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第04章_IDEA的安装与使用（下）"/></a><div class="content"><a class="title" href="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第04章_IDEA的安装与使用（下）">第04章_IDEA的安装与使用（下）</a><time datetime="2023-02-18T12:37:01.000Z" title="发表于 2023-02-18 20:37:01">2023-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/" title="第04章_IDEA的安装与使用（上）"><img src="https://img0.baidu.com/it/u=2434210581,3590463476&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=360" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第04章_IDEA的安装与使用（上）"/></a><div class="content"><a class="title" href="/2023/02/18/java2023/%E7%AC%AC04%E7%AB%A0_IDEA%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/" title="第04章_IDEA的安装与使用（上）">第04章_IDEA的安装与使用（上）</a><time datetime="2023-02-18T12:37:01.000Z" title="发表于 2023-02-18 20:37:01">2023-02-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By YZ</div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><div class="aplayer no-destroy" data-id="7193364325" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
