@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>观察者模式 | YZ</title><meta name="author" content="YZ"><meta name="copyright" content="YZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="观察者模式观察者模式（Observer Pattern）是一种行为型设计模式，它定义了对象之间的一对多依赖关系，使得当一个对象的状态发生改变时，所有依赖它的对象都会自动通知并更新。 观察者模式中涉及以下角色：  主题（Subject）：也称为被观察者，负责管理所有观察者对象的注册、删除和通知操作。当"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/06/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '观察者模式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-27 10:05:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/constown/HexoCustomFile@0.0.4/dist/css/custom.min.css"><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="YZ" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">75</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416')"><nav id="nav"><span id="blog-info"><a href="/" title="YZ"><span class="site-name">YZ</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">观察者模式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-26T11:49:14.000Z" title="发表于 2023-06-26 19:49:14">2023-06-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-27T02:05:09.528Z" title="更新于 2023-06-27 10:05:09">2023-06-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="观察者模式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><p>观察者模式（Observer Pattern）是一种行为型设计模式，它定义了对象之间的一对多依赖关系，使得当一个对象的状态发生改变时，所有依赖它的对象都会自动通知并更新。</p>
+<p>观察者模式中涉及以下角色：</p>
+<ul>
+<li>主题（Subject）：也称为被观察者，负责管理所有观察者对象的注册、删除和通知操作。当主题的状态发生改变时，会通知所有观察者。</li>
+<li>观察者（Observer）：定义了一个更新接口，用于接收主题通知的更新。当观察者接收到主题的通知后，可以执行相应的操作。</li>
+<li>具体主题（ConcreteSubject）：实现主题接口，负责具体的主题业务逻辑，并维护观察者列表。具体主题通常会在其状态发生变化时，通知观察者。</li>
+<li>具体观察者（ConcreteObserver）：实现观察者接口，具体定义当接收到主题通知时的更新行为。每个具体观察者都会在主题状态发生变化时被通知，并执行相应的操作。</li>
+</ul>
+<h1 id="使用Java接口和回调函数实现"><a href="#使用Java接口和回调函数实现" class="headerlink" title="使用Java接口和回调函数实现"></a>使用Java接口和回调函数实现</h1><p>通过定义一个包含通知方法的观察者接口，然后将观察者通过回调函数注册到主题中。当主题的状态发生改变时，调用观察者的回调方法通知其进行相应的处理。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">registerObserver</span><span class="params">(Observer observer)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">unRegisterObserver</span><span class="params">(Observer observer)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">notifyObservers</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(String message)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    ArrayList&lt;Observer&gt; observers = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Observer&gt;();</span><br><span class="line">    String message;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">registerObserver</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">        observers.add(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unRegisterObserver</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">        observers.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyObservers</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Observer observer : observers) &#123;</span><br><span class="line">            observer.update(message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.message = message;</span><br><span class="line">        notifyObservers();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcreteObserver</span> <span class="keyword">implements</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ConcreteObserver</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;观察者: &quot;</span> + name + <span class="string">&quot; 收到通知：&quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ConcreteSubject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteSubject</span>();</span><br><span class="line">        subject.registerObserver(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;小明&quot;</span>));</span><br><span class="line">        subject.registerObserver(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;小红&quot;</span>));</span><br><span class="line">        subject.registerObserver(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;小刚&quot;</span>));</span><br><span class="line">        subject.setState(<span class="string">&quot;明天放假&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">观察者: 小明 收到通知：明天放假</span><br><span class="line">观察者: 小红 收到通知：明天放假</span><br><span class="line">观察者: 小刚 收到通知：明天放假</span><br></pre></td></tr></table></figure>
+<p>运行以上代码，观察者1和观察者2都会收到主题状态的改变通知并进行相应的操作。</p>
+<h1 id="JDK实现"><a href="#JDK实现" class="headerlink" title="JDK实现"></a>JDK实现</h1><p>在 Java 中，通过java.util.Observable类和 java.util.Observer接口定义了观察者模式，只要实现它们的子类就可以编写观察者模式实例。</p>
+<h2 id="Observable类"><a href="#Observable类" class="headerlink" title="Observable类"></a>Observable类</h2><p>Observable类是抽象目标类（被观察者），它有一个Vector集合成员变量，用于保存所有要通知的观察者对象，下面是它最重要的 3 个方法：</p>
+<ul>
+<li>void addObserver(Observer o) 方法：用于将新的观察者对象添加到集合中。</li>
+<li>void notifyObservers(Object arg) 方法：调用集合中的所有观察者对象的update方法，通知它们数据发生改变。通常越晚加入集合的观察者越先得到通知。</li>
+<li>void setChange() 方法：用来设置一个boolean类型的内部标志，注明目标对象发生了变化。当它为true时，notifyObservers() 才会通知观察者。</li>
+</ul>
+<h2 id="Observer-接口"><a href="#Observer-接口" class="headerlink" title="Observer 接口"></a>Observer 接口</h2><p>Observer 接口是抽象观察者，它监视目标对象的变化，当目标对象发生变化时，观察者得到通知，并调用 update 方法，进行相应的工作。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Subject</span> <span class="keyword">extends</span> <span class="title class_">java</span>.util.Observable &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyMessage</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;被观察者: &quot;</span> + name + <span class="string">&quot; 发送通知：&quot;</span> + message);</span><br><span class="line">        setChanged();</span><br><span class="line">        notifyObservers(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">java</span>.util.Observer &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Observable o, Object arg)</span> &#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot;关注了 &quot;</span> + ((Subject) o).getName() + <span class="string">&quot; ,收到通知：&quot;</span> + arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Subject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Subject</span>(<span class="string">&quot;公众号&quot;</span>);</span><br><span class="line">        subject.addObserver(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;小明&quot;</span>));</span><br><span class="line">        subject.addObserver(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;小红&quot;</span>));</span><br><span class="line">        subject.addObserver(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;小刚&quot;</span>));</span><br><span class="line">        subject.notifyMessage(<span class="string">&quot;明天放假&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">被观察者: 公众号 发送通知：明天放假</span><br><span class="line">小刚关注了 公众号 ,收到通知：明天放假</span><br><span class="line">小红关注了 公众号 ,收到通知：明天放假</span><br><span class="line">小明关注了 公众号 ,收到通知：明天放假</span><br></pre></td></tr></table></figure>
+<h1 id="Google的Guava实现"><a href="#Google的Guava实现" class="headerlink" title="Google的Guava实现"></a>Google的Guava实现</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>EventBus术语</th>
+<th>解释</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件（消息）</td>
+<td>可以向事件总线（EventBus）发布的对象</td>
+<td>通常是一个类，不同的消息事件用不同的类来代替，消息内容就是类里面的属性</td>
+</tr>
+<tr>
+<td>订阅</td>
+<td>向事件总线注册监听者，以接受事件的行为</td>
+<td>EventBus.register(Object)，参数就是监听者</td>
+</tr>
+<tr>
+<td>监听者</td>
+<td>提供一个处理方法，希望接受和处理事件的对象</td>
+<td>通常也是一个类，里面有消息的处理方法</td>
+</tr>
+<tr>
+<td>处理方法</td>
+<td>监听者提供的公共方法，事件总线使用该方法向监听者发送事件；该方法应使用 Subscribe 注解</td>
+<td>监听者里面添加一个 Subscribe 注解的方法，就可以认为是消息的处理方法</td>
+</tr>
+<tr>
+<td>发布消息</td>
+<td>通过事件总线向所有匹配的监听者提供事件</td>
+<td>EventBus.post(Object)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Subscribe</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Object arg)</span> &#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot; 收到通知：&quot;</span> + arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">EventBus</span> <span class="variable">eventBus</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EventBus</span>();</span><br><span class="line">        eventBus.register(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;小明&quot;</span>));</span><br><span class="line">        eventBus.register(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;小红&quot;</span>));</span><br><span class="line">        eventBus.register(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;小刚&quot;</span>));</span><br><span class="line">        eventBus.post(<span class="string">&quot;明天放假&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">小明 收到通知：明天放假</span><br><span class="line">小红 收到通知：明天放假</span><br><span class="line">小刚 收到通知：明天放假</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>关于<code>com.google.common.eventbus.Subscribe</code>被标记为<code>@Beta</code>不稳定的事情是指它处于实验性阶段，可能在将来的版本中进行更改或删除。<code>@Beta</code>注解用于标记Google Guava库中的实验性功能。这意味着开发者可以使用这些功能，但需要注意它们的稳定性和将来的变化。</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>适用场景：</p>
+<ul>
+<li>当一个抽象模型包含两个方面内容，其中一个方面依赖于另一个方面。</li>
+<li>其他一个或多个对象的变化依赖于另一个对象的变化。</li>
+<li>实现类似广播机制的功能，无需知道具体收听者，只需分发广播，系统中感兴趣的对象会自动接收该广播。</li>
+</ul>
+<p>多层级嵌套使用，形成一种链式触发机制，使得事件具备跨域（跨越两种观察者类型）通知。</p>
+<p>优点：</p>
+<ul>
+<li>观察者和被观察者是松耦合（抽象耦合）的，符合依赖倒置原则。</li>
+<li>分离了表示层（观察者）和数据逻辑层（被观察者），并且建立了一套触发机制，使得数据的变化可以相应到多个表示层上。</li>
+<li>实现了一对多的通讯机制，支持事件注册机制，支持兴趣分发机制，当被观察者触发事件时，只有感兴趣的观察者可以接收到通知。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>如果观察者数量过多，则事件通知会耗时较长。</li>
+<li>事件通知呈线性关系，如果其中一个观察者处理事件卡壳，会影响后续的观察者接收该事件。</li>
+<li>如果观察者和被观察者之间存在循环依赖，则可能造成两者之间的循环调用，导致系统崩溃。</li>
+</ul>
+<p>​<br>​<br>​<br>​<br>​        </p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式"><img class="cover" src="https://img1.baidu.com/it/u=3486908499,2121835088&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">迭代器模式</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式"><img class="cover" src="https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">适配器模式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YZ</div><div class="author-info__description">YZ的博客,欢迎访问</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">75</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yangzhengyz"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yangzhengyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/2863057582yz@gmail.com" target="_blank" title="twitter"><i class="fa-brands fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to  my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Java%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">使用Java接口和回调函数实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JDK%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">JDK实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Observable%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">Observable类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Observer-%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.2.</span> <span class="toc-text">Observer 接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.3.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Google%E7%9A%84Guava%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">Google的Guava实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/06/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="组合模式"><img src="https://img1:baidu:com/it/u=1777496104,822946362&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="组合模式"/></a><div class="content"><a class="title" href="/2023/06/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="组合模式">组合模式</a><time datetime="2023-06-30T12:17:19.000Z" title="发表于 2023-06-30 20:17:19">2023-06-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" title="外观模式"><img src="https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="外观模式"/></a><div class="content"><a class="title" href="/2023/06/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" title="外观模式">外观模式</a><time datetime="2023-06-29T11:51:21.000Z" title="发表于 2023-06-29 19:51:21">2023-06-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" title="桥接模式"><img src="https://img0.baidu.com/it/u=1172543276,3142609657&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=416" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="桥接模式"/></a><div class="content"><a class="title" href="/2023/06/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" title="桥接模式">桥接模式</a><time datetime="2023-06-29T06:23:03.000Z" title="发表于 2023-06-29 14:23:03">2023-06-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" title="装饰模式"><img src="https://img1:baidu:com/it/u=1777496104,822946362&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="装饰模式"/></a><div class="content"><a class="title" href="/2023/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" title="装饰模式">装饰模式</a><time datetime="2023-06-28T12:07:12.000Z" title="发表于 2023-06-28 20:07:12">2023-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式"><img src="https://img1.baidu.com/it/u=3486908499,2121835088&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迭代器模式"/></a><div class="content"><a class="title" href="/2023/06/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">迭代器模式</a><time datetime="2023-06-27T02:13:11.000Z" title="发表于 2023-06-27 10:13:11">2023-06-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By YZ</div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><div class="aplayer no-destroy" data-id="7193364325" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
