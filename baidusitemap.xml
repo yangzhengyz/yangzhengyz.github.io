@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://example.com/2025/03/01/JUC/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2025-03-01</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E6%9E%B6%E6%9E%84%E7%AF%87/</loc>
+    <lastmod>2025-03-01</lastmod>
+  </url>
+  <url>
     <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E6%97%A5%E5%BF%97%E4%B8%8E%E5%A4%87%E4%BB%BD%E7%AF%87/</loc>
     <lastmod>2024-12-15</lastmod>
   </url>
   <url>
-    <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E6%9E%B6%E6%9E%84%E7%AF%87/</loc>
+    <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E8%B0%83%E4%BC%98%E7%AF%87/</loc>
     <lastmod>2024-12-15</lastmod>
   </url>
   <url>
-    <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E8%B0%83%E4%BC%98%E7%AF%87/</loc>
+    <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E4%BA%8B%E7%89%A9%E7%AF%87/</loc>
     <lastmod>2024-12-15</lastmod>
   </url>
   <url>
@@ -222,10 +230,6 @@
   </url>
   <url>
     <loc>http://example.com/2023/02/18/java2023/%E7%AC%AC03%E7%AB%A0_%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/</loc>
-    <lastmod>2023-02-19</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2022/10/28/MySQL/mysql%E9%AB%98%E7%BA%A7%E7%AF%87%E7%AC%94%E8%AE%B0/MySQL%E4%BA%8B%E7%89%A9%E7%AF%87/</loc>
     <lastmod>2023-02-19</lastmod>
   </url>
   <url>
