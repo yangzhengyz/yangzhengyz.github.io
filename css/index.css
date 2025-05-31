@@ -1350,8 +1350,8 @@ canvas:not(#ribbon-canvas),
   --preloader-bg: #37474f;
   --preloader-color: #fff;
   --tab-border-color: #f0f0f0;
-  --tab-botton-bg: #f0f0f0;
-  --tab-botton-color: #1f2d3d;
+  --tab-button-bg: #f0f0f0;
+  --tab-button-color: #1f2d3d;
   --tab-button-hover-bg: #dcdcdc;
   --tab-button-active-bg: #fff;
   --card-bg: #fff;
@@ -1678,7 +1678,7 @@ figure.highlight pre .javascript .function {
 .container pre,
 .container code {
   font-size: var(--global-font-size);
-  font-family: consolas, Menlo, 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  font-family: consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
   border-radius: 6px;
 }
 .container code {
@@ -3921,12 +3921,17 @@ figure.highlight pre .javascript .function {
   width: 100% !important;
 }
 #pagination .pagination-related {
-  width: 50%;
   height: 150px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   #pagination .pagination-related {
-    width: 100%;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
   }
 }
 #pagination .pagination-related .info-1 .info-item-2 {
@@ -3940,6 +3945,22 @@ figure.highlight pre .javascript .function {
   margin-top: 40px;
   width: 100%;
   border-radius: 6px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  #pagination.pagination-post {
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -o-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
 }
 .layout .pagination > * {
   display: inline-block;
@@ -5801,7 +5822,7 @@ blockquote.pullquote.right {
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  background: var(--tab-botton-bg);
+  background: var(--tab-button-bg);
 }
 .container .tabs > .nav-tabs > .tab {
   -webkit-box-flex: 1;
@@ -5813,8 +5834,8 @@ blockquote.pullquote.right {
   flex-grow: 1;
   padding: 8px 18px;
   border-top: 2px solid var(--tab-border-color);
-  background: var(--tab-botton-bg);
-  color: var(--tab-botton-color);
+  background: var(--tab-button-bg);
+  color: var(--tab-button-color);
   line-height: 2;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -6031,8 +6052,8 @@ blockquote.pullquote.right {
   --preloader-bg: #0d0d0d;
   --preloader-color: rgba(255,255,255,0.7);
   --tab-border-color: #2c2c2c;
-  --tab-botton-bg: #2c2c2c;
-  --tab-botton-color: rgba(255,255,255,0.7);
+  --tab-button-bg: #2c2c2c;
+  --tab-button-color: rgba(255,255,255,0.7);
   --tab-button-hover-bg: #383838;
   --tab-button-active-bg: #121212;
   --card-bg: #121212;
