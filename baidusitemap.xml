@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://example.com/2023/07/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2025-06-07</lastmod>
+  </url>
+  <url>
     <loc>http://example.com/2025/03/01/JUC/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2025-03-01</lastmod>
   </url>
@@ -42,10 +46,6 @@
   </url>
   <url>
     <loc>http://example.com/2023/07/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2023-07-30</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2023/07/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2023-07-30</lastmod>
   </url>
   <url>
